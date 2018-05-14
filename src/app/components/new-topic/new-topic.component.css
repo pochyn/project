@@ -1,0 +1,51 @@
+html *
+{
+   font-size: 1em !important;
+   color: #000 !important;
+   font-family: Arial !important;
+}
+
+.example-form {
+    min-width: 150px;
+    min-height: 350px;
+    width: 100%;
+}
+
+.link-form {
+    width: 100%;
+}
+
+.source_form {
+    width: 100%;
+}
+.example-full {
+    width: 76%;
+}
+  
+.example-full-width {
+    width: 100%;
+}
+
+.content{
+    min-height: 350px;
+}
+
+.header{
+    height: 3px;
+    width: 100%;
+    background: red;
+}
+
+.close{
+    display: flex;
+    justify-content: center;
+    min-height: 10px;
+    max-height: 35px;
+    min-width: 10px;
+    max-width: 10px;
+}
+
+.divider{
+    max-height: 10px;
+    min-height: 10px;
+}

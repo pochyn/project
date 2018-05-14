@@ -1,0 +1,60 @@
+
+.mat-column-data-date_modified {
+    flex: 0 0 0px;
+}
+
+.mat-column-data-branch {
+    flex: 0 0 0px;
+}
+.mat-header-cell {
+    display:flex;
+    justify-content:left;
+  }
+.mat-cell{
+    display: flex;
+    justify-content: left;
+}  
+
+.mat-row{
+    min-height: 6px;
+    max-height: 30px;
+    cursor: pointer;
+}
+
+
+.example-container {
+    display: flex;
+    flex-direction: column;
+    max-height: 100px;
+    min-width: 95px;
+    max-width: 100px;
+}
+  
+.mat-table {
+    overflow: auto;
+}
+
+
+
+.positive {
+    background-color: #00b894;
+}
+
+.negative {
+    background-color: white;
+}
+
+.as {
+    min-height: 100%
+}
+
+.posts {
+    min-height: 16vh;
+    max-height: 18vh;
+    overflow-y: hidden;
+    overflow-x: hidden;
+
+}
+
+
+

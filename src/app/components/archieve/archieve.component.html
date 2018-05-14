@@ -1,0 +1,42 @@
+
+      <div>
+        <!-- filter field-->
+        <div class="example-header">
+          <mat-form-field>
+            <input matInput (keyup)="applyFilter(postsData, $event.target.value)" placeholder="Пошук...">
+          </mat-form-field>
+        </div>
+      <!-- table with posts for gazets-->
+      <mat-table #table [dataSource]="postsData" matSort matSortActive="data.date" matSortDirection="desc">  
+        
+        <ng-container matColumnDef="data.date">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Дата </mat-header-cell>
+          <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{ post.data.date}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="data.author">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Автор </mat-header-cell>
+            <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{ post.data.name}} </mat-cell>
+          </ng-container>
+  
+        <ng-container matColumnDef="data.content" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Тема </mat-header-cell>
+            <mat-cell *matCellDef="let post"> {{post.data.content}} </mat-cell>
+        </ng-container>
+  
+        <ng-container matColumnDef="data.actions">
+          <mat-header-cell  style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;"*matHeaderCellDef> Дії </mat-header-cell>
+          <mat-cell *matCellDef="let post">
+            <button (click)=deletePost(post.id,post.data)>X</button>
+          </mat-cell>
+        </ng-container>
+  
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns; let i = index" 
+        class="my-mat-row"
+        [ngClass]="{'positive' : row.data.checked == true, 'negative' : row.data.checked == false}"></mat-row>
+      </mat-table>
+      <mat-paginator #gazPaginator
+                     [pageSize]="20"
+                     [showFirstLastButtons]="true">
+      </mat-paginator>
+      </div>

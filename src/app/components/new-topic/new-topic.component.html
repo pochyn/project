@@ -1,0 +1,64 @@
+<mat-dialog-actions>
+    <button mat-raised-button class='close' [mat-dialog-close]="true">X</button>
+</mat-dialog-actions>
+<div class="header"></div>
+<div class="divider"></div>
+
+<form class="source-form">
+    <mat-form-field class="example-full">
+        <textarea matInput placeholder="Першоджерело" [formControl]="sourceControl" [(ngModel)]="source" name="source" required></textarea>
+        <mat-error *ngIf="sourceControl.hasError('required')">
+            Першоджерело!
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput [formControl]="dateControl" [(ngModel)]="sourceDate" name="sourceDate" [matDatepicker]="picker" required placeholder="Дата появлення першоджерела">
+        <mat-error *ngIf="dateControl.hasError('required')">
+            Дата появлення в Першоджерелі!
+        </mat-error>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+</form>
+
+
+<form class="example-form">
+    <mat-form-field class="example-full-width">
+      <textarea class="content" matInput placeholder="Опис теми (максимум 1000 знаків)" [formControl]="contentControl" [(ngModel)]="content" name="content" maxLength="1000" required></textarea>
+      <mat-error *ngIf="contentControl.hasError('required')">
+        Опиши тему!
+      </mat-error>
+    </mat-form-field>
+</form>
+
+<form class="link-form">
+    <mat-form-field class="example-full-width">
+      <textarea matInput placeholder="Лінк" [(ngModel)]="link" name="link"></textarea>
+    </mat-form-field>
+</form>
+
+
+<form>
+<mat-form-field>
+    <mat-select placeholder="Режим" required [(ngModel)]="selected_types" [formControl]="typeControl" multiple>
+      <mat-option *ngFor="let type of types" [value]="type">{{type}}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="dateControl.hasError('required')">
+        Режим!
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+        <input matInput [(ngModel)]="submitDate" name="submitDate" [matDatepicker]="picker1"  placeholder="Дата можливої здачі">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+</form>
+
+  <mat-dialog-actions>
+    <button mat-raised-button type="submit" mat-dialog-close [disabled]="dateControl.hasError('required') || contentControl.hasError('required') || sourceControl.hasError('required') || typeControl.hasError('required')" (click)="newPost()">Додати тему!</button>
+</mat-dialog-actions>
+
+
+

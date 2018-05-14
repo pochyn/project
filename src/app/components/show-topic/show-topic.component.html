@@ -1,0 +1,88 @@
+<mat-dialog-actions>
+        <button mat-raised-button class='close' [mat-dialog-close]="true">X</button>
+        <button mat-raised-button class='archieve'  mat-dialog-close (click)="archieve(id)">Архівувати</button>
+    </mat-dialog-actions>
+<div class="header"></div>
+    <div class="divider"></div>
+    
+    <div>
+        <font size="2" color="grey">Автор: </font> <font size="3" color="black">{{post.name}} </font>
+
+    </div>
+    <mat-divider></mat-divider>
+    <div>
+        <font size="2" color="grey">Відділ: </font> <font size="3" color="black">{{post.branch}} </font>
+    </div>
+    <mat-divider></mat-divider>
+
+    <div>
+        <font size="2" color="grey">Дата: </font> <font size="3" color="black">{{post.date}} </font>
+    </div>
+    <mat-divider></mat-divider>
+    <div>
+            <font size="2" color="grey">Здача: </font> <font size="3" color="black">{{post.submitDate}} </font>
+    </div>
+    <mat-divider></mat-divider>
+
+    <div>
+        <font size="2" color="grey">Першоджерело: </font> <font size="3" color="black">{{post.source}} ({{post.sourceDate}})</font>
+    </div>
+    <mat-divider></mat-divider>
+
+    <div>
+        <font size="2" color="grey">Лінк: </font> <font size="3" color="black"><a href="{{post.link}}" target="_blank">{{post.link}}</a> </font>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="divider">
+
+    </div>
+    <div class="divider">
+
+        </div>
+    <div class="divider">
+
+    </div>
+    <mat-divider></mat-divider>
+    <div class="content">
+        <font size="2" color="grey">Опис: </font> <br /> <font size="3" color="black">{{post.content}} </font>
+        <div class="divider">
+
+        </div>
+        <mat-divider></mat-divider>
+    </div>
+
+    <div class="divider">
+
+    </div>
+
+    <mat-divider></mat-divider>
+    <div class="content">
+        <font size="2" color="grey">Коментарі: </font> <br /> <font size="3" color="black">{{post.comments}} </font>
+        <div class="divider">
+
+        </div>
+        <mat-divider></mat-divider>
+    </div>
+
+    <div class="divider">
+
+    </div>
+    <div class="divider">
+    
+        </div>
+    <div>
+        <font size="4" color="red"> <strong>ДЕДЛАЙН: </strong> </font> <font size="4" color="black">{{post.deadline}}</font>
+    </div>
+    <div class="divider">
+    
+        </div>
+    <mat-divider></mat-divider>
+    <mat-form-field>
+            <mat-select placeholder="Режим"  [(ngModel)]="selected_types" [formControl]="typeControl" multiple>
+              <mat-option *ngFor="let type of types" [value]="type">{{type}}</mat-option>
+            </mat-select>
+    </mat-form-field>  <button mat-raised-button type="submit" [disabled]="typeControl.hasError('required')" (click)="changePost(id)">Перенести</button>
+
+    <div class="header"></div>
+
+

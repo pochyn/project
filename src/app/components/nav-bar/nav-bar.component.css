@@ -1,0 +1,41 @@
+.matt-card{
+  min-height: 98vh;
+  background-color: #d63031;
+}
+
+
+.logo img{
+  margin: auto 5px;
+  float: left;
+  width: auto;
+  height: 65vh;
+}
+
+.mat-success1 {
+  background-color: #ff7675;
+  color: #fff;
+  width: 100%;
+  padding: 3px;
+}
+.mat-success {
+  background-color: #fab1a0;
+  color: #fff;
+  width: 100%;
+  padding: 3px;
+}
+
+.divider2{
+  width:1px;
+  height:1vh;
+  display:inline-block;
+}
+.divider{
+  width:1px;
+  height:5vh;
+  display:inline-block;
+}
+.nextdivider{
+  width:auto;
+  height:10vh;
+  display:inline-block;
+}

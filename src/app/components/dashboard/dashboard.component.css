@@ -1,0 +1,48 @@
+.card-container {
+  position:relative;
+  padding:15px;
+  text-align: center;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+.card1-container {
+  position:relative;
+  padding-left:15px;
+  padding-right:15px;
+  text-align: center;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+.card2-container {
+  position:relative;
+  padding-left:15px;
+  padding-right:15px;
+  text-align: center;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+.card3-container {
+  position:relative;
+  padding-left:0px;
+  padding-right:15px;
+  text-align: center;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+
+a {
+  cursor: pointer;
+  color: blue;
+}
+
+.input-width {
+  width: 80%;
+}
+
+.content {
+    max-height: calc(98vh);
+    overflow-y: hidden;
+    overflow-x: hidden;
+    /* 80px header + 40px footer = 120px  */
+}
