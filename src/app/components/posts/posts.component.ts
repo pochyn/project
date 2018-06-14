@@ -53,6 +53,10 @@ interface Post {
   delete_kv: boolean;
   delete_or: boolean;
   delete_gr: boolean;
+  checked_gazeta: boolean;
+  checked_site: boolean;
+  checked_lviv: boolean;
+  checked_regions: boolean;
   date_modified: any;
 }
 interface PostId extends Post { 
@@ -83,9 +87,11 @@ export class PostsComponent implements OnInit {
   sites: any;
   lviv: any;
   regions: any;
-  
+
+
+ 
   // what columns to diaplay
-  displayedColumns = ['data.checked', 'data.date', 'data.content', 'data.actions'];
+  displayedColumns = ['data.checked', 'data.date', 'data.content', 'data.actions', 'data.comments'];
 
   constructor(private afs: AngularFirestore, private auth: AuthService,
               private dialogRef: MatDialog, private afauth: AngularFireAuth) { }
@@ -101,12 +107,21 @@ export class PostsComponent implements OnInit {
   @ViewChild('lvivPaginator') lvivPaginator: MatPaginator;
   @ViewChild('regionsPaginator') regionsPaginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild('table1') table1: MatSort;
+  @ViewChild('table2') table2: MatSort;
+  @ViewChild('table3') table3: MatSort;
+  @ViewChild('table4') table4: MatSort;
   @ViewChildren('matrow') datarows: QueryList<MatRow>;
 
   
 
   ngOnInit() {
+    var targetPriceVal;
 
+    const notification = {
+        title: 'Теми',
+        body: 'Нова затверджена Тема!'
+    }
     // --------------------------
     //get data for posts on gazeta
     // --------------------------
@@ -133,7 +148,7 @@ export class PostsComponent implements OnInit {
       }
     };
     //filter settings
-    this.postsData.sort = this.sort;
+    this.postsData.sort = this.table1;
     this.postsData.filterPredicate = (item: any, filter: string)  => {
       const accumulator = (currentTerm, key) => {
         return key === 'data' ? currentTerm + item.data.content + item.data.name  : currentTerm + item[key];
@@ -170,7 +185,7 @@ export class PostsComponent implements OnInit {
       }
     };
     //filter settings
-    this.sitesData.sort = this.sort;
+    this.sitesData.sort = this.table2;
     this.sitesData.filterPredicate = (item: any, filter: string)  => {
       const accumulator = (currentTerm, key) => {
         return key === 'data' ? currentTerm + item.data.content + item.data.name  : currentTerm + item[key];
@@ -180,6 +195,7 @@ export class PostsComponent implements OnInit {
       const transformedFilter = filter.trim().toLowerCase();
       return dataStr.indexOf(transformedFilter) !== -1;
     };
+    
 
     // --------------------------
     //get data for posts on lviv
@@ -207,7 +223,7 @@ export class PostsComponent implements OnInit {
       }
     };
     //filter settings
-    this.lvivData.sort = this.sort;
+    this.lvivData.sort = this.table3;
     this.lvivData.filterPredicate = (item: any, filter: string)  => {
       const accumulator = (currentTerm, key) => {
         return key === 'data' ? currentTerm + item.data.content + item.data.name  : currentTerm + item[key];
@@ -217,6 +233,7 @@ export class PostsComponent implements OnInit {
       const transformedFilter = filter.trim().toLowerCase();
       return dataStr.indexOf(transformedFilter) !== -1;
     };
+
 
     // --------------------------
     //get data for posts on regions
@@ -244,7 +261,7 @@ export class PostsComponent implements OnInit {
       }
     };
     //filter settings
-    this.regionsData.sort = this.sort;
+    this.regionsData.sort = this.table4;
     this.regionsData.filterPredicate = (item: any, filter: string)  => {
       const accumulator = (currentTerm, key) => {
         return key === 'data' ? currentTerm + item.data.content + item.data.name  : currentTerm + item[key];
@@ -255,7 +272,7 @@ export class PostsComponent implements OnInit {
       return dataStr.indexOf(transformedFilter) !== -1;
     };
   }
-  
+
   //apply filter for gazeta and site accordingly
   applyFilter(col: any, filterValue: string) {
     filterValue = filterValue.trim(); 
@@ -275,10 +292,9 @@ export class PostsComponent implements OnInit {
   
   //open window to show current post
   showPost(postid, postdata){
-    this.afs.doc('posts/'+postid).update({read: true});
     this.dialogRef.open(ShowTopicComponent, {
-      height: '800px',
-      width: '1000px',
+      height: '90vh',
+      width: '90vw',
       data: {
         postId: postid,
         postdata: postdata,

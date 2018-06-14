@@ -1,7 +1,7 @@
 .card-container {
-  width: 400px;
+  width: 500px;
   position:relative;
-  top:50%;
+  top:45%;
   left:50%;
   padding:15px;
   -ms-transform: translateX(-50%) translateY(-50%);
@@ -18,11 +18,17 @@ a {
 .input-width {
   width: 80%;
 }
-
-.content {
-    max-height: calc(100vh - 20px);
-    overflow-y: hidden;
-    overflow-x: hidden;
-    /* 80px header + 40px footer = 120px  */
+.image {
+  height:100vh;
 }
 
+.content {
+    max-height: 100vh;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.mat-success{
+  background-color: #E11F1F;
+  color: #fff;
+}

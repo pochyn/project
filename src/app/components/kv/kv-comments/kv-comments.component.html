@@ -1,0 +1,21 @@
+<div class=posts>
+  <div>
+  <mat-table #table [dataSource]="postsData" matSort matSortActive="data.date_modified" matSortDirection="desc">  
+    
+
+    <ng-container matColumnDef="data.date_modified">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Дата </mat-header-cell>
+      <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{ post.data.date_modified}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="data.comments" >
+        <mat-header-cell *matHeaderCellDef>Коментарі</mat-header-cell>
+        <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{post.data.comments}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns; let i = index" 
+    class="my-mat-row"
+    (click)="showPost(row.id,row.data)"></mat-row>
+  </mat-table>
+  </div>

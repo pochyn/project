@@ -4,6 +4,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+const g_regex = '1111';
 
 @Component({
   selector: 'app-signup-page',
@@ -16,10 +17,15 @@ export class SignupPageComponent implements OnInit {
     email: '',
     password: '',
     displayName: '',
-    branch: ''
+    branch: '',
+    posada: ''
   }
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private router: Router) { }
+
+  selected: any;
+  types = ['Спорт', 'Світ', "Здоров'я", 'Технології', 'Оперативний редактор', 'Головний редактор'];
+  posadas = ['Журналіст', 'Оперативний Редактор - Газета', 'Оперативний редактор - Сайт', 'Керівник відділу', 'Головний редактор']
 
   emailFormControl: FormControl = new FormControl('', [
     Validators.required,
@@ -28,12 +34,26 @@ export class SignupPageComponent implements OnInit {
   passwordFormControl: FormControl = new FormControl('', [
     Validators.required
   ]);
+  branchFormControl: FormControl = new FormControl('', [
+    Validators.required
+  ]);
+  posadaFormControl: FormControl = new FormControl('', [
+    Validators.required
+  ]);
+  nameFormControl: FormControl = new FormControl('', [
+    Validators.required
+  ]);
 
   ngOnInit() {
   }
 
   createAccount() {
+    console.log(this.usercreds);
     this.auth.signUp(this.usercreds);
+  }
+
+  goBack(){
+    this.router.navigate(['login']);
   }
 
 }

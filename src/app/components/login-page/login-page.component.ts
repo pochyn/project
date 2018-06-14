@@ -25,7 +25,6 @@ export class LoginPageComponent implements OnInit {
     // window.location.reload();
 
   }
-  
     emailFormControl: FormControl = new FormControl('', [
     Validators.required,
     Validators.pattern(EMAIL_REGEX)
@@ -55,5 +54,8 @@ export class LoginPageComponent implements OnInit {
   signup() {
     this.router.navigate(['signup']);
   }
-
+  reset(){
+    this.router.navigate(['reset']);
+  }
+  
 }

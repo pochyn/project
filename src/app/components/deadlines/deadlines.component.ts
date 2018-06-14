@@ -53,6 +53,10 @@ interface Post {
   delete_kv: boolean;
   delete_or: boolean;
   delete_gr: boolean;
+  checked_gazeta: boolean;
+  checked_site: boolean;
+  checked_lviv: boolean;
+  checked_regions: boolean;
   date_modified: any;
 }
 interface PostId extends Post { 
@@ -92,6 +96,17 @@ export class DeadlinesComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   ngOnInit() {
+        //get time
+        var today = new Date();
+        var hour = today.getHours();
+        var min = today.getMinutes();
+        today.setHours(hour);
+        today.setMinutes(min);
+        var options = {  
+          year: "numeric", month: "numeric",  
+          day: "numeric", hour: "2-digit", minute: "2-digit"  
+        };  
+        var dt = today.toLocaleTimeString("en-us", options);
     // --------------------------
     //get data for posts on gazeta
     // --------------------------
@@ -104,7 +119,7 @@ export class DeadlinesComponent implements OnInit {
           return { id, data };
         });
       }).map(posts => posts.filter(post => post.data.author == this.auth.currentUserId
-                                    && post.data.deadline != '' && !post.data.archieved_g));
+                                    && post.data.deadline != '' && post.data.deadline > dt && !post.data.archieved_g));
     //gazeta tab paginator
     this.posts.subscribe(newData => this.postsData.data = newData);
     this.postsData.paginator = this.postsPaginator;
@@ -134,8 +149,8 @@ export class DeadlinesComponent implements OnInit {
   showPost(postid, postdata){
     this.afs.doc('posts/'+postid).update({read: true});
     this.dialogRef.open(ShowTopicComponent, {
-      height: '800px',
-      width: '1000px',
+      height: '90vh',
+      width: '90vw',
       data: {
         postId: postid,
         postdata: postdata,

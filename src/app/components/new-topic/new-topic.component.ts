@@ -40,6 +40,10 @@ interface Post {
   delete_kv: boolean;
   delete_or: boolean;
   delete_gr: boolean;
+  checked_gazeta: boolean;
+  checked_site: boolean;
+  checked_lviv: boolean;
+  checked_regions: boolean;
   date_modified: any;
 
 }
@@ -83,6 +87,10 @@ export class NewTopicComponent implements OnInit {
   delete_kv: boolean;
   delete_or: boolean;
   delete_gr: boolean;
+  checked_gazeta: boolean;
+  checked_site: boolean;
+  checked_lviv: boolean;
+  checked_regions: boolean;
   date_modified: any;
 
 
@@ -129,6 +137,10 @@ export class NewTopicComponent implements OnInit {
     this.delete_kv= false;
     this.delete_or= false;
     this.delete_gr= false;
+    this.checked_gazeta= false;
+    this.checked_site= false;
+    this.checked_lviv= false;
+    this.checked_regions= false;
     this.date_modified = '';
   }
   
@@ -179,7 +191,11 @@ export class NewTopicComponent implements OnInit {
       day: "numeric", hour: "2-digit", minute: "2-digit"  
     };  
     var dt = today.toLocaleTimeString("en-us", options);
-    var sbm_dt = this.submitDate.toLocaleTimeString("en-us", options);
+    if (this.submitDate != undefined){
+      var sbm_dt = this.submitDate.toLocaleTimeString("en-us", options);
+    } else {
+      var sbm_dt ='';
+    }
     var src_dt = this.sourceDate.toLocaleTimeString("en-us", options);
     
     //get all needed info and setup new post
@@ -215,6 +231,10 @@ export class NewTopicComponent implements OnInit {
                         'delete_or': this.delete_or,
                         'delete_gr': this.delete_gr,
                         'date_modified': this.date_modified,
+                        'checked_gazeta': this.checked_gazeta,
+                        'checked_site': this.checked_site,
+                        'checked_lviv': this.checked_lviv,
+                        'checked_regions': this.checked_regions,
                         'branch': br});
     })
   }

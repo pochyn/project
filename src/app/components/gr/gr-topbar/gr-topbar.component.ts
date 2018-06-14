@@ -1,0 +1,45 @@
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../../services/auth.service';
+import {GrNewTopicComponent} from '../gr-new-topic/gr-new-topic.component';
+import {MatDialog} from '@angular/material';
+import {GrArchieveComponent } from '../gr-archieve/gr-archieve.component';
+declare var electron: any;  
+
+@Component({
+  selector: 'app-gr-topbar',
+  templateUrl: './gr-topbar.component.html',
+  styleUrls: ['./gr-topbar.component.css']
+})
+export class GrTopbarComponent implements OnInit {
+
+  constructor(private auth: AuthService, private dialogRef: MatDialog) { }
+
+  ngOnInit() {
+  }
+
+  close(){
+    electron.ipcRenderer.send('close');
+  }
+
+  minimize(){
+    electron.ipcRenderer.send('minimize');
+  }
+  logout() {
+    this.auth.logout();
+  }
+  
+  //add Post
+  addPost() {
+    this.dialogRef.open(GrNewTopicComponent, {
+      height: '90vh',
+      width: '90vw',
+    });
+  }
+  showArchieve(){
+    this.dialogRef.open(GrArchieveComponent, {
+      height: '90vh',
+      width: '90vw',
+    });
+  }
+  
+}

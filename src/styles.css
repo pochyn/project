@@ -1,2 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+
+   /* Styles for tab labels */
+.mat-tab-label {
+    min-width: 25px !important;
+    max-height: 40px;
+    background-color: transparent;
+    color: #C20909 !important;
+    font-weight: 900;
+}

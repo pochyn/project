@@ -1,14 +1,23 @@
 {
   "name": "expres",
-  "version": "0.0.0",
+  "productName": "expres",
+  "version": "0.0.1",
+  "description": "expres",
   "license": "MIT",
+  "main": "main.js",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "electron": "electron .",
+    "package-mac": "electron-packager . --overwrite --asar=true --platform=darwin --arch=x64  --prune=true --out=release-builds",
+    "package-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=Stas --version-string.FileDescription=Stas --version-string.ProductName=\"expres\"",
+    "package-linux": "electron-packager . --overwrite --asar=true --platform=linux --arch=x64  --prune=true --out=release-builds",
+    "create-installer-mac": "electron-installer-dmg ./release-builds/Electron\\ tutorial\\ app-darwin-x64/Electron\\ tutorial\\ app.app expres --out=release-builds --overwrite",
+    "create-installer-win": "node installers/windows/createinstaller.js"
   },
   "private": true,
   "dependencies": {
@@ -27,6 +36,8 @@
     "ajv": "^6.0.0",
     "angularfire2": "^5.0.0-rc.6",
     "core-js": "^2.4.1",
+    "electron": "^1.8.3",
+    "electron-packager": "^11.1.0",
     "firebase": "^4.9.0",
     "rxjs": "^5.5.6",
     "zone.js": "^0.8.19"
@@ -39,6 +50,8 @@
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "~6.0.60",
     "codelyzer": "^4.0.1",
+    "electron-installer-dmg": "^1.0.0",
+    "electron-winstaller": "^2.6.4",
     "jasmine-core": "~2.8.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~2.0.0",

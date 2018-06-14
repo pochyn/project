@@ -1,0 +1,118 @@
+.mat-column-data-checked {
+    flex: 0 0 0px;
+}
+.mat-column-data-date {
+    flex: 0 0 140px;
+}
+
+.mat-column-data-content {
+    flex: 0 0 45%;
+    margin-left: 25px;
+
+}
+.mat-column-data-comments {
+    margin-left: 25px;
+}
+
+.mat-column-data-actions {
+    flex: 0 0 0px;
+}
+.mat-column-data-name {
+    margin-left: 15px;
+    flex: 0 0 100px;
+}
+
+.mat-column-data-branch {
+    flex: 0 0 15px;
+}
+.mat-header-cell {
+    display:flex;
+    justify-content:center;
+  }
+.mat-cell{
+    display: flex;
+    justify-content: left;
+}  
+
+.mat-row{
+
+    min-height: 23px;
+    max-height: 23px;
+    cursor: pointer;
+}
+  
+
+.posts {
+    min-height: 85vh;
+    max-height: 85vh;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+.mat-form-field {
+    min-height: 64px;
+    padding-left: 22px;
+    padding-top: 5px;
+    padding-bottom: 0px;
+    font-size: 14px;
+    width: 95%;
+}
+
+.header{
+    height: 3px;
+    width: 100%;
+    background: red;
+}
+.positive {
+    background-color: #ABEBC6 !important;
+}
+
+.negative {
+    background-color: white;
+}
+
+.read {
+    background-color: #E6E6E6;
+}
+
+.Sport {
+    background-color: indigo;
+    color: indigo;
+}
+
+.Svit {
+    background-color: aqua;
+    color: aqua;
+}
+.Zdorovya {
+    background-color: gold;
+    color: gold;
+}
+
+.Techno {
+    background-color: fuchsia;
+    color: fuchsia;
+}
+
+.Gr{
+    background-color: firebrick;
+    color: firebrick; 
+}
+
+.demo-tab-group {
+    border: 1px solid #e8e8e8;
+}
+  
+
+.positive {
+    background-color: #00b894 !important;
+}
+
+.negative {
+    background-color: white;
+}
+
+
+
+
+

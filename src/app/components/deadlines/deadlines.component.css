@@ -37,7 +37,7 @@
 
 
 .positive {
-    background-color: #00b894;
+    background-color: #00b894 !important;
 }
 
 .negative {
@@ -49,8 +49,8 @@
 }
 
 .posts {
-    min-height: 16vh;
-    max-height: 18vh;
+    min-height: 20vh;
+    max-height: 20vh;
     overflow-y: hidden;
     overflow-x: hidden;
 

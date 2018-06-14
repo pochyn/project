@@ -23,14 +23,14 @@ export class NavBarComponent implements OnInit {
   //add Post
   addPost() {
     this.dialogRef.open(NewTopicComponent, {
-      height: '800px',
-      width: '1000px'
+      height: '90vh',
+      width: '90vw',
     });
   }
   showArchieve(){
     this.dialogRef.open(ArchieveComponent, {
-      height: '800px',
-      width: '1000px',
+      height: '90vh',
+      width: '90vw',
     });
   }
 

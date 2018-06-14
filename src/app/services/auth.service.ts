@@ -46,13 +46,19 @@ export class AuthService {
           displayName: usercreds.displayName,
           photoURL: constants.PROFILE_PIC
         }).then(() => {
-          this.setUserData(usercreds.email, usercreds.displayName, user.photoURL, usercreds.branch);
+          this.setUserData(usercreds.email, usercreds.displayName, usercreds.posada, usercreds.branch);
         })
       })
   }
+  resetPassword(email: string) {
+    var auth = firebase.auth();
+    return auth.sendPasswordResetEmail(email)
+      .then(() => console.log("email sent"))
+      .catch((error) => console.log(error))
+  }
 
   //set user data to a local users collections.
-  setUserData(email: string, displayName: string, photoURL: string, branch: string) {
+  setUserData(email: string, displayName: string, posada: string, branch: string) {
     const path = `users/${this.currentUserId}`;
     const statuspath = `status/${this.currentUserId}`;
     const userdoc = this.afs.doc(path);
@@ -61,13 +67,33 @@ export class AuthService {
       email: email,
       displayName: displayName,
       branch: branch,
-      photoURL: photoURL
+      posada: posada
     });
     status.set({
       email: email,
       status: 'online'
     });
-    this.router.navigate(['dashboard']);
+    let collRef = this.afs.collection('users').ref;
+    let queryRef = collRef.where('email', '==',  this.afauth.auth.currentUser.email);
+    queryRef.get().then((snapShot) => {
+    var posada = snapShot.docs[0].data()['posada']
+    console.log(posada)
+    if (posada == 'Журналіст') {
+      this.router.navigate(['dashboard']);
+    }
+    if (posada == 'Оперативний Редактор - Газета') {
+      this.router.navigate(['dashboard_or_gazeta']);
+    }
+    if (posada == 'Оперативний редактор - Сайт') {
+      this.router.navigate(['dashboard_or_site']);
+    }
+    if (posada == 'Керівник відділу') {
+      this.router.navigate(['dashboard_kv']);
+    }
+    if (posada == 'Головний редактор') {
+      this.router.navigate(['dashboard_gr']);
+    }
+  })
   }
 
   //Google Login Update
@@ -97,7 +123,27 @@ export class AuthService {
     //     })
     //   })
     // }
+    let collRef = this.afs.collection('users').ref;
+    let queryRef = collRef.where('email', '==',  this.afauth.auth.currentUser.email);
+    queryRef.get().then((snapShot) => {
+    var posada = snapShot.docs[0].data()['posada']
+    console.log(posada)
+    if (posada == 'Журналіст') {
       this.router.navigate(['dashboard']);
+    }
+    if (posada == 'Оперативний Редактор - Газета') {
+      this.router.navigate(['dashboard_or_gazeta']);
+    }
+    if (posada == 'Оперативний редактор - Сайт') {
+      this.router.navigate(['dashboard_or_site']);
+    }
+    if (posada == 'Керівник відділу') {
+      this.router.navigate(['dashboard_kv']);
+    }
+    if (posada == 'Головний редактор') {
+      this.router.navigate(['dashboard_gr']);
+    }
+  })
   }
 
   //Login function
@@ -107,7 +153,27 @@ export class AuthService {
         this.authState = user;
         const status = 'online';
         this.setUserStatus(status);
-        this.router.navigate(['dashboard']);
+        let collRef = this.afs.collection('users').ref;
+        let queryRef = collRef.where('email', '==',  this.afauth.auth.currentUser.email);
+        queryRef.get().then((snapShot) => {
+        var posada = snapShot.docs[0].data()['posada']
+        console.log(posada)
+        if (posada == 'Журналіст') {
+          this.router.navigate(['dashboard']);
+        }
+        if (posada == 'Оперативний Редактор - Газета') {
+          this.router.navigate(['dashboard_or_gazeta']);
+        }
+        if (posada == 'Оперативний редактор - Сайт') {
+          this.router.navigate(['dashboard_or_site']);
+        }
+        if (posada == 'Керівник відділу') {
+          this.router.navigate(['dashboard_kv']);
+        }
+        if (posada == 'Головний редактор') {
+          this.router.navigate(['dashboard_gr']);
+        }
+      })
       })
   }
 

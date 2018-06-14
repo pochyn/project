@@ -1,0 +1,29 @@
+.fillup {
+    flex: 1 1 auto;
+  }
+  
+  button {
+    -webkit-app-region: no-drag;
+  }
+  
+  .mat-success{
+    background-color: #D0D3D4;
+    color: grey;
+    max-height: 40px;
+  }
+  
+  .mat-success1 {
+    color: #A93226;
+    background-color: #D0D3D4;
+    max-height: 40px;
+  }
+  .mat-success2 {
+    color: grey;
+    background-color: #D0D3D4;
+    max-height: 40px;
+  }
+  
+  .ico{
+  max-height: 25px;
+  max-width: 25px;
+  }

@@ -80,6 +80,8 @@ export class ShowTopicComponent implements OnInit {
   post: Observable<Post>;
   id: any;
 
+  newContent: any;
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private afs: AngularFirestore,
                 private dialogRef: MatDialog) { }
 
@@ -138,11 +140,17 @@ export class ShowTopicComponent implements OnInit {
     this.afs.doc('posts/'+postid).update({archieved_g: true});
   }
 
+  changeContent(postid){
+    console.log(this.newContent);
+    //this.afs.doc('posts/'+postid).update({content: this.newContent});
+  }
+
+   
+
   showPost(postid, postdata){
-    this.afs.doc('posts/'+postid).update({read: true});
     this.dialogRef.open(ShowTopicComponent, {
-      height: '800px',
-      width: '1000px',
+      height: '90vh',
+      width: '90vw',
       data: {
         postId: postid,
         postdata: postdata

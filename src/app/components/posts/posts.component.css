@@ -6,7 +6,12 @@
 }
 
 .mat-column-data-content {
-    margin-left: 30px;
+    flex: 0 0 45%;
+    margin-left: 25px;
+}
+
+.mat-column-data-comments {
+    margin-left: 25px;
 }
 
 .mat-column-data-actions {
@@ -27,7 +32,7 @@
 
 .mat-row{
     min-height: 6px;
-    max-height: 30px;
+    max-height: 300px;
     cursor: pointer;
 }
 
@@ -38,6 +43,7 @@
     flex-direction: column;
     max-height: 500px;
     min-width: 300px;
+    overflow: auto;
 }
   
 .mat-table {
@@ -58,7 +64,7 @@
 }
 
 .positive {
-    background-color: #00b894;
+    background-color: #ABEBC6 !important;
 }
 
 .negative {
@@ -70,10 +76,10 @@
 }
 
 .posts {
-    min-height: 65vh;
-    max-height: 66vh;
-    overflow-y: hidden;
-    overflow-x: hidden;
+    min-height: 57vh;
+    max-height: 57vh;
+    overflow-y: auto;
+    overflow-x: auto;
 }
 
 

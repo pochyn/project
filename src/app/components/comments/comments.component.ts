@@ -53,6 +53,10 @@ interface Post {
   delete_kv: boolean;
   delete_or: boolean;
   delete_gr: boolean;
+  checked_gazeta: boolean;
+  checked_site: boolean;
+  checked_lviv: boolean;
+  checked_regions: boolean;
   date_modified: any;
 }
 interface PostId extends Post { 
@@ -134,8 +138,8 @@ export class CommentsComponent implements OnInit {
   showPost(postid, postdata){
     this.afs.doc('posts/'+postid).update({read: true});
     this.dialogRef.open(ShowTopicComponent, {
-      height: '800px',
-      width: '1000px',
+      height: '90vh',
+      width: '90vw',
       data: {
         postId: postid,
         postdata: postdata,

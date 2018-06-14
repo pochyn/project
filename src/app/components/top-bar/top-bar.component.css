@@ -1,0 +1,19 @@
+.fillup {
+  flex: 1 1 auto;
+}
+
+button {
+  -webkit-app-region: no-drag;
+}
+
+.mat-success{
+  background-color: transparent;
+  color: grey;
+  max-height: 40px;
+}
+
+.bar{
+  background-color: transparent;
+  height: 40px;
+}
+
