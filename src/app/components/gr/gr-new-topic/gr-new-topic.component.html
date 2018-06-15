@@ -43,14 +43,7 @@
     
     </div>
     <form>
-    <mat-form-field>
-        <mat-select placeholder="Куди" required [(ngModel)]="selected_types" [formControl]="typeControl" multiple>
-          <mat-option *ngFor="let type of types" [value]="type">{{type}}</mat-option>
-        </mat-select>
-        <mat-error *ngIf="dateControl.hasError('required')">
-            Куди!
-        </mat-error>
-      </mat-form-field>
+
     
       <mat-form-field>
             <input matInput [(ngModel)]="submitDate" name="submitDate" [matDatepicker]="picker1"  placeholder="Дата можливої здачі">
@@ -59,7 +52,7 @@
         </mat-form-field>
     </form>
     <mat-dialog-actions>
-        <button mat-raised-button class='approve' type="submit" mat-dialog-close [disabled]="dateControl.hasError('required') || contentControl.hasError('required') || sourceControl.hasError('required') || typeControl.hasError('required')" (click)="newPost()">Додати тему!</button>
+        <button mat-raised-button class='approve' type="submit" mat-dialog-close [disabled]="dateControl.hasError('required') || contentControl.hasError('required') || sourceControl.hasError('required')" (click)="newPost()">Додати тему!</button>
     </mat-dialog-actions>
     <div class="header"></div>
     

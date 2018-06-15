@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router'
 import { Location } from '@angular/common';
 import { AuthService } from '../../../services/auth.service';
 import { FormControl, Validators } from '@angular/forms';
-import { MatSnackBar, MatDatepicker } from '@angular/material';
+import { MatSnackBar, MatDatepicker, MAT_DIALOG_DATA } from '@angular/material';
 
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
@@ -52,6 +52,7 @@ interface PostId extends Post {
   id: string; 
 }
 
+
 @Component({
   selector: 'app-gr-new-topic',
   templateUrl: './gr-new-topic.component.html',
@@ -62,7 +63,7 @@ export class GrNewTopicComponent implements OnInit {
 
   postsCol: AngularFirestoreCollection<Post>;
   posts: any;
-
+  regime: any;
   author: string;
   name: string;
   date: string;
@@ -101,7 +102,7 @@ export class GrNewTopicComponent implements OnInit {
   selected_types: any;
   types = ['Газета', 'Сайт', 'Львів', 'Регіони'];
 
-  constructor(private afs: AngularFirestore, private auth: AuthService,
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private afs: AngularFirestore, private auth: AuthService,
                 private afauth: AngularFireAuth) { }
   
   contentControl: FormControl = new FormControl('', [
@@ -121,6 +122,7 @@ export class GrNewTopicComponent implements OnInit {
   ]);
 
   ngOnInit() {
+    this.regime = this.data["regime"];
     this.deadline = '';
     this.link = '';
     this.submitDate = undefined;
@@ -163,23 +165,22 @@ export class GrNewTopicComponent implements OnInit {
 
     return hour + ':' + min + ' ' + '-' + day + ' ' + monthNames[monthIndex] + ' ' + year;
   }
-  getTypes(arr){
-    if(arr.indexOf("Газета") > -1){
-      this.gazeta_type = true;
-    }
-    if(arr.indexOf("Сайт") > -1){
-      this.site_type = true;
-    }
-    if(arr.indexOf("Львів") > -1){
-      this.lviv_type = true;
-    }
-    if(arr.indexOf("Регіони") > -1){
-      this.regions_type = true;
-    }
-  }
 
   newPost(){
-    this.getTypes(this.selected_types);
+    console.log(this.regime)
+    console.log(this.regime == "gazeta")
+    if (this.regime == "gazeta"){
+      this.gazeta_type = true;
+    }
+    if (this.regime == "site"){
+      this.site_type = true;
+    }
+    if (this.regime == "lviv"){
+      this.lviv_type = true;
+    }
+    if (this.regime == "regions"){
+      this.regions_type = true;
+    }
 
     //get time
     var today = new Date();

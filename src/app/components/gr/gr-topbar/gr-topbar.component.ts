@@ -29,10 +29,13 @@ export class GrTopbarComponent implements OnInit {
   }
   
   //add Post
-  addPost() {
+  addPost(regime) {
     this.dialogRef.open(GrNewTopicComponent, {
       height: '90vh',
       width: '90vw',
+      data: {
+        regime: regime,
+      }
     });
   }
   showArchieve(){
