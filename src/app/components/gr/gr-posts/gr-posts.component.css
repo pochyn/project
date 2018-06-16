@@ -113,4 +113,35 @@
 .demo-tab-group {
     border: 1px solid #e8e8e8;
 }
+
+
+.app-fab--absolute {
+
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+
+
+    color: #D0D3D4;
+    background-color: #A93226;
+    height: 30px;
+    width: 60px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    background-repeat:no-repeat;
+    border: none;
+    outline:none;
+    padding-bottom: 10px;
+    font-size: 20px;
+
+
+  }
+  
+  @media(min-width: 1024px) {
+     .app-fab--absolute {
+      bottom: 1.5rem;
+      right: 1.5rem;
+    }
+  }
   
