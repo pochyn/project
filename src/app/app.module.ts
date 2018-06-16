@@ -56,7 +56,6 @@ import { KvPostsComponent } from './components/kv/kv-posts/kv-posts.component';
 import { KvShowTopicComponent } from './components/kv/kv-show-topic/kv-show-topic.component';
 import { GrArchieveComponent } from './components/gr/gr-archieve/gr-archieve.component';
 import { GrDashboardComponent } from './components/gr/gr-dashboard/gr-dashboard.component';
-import { GrNavBarComponent } from './components/gr/gr-nav-bar/gr-nav-bar.component';
 import { GrNewTopicComponent } from './components/gr/gr-new-topic/gr-new-topic.component';
 import { GrShowTopicComponent } from './components/gr/gr-show-topic/gr-show-topic.component';
 import { GrPostsComponent } from './components/gr/gr-posts/gr-posts.component';
@@ -68,6 +67,10 @@ import { KvTopBarComponent } from './components/kv/kv-top-bar/kv-top-bar.compone
 import { OrTopBarComponent } from './components/or_gazeta/or-top-bar/or-top-bar.component';
 import { SiteTopBarComponent } from './components/or_site/site-top-bar/site-top-bar.component';
 import { GrBarComponent } from './components/gr/gr-bar/gr-bar.component';
+import { GrSiteComponent } from './components/gr/gr-site/gr-site.component';
+import { GrLvivComponent } from './components/gr/gr-lviv/gr-lviv.component';
+import { GrRegionsComponent } from './components/gr/gr-regions/gr-regions.component';
+
 
 @NgModule({
   declarations: [
@@ -102,7 +105,6 @@ import { GrBarComponent } from './components/gr/gr-bar/gr-bar.component';
     KvShowTopicComponent,
     GrArchieveComponent,
     GrDashboardComponent,
-    GrNavBarComponent,
     GrNewTopicComponent,
     GrShowTopicComponent,
     GrPostsComponent,
@@ -113,7 +115,10 @@ import { GrBarComponent } from './components/gr/gr-bar/gr-bar.component';
     KvTopBarComponent,
     OrTopBarComponent,
     SiteTopBarComponent,
-    GrBarComponent
+    GrBarComponent,
+    GrSiteComponent,
+    GrLvivComponent,
+    GrRegionsComponent
   ],
   imports: [
     BrowserModule,

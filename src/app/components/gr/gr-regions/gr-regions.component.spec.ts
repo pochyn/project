@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GrNavBarComponent } from './gr-nav-bar.component';
+import { GrRegionsComponent } from './gr-regions.component';
 
-describe('GrNavBarComponent', () => {
-  let component: GrNavBarComponent;
-  let fixture: ComponentFixture<GrNavBarComponent>;
+describe('GrRegionsComponent', () => {
+  let component: GrRegionsComponent;
+  let fixture: ComponentFixture<GrRegionsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GrNavBarComponent ]
+      declarations: [ GrRegionsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GrNavBarComponent);
+    fixture = TestBed.createComponent(GrRegionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

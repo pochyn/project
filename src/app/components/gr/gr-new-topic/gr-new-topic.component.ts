@@ -167,22 +167,19 @@ export class GrNewTopicComponent implements OnInit {
   }
 
   newPost(){
-    console.log(this.regime)
-    console.log(this.regime == "gazeta")
-    if (this.regime == "gazeta"){
+    //get time
+    if (this.regime == "gazeta") {
       this.gazeta_type = true;
     }
-    if (this.regime == "site"){
+    if (this.regime == "site") {
       this.site_type = true;
     }
-    if (this.regime == "lviv"){
+    if (this.regime == "lviv") {
       this.lviv_type = true;
     }
-    if (this.regime == "regions"){
+    if (this.regime == "regions") {
       this.regions_type = true;
     }
-
-    //get time
     var today = new Date();
     var hour = today.getHours();
     var min = today.getMinutes();
@@ -207,7 +204,7 @@ export class GrNewTopicComponent implements OnInit {
         var br = snapShot.docs[0].data()['branch']
         var name = snapShot.docs[0].data()['displayName']
 
-        this.afs.collection('posts').add({ 
+        this.afs.collection("/posts").add({ 
                         'content': this.content,
                         'author': this.auth.currentUserId,
                         'date': dt,

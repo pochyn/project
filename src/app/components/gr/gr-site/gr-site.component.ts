@@ -65,13 +65,13 @@ interface PostId extends Post {
 
 
 @Component({
-  selector: 'app-gr-posts',
-  templateUrl: './gr-posts.component.html',
-  styleUrls: ['./gr-posts.component.css']
+  selector: 'app-gr-site',
+  templateUrl: './gr-site.component.html',
+  styleUrls: ['./gr-site.component.css']
 })
-export class GrPostsComponent implements OnInit {
+export class GrSiteComponent implements OnInit {
 
- //to get data from database
+  //to get data from database
  postsColGaz: AngularFirestoreCollection<Post>;
  postsColSite: AngularFirestoreCollection<Post>;
  postsColLviv: AngularFirestoreCollection<Post>;
@@ -167,7 +167,7 @@ export class GrPostsComponent implements OnInit {
          const id = a.payload.doc.id;
          return { id, data };
        });
-     }).map(posts => posts.filter(post => post.data.gazeta_type && !post.data.read && !post.data.archieved_gr));
+     }).map(posts => posts.filter(post => post.data.site_type && !post.data.read && !post.data.archieved_gr));
    //gazeta tab paginator
    this.posts.subscribe(newData => this.postsData.data = newData);
    this.postsData.paginator = this.gazPaginator;
@@ -204,7 +204,7 @@ export class GrPostsComponent implements OnInit {
            const id = a.payload.doc.id;
            return { id, data };
          });
-       }).map(posts => posts.filter(post => post.data.gazeta_type && post.data.checked_gazeta && !post.data.archieved_gr));       
+       }).map(posts => posts.filter(post => post.data.site_type && post.data.checked_gazeta && !post.data.archieved_gr));       
    //site tab paginator
    this.sites.subscribe(data => this.sitesData.data = data);
    this.sitesData.paginator = this.sitePaginator;
@@ -241,7 +241,7 @@ export class GrPostsComponent implements OnInit {
          const id = a.payload.doc.id;
          return { id, data };
        });
-     }).map(posts => posts.filter(post => post.data.gazeta_type && post.data.read && !post.data.checked_gazeta && !post.data.archieved_gr));
+     }).map(posts => posts.filter(post => post.data.site_type && post.data.read && !post.data.checked_gazeta && !post.data.archieved_gr));
    //gazeta tab paginator
    this.lviv.subscribe(nData => this.lvivData.data = nData);
    this.lvivData.paginator = this.lvivPaginator;
@@ -301,8 +301,4 @@ export class GrPostsComponent implements OnInit {
      }
    });
  } 
-
- test(){
-   console.log("click")
- }
 }

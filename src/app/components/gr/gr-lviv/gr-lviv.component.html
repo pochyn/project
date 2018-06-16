@@ -1,0 +1,179 @@
+<mat-card class="mat-elevation-z10">
+    <div>
+      <div class="new-posts"></div>
+        <!-- filter field
+        <div>
+          <mat-form-field>
+            <input matInput (keyup)="applyFilter(postsData, $event.target.value)" placeholder="Пошук...">
+          </mat-form-field>
+        </div>
+      table with posts for gazets-->
+      
+      <mat-table #table1="matSort" [dataSource]="postsData" matSort matSortActive="data.date" matSortDirection="desc">  
+        
+        <ng-container matColumnDef="data.checked">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Затвердити </mat-header-cell>
+          <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{post.data.checked}} </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="data.branch">
+            <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+            <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;"  *matCellDef="let post" [ngClass]="{'Sport' : post.data.branch == 'Спорт', 'Svit' : post.data.branch == 'Світ', 'Zdorovya' : post.data.branch == 'Здоров\'я', 'Techno' : post.data.branch == 'Технології', 'Gr' : post.data.branch == 'Головний редактор'}"> {{ post.data.branch }} </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="data.date">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Дата </mat-header-cell>
+          <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{ post.data.date}} </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="data.name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Автор </mat-header-cell>
+          <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{ post.data.name}} </mat-cell>
+        </ng-container>
+    
+    
+        <ng-container matColumnDef="data.content" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Тема </mat-header-cell>
+            <mat-cell style="justify-content: left; text-overflow:ellipsis; " *matCellDef="let post"> {{post.data.content}} </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="data.comments" >
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Коментарі </mat-header-cell>
+          <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{post.data.comments}} </mat-cell>
+      </ng-container>
+    
+        <ng-container matColumnDef="data.actions">
+          <mat-header-cell  style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;"*matHeaderCellDef> Дії </mat-header-cell>
+          <mat-cell *matCellDef="let post">
+            <button (click)=archieve(post.id)>X</button>
+          </mat-cell>
+        </ng-container>
+    
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns; let i = index" 
+        (click)="showPost(row.id,row.data)"
+        [ngClass]="{'positive' : row.data.checked_gazeta == true, 'negative' : row.data.checked_gazeta == false, 'own' : row.data.author == this.auth.currentUserId && row.data.checked == true, 'read' : row.data.read == true}"></mat-row>
+      </mat-table>
+      <mat-paginator #gazPaginator
+                     [pageSize]="14"
+                     [pageSizeOptions]="[5, 14, 25, 50]"
+                     [showFirstLastButtons]="true">
+      </mat-paginator>
+      </div>
+    </mat-card>
+    
+    <mat-card class="cards mat-elevation-z10">
+      <div>
+          <div class="approved-posts"></div>
+        <!-- table with posts for gazets-->
+        
+        <mat-table #table1="matSort" [dataSource]="sitesData" matSort matSortActive="data.date" matSortDirection="desc">  
+          
+          <ng-container matColumnDef="data.checked">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Затвердити </mat-header-cell>
+            <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{post.data.checked}} </mat-cell>
+          </ng-container>
+      
+          <ng-container matColumnDef="data.branch">
+              <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+              <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;"  *matCellDef="let post" [ngClass]="{'Sport' : post.data.branch == 'Спорт', 'Svit' : post.data.branch == 'Світ', 'Zdorovya' : post.data.branch == 'Здоров\'я', 'Techno' : post.data.branch == 'Технології', 'Gr' : post.data.branch == 'Головний редактор'}"> {{ post.data.branch }} </mat-cell>
+          </ng-container>
+      
+          <ng-container class="top" matColumnDef="data.date">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Дата </mat-header-cell>
+            <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{ post.data.date}} </mat-cell>
+          </ng-container>
+      
+          <ng-container matColumnDef="data.name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Автор </mat-header-cell>
+            <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{ post.data.name}} </mat-cell>
+          </ng-container>
+      
+      
+          <ng-container matColumnDef="data.content" >
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Тема </mat-header-cell>
+              <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{post.data.content}} </mat-cell>
+          </ng-container>
+      
+          <ng-container matColumnDef="data.comments" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Коментарі </mat-header-cell>
+            <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{post.data.comments}} </mat-cell>
+        </ng-container>
+      
+          <ng-container matColumnDef="data.actions">
+            <mat-header-cell  style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;"*matHeaderCellDef> Дії </mat-header-cell>
+            <mat-cell *matCellDef="let post">
+              <button (click)=archieve(post.id)>X</button>
+            </mat-cell>
+          </ng-container>
+      
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns; let i = index" 
+          (click)="showPost(row.id,row.data)"
+          [ngClass]="{'positive' : row.data.checked_gazeta == true, 'negative' : row.data.checked_gazeta == false, 'own' : row.data.author == this.auth.currentUserId && row.data.checked == true, 'read' : row.data.read == true}"></mat-row>
+        </mat-table>
+        <mat-paginator #sitePaginator
+                       [pageSize]="14"
+                       [pageSizeOptions]="[5, 14, 25, 50]"
+                       [showFirstLastButtons]="true">
+        </mat-paginator>
+        </div>
+      </mat-card>
+    
+    <mat-card class="cards mat-elevation-z10">
+        <div>
+          <!-- table with posts for gazets-->
+          <div class="rejected-posts"></div>
+          <mat-table #table1="matSort" [dataSource]="lvivData" matSort matSortActive="data.date" matSortDirection="desc">  
+            
+            <ng-container matColumnDef="data.checked">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Затвердити </mat-header-cell>
+              <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{post.data.checked}} </mat-cell>
+            </ng-container>
+        
+            <ng-container matColumnDef="data.branch">
+                <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+                <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;"  *matCellDef="let post" [ngClass]="{'Sport' : post.data.branch == 'Спорт', 'Svit' : post.data.branch == 'Світ', 'Zdorovya' : post.data.branch == 'Здоров\'я', 'Techno' : post.data.branch == 'Технології', 'Gr' : post.data.branch == 'Головний редактор'}"> {{ post.data.branch }} </mat-cell>
+            </ng-container>
+        
+            <ng-container matColumnDef="data.date">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Дата </mat-header-cell>
+              <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{ post.data.date}} </mat-cell>
+            </ng-container>
+        
+            <ng-container matColumnDef="data.name">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Автор </mat-header-cell>
+              <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{ post.data.name}} </mat-cell>
+            </ng-container>
+        
+        
+            <ng-container matColumnDef="data.content" >
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Тема </mat-header-cell>
+                <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{post.data.content}} </mat-cell>
+            </ng-container>
+        
+            <ng-container matColumnDef="data.comments" >
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Коментарі </mat-header-cell>
+              <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{post.data.comments}} </mat-cell>
+          </ng-container>
+        
+            <ng-container matColumnDef="data.actions">
+              <mat-header-cell  style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;"*matHeaderCellDef> Дії </mat-header-cell>
+              <mat-cell *matCellDef="let post">
+                <button (click)=archieve(post.id)>X</button>
+              </mat-cell>
+            </ng-container>
+        
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns; let i = index" 
+            (click)="showPost(row.id,row.data)"
+            [ngClass]="{'positive' : row.data.checked_gazeta == true, 'negative' : row.data.checked_gazeta == false, 'own' : row.data.author == this.auth.currentUserId && row.data.checked == true, 'read' : row.data.read == true}"></mat-row>
+          </mat-table>
+          <mat-paginator #lvivPaginator
+                         [pageSize]="14"
+                         [pageSizeOptions]="[5, 14, 25, 50]"
+                         [showFirstLastButtons]="true">
+          </mat-paginator>
+          </div>
+        </mat-card>
+          
