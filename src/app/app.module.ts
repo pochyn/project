@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -70,6 +70,11 @@ import { GrBarComponent } from './components/gr/gr-bar/gr-bar.component';
 import { GrSiteComponent } from './components/gr/gr-site/gr-site.component';
 import { GrLvivComponent } from './components/gr/gr-lviv/gr-lviv.component';
 import { GrRegionsComponent } from './components/gr/gr-regions/gr-regions.component';
+import { OrNewTopicComponent } from './components/or_site/or-new-topic/or-new-topic.component';
+import { GazetaBarComponent } from './components/or_gazeta/gazeta-bar/gazeta-bar.component';
+import { SitePostsComponent } from './components/or_gazeta/site-posts/site-posts.component';
+import { OrGazetaNewTopicComponent } from './components/or_gazeta/or-gazeta-new-topic/or-gazeta-new-topic.component';
+
 
 
 @NgModule({
@@ -118,11 +123,15 @@ import { GrRegionsComponent } from './components/gr/gr-regions/gr-regions.compon
     GrBarComponent,
     GrSiteComponent,
     GrLvivComponent,
-    GrRegionsComponent
+    GrRegionsComponent,
+    OrNewTopicComponent,
+    GazetaBarComponent,
+    SitePostsComponent,
+    OrGazetaNewTopicComponent
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
+    NoopAnimationsModule,
     MaterialdesignModule,
     FlexLayoutModule,
     FormsModule,
@@ -145,7 +154,9 @@ import { GrRegionsComponent } from './components/gr/gr-regions/gr-regions.compon
     KvArchieveComponent,
     GrNewTopicComponent,
     GrShowTopicComponent,
-    GrArchieveComponent
+    GrArchieveComponent,
+    OrNewTopicComponent,
+    OrGazetaNewTopicComponent
   ],
   providers: [
     AuthService,

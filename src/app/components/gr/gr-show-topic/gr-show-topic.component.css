@@ -103,9 +103,8 @@ html *
 }
 
 .full{
-    min-height: 93%;
-    max-height: 93%;
-    overflow: auto;
+    max-height: 75vh;
+    overflow: scroll;
 }
 
 .fillup {

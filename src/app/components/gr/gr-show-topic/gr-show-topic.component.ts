@@ -8,6 +8,8 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 
+import * as moment from 'moment';
+
 interface Post {
   author: string;
   name: string;
@@ -98,20 +100,20 @@ export class GrShowTopicComponent implements OnInit {
   comm: any;
   users = {};
   types = ['Газета', 'Сайт', 'Львів', 'Регіони'];
-  hours = ['9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'];
+  hours = ['9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '24:00'];
   selected: any;
   selected_hour: any;
   journ = [];
-
-
+  public local = [];
 
   typeControl: FormControl = new FormControl('', [
     Validators.required
   ]);
 
   ngOnInit() {
-    
-
+    this.post = this.data['postdata'];
+    this.id = this.data['postId'];
+  
     let collRef = this.afs.collection('users').ref;
     let queryRef = collRef;
     queryRef.get().then((snapShot) => {
@@ -122,10 +124,9 @@ export class GrShowTopicComponent implements OnInit {
           this.users[dock.data()['displayName']] = [dock.id, dock.data()['branch']];
         }
     });
-
-    this.post = this.data['postdata'];
-    this.id = this.data['postId'];
-
+    this.getClass();
+  }
+  getClass(){
     var element1 = document.getElementById("1");
     if (this.post['checked_gazeta']){
       element1.classList.toggle("approve");
@@ -155,8 +156,20 @@ export class GrShowTopicComponent implements OnInit {
     }
   }
 
-  showData(){
-    
+  getData(){
+    let collRef1 = this.afs.collection('posts').ref;
+    let queryRef1 = collRef1;
+    queryRef1.get().then((snapShot) => {
+        for( let dock of snapShot.docs){
+          //this.users.push({key: dock.data()['displayName'], 
+          //                 value: dock.id});
+          if (dock.id == this.data['postId']){
+            this.post = dock.data();
+          }
+        }
+    });
+    var element5 = (<HTMLInputElement>document.getElementById("5"));
+    element5.value = '';
   }
 
   getTypes(arr){
@@ -190,36 +203,19 @@ export class GrShowTopicComponent implements OnInit {
         this.checked_regions = false;
       }
   }
-  getPost(postId) {
-    this.postDoc = this.afs.doc('posts/'+postId);
-    this.post = this.postDoc.valueChanges();
-  }
 
   changePost(postid, data){
+    var sbm_dt = this.formatDlnDate();
+    this.afs.doc('posts/'+postid).update({deadline: sbm_dt});
 
-
-    var sbm_dt;
-    var options = {  
-      year: "numeric", month: "numeric",  
-      day: "numeric"
-    };  
-    if (this.deadln != undefined){
-        sbm_dt = this.deadln.toLocaleDateString ("en-us", options);
-    } else {
-      sbm_dt ='';
-    }
     if (this.selected_types != undefined &&  this.selected_types != ''){
       this.getTypes(this.selected_types);
       this.afs.doc('posts/'+postid).update({gazeta_type: this.gazeta_type});
       this.afs.doc('posts/'+postid).update({site_type: this.site_type});
       this.afs.doc('posts/'+postid).update({lviv_type: this.lviv_type});
       this.afs.doc('posts/'+postid).update({regions_type: this.regions_type});
-      this.afs.doc('posts/'+postid).update({checked_gazeta: this.checked_gazeta});
-      this.afs.doc('posts/'+postid).update({checked_site: this.checked_site});
-      this.afs.doc('posts/'+postid).update({checked_lviv: this.checked_lviv});
-      this.afs.doc('posts/'+postid).update({checked_regions: this.checked_regions});
     }
-    this.afs.doc('posts/'+postid).update({deadline: sbm_dt});
+
     if (this.selected != undefined &&  this.selected != ''){
       this.afs.doc('posts/'+postid).update({author: this.users[this.selected][0]});
       this.afs.doc('posts/'+postid).update({branch: this.users[this.selected][1]});
@@ -228,23 +224,41 @@ export class GrShowTopicComponent implements OnInit {
 
     if (this.comm != undefined &&  this.comm != ''){
       this.afs.doc('posts/'+postid).update({comments: this.post['comments'] + this.comm});
-      var today = new Date();
-      var hour = today.getHours();
-      var min = today.getMinutes();
-      today.setHours(hour);
-      today.setMinutes(min);
-      var options1 = {  
-        year: "numeric", month: "numeric",  
-        day: "numeric", hour: "2-digit", minute: "2-digit"  
-      };  
-      var modified_dt = today.toLocaleTimeString("en-us", options1);
+      var modified_dt = this.formatTodayDate();
       this.afs.doc('posts/'+postid).update({date_modified: modified_dt});
-
     }
+    this.getData();
   }
 
   archieve(postid){
     this.afs.doc('posts/'+postid).update({archieved_gr: true});
+    this.getData();
+  }
+
+  formatTodayDate() {
+    var today = new Date();
+    let dt = moment(today).format("h:mm, DD/MM/YY");
+    return dt
+  }
+
+  formatDlnDate() {
+    var sbm_dt;
+    if (this.deadln != undefined){
+      if (this.selected_hour != undefined){
+        var arr = this.selected_hour.split(':')
+        this.deadln.setHours(arr[0])
+        this.deadln.setMinutes(arr[1])
+      }
+      var dt = moment(this.deadln).format("h:mm, DD/MM/YY");
+      sbm_dt = dt;
+    } else {
+      if (this.post["deadline"] == ''){
+        sbm_dt ='';
+      } else {
+        sbm_dt = this.post["deadline"];
+      }
+    }
+    return sbm_dt
   }
   
   approve_gazeta(postid, check){
@@ -257,9 +271,11 @@ export class GrShowTopicComponent implements OnInit {
     if (!check){
       var element12 = document.getElementById("1");
       this.afs.doc('posts/'+postid).update({checked_gazeta: true});
+      this.afs.doc('posts/'+postid).update({gazeta_type: true});
       element12.classList.remove("rej");
       element12.classList.add("approve");
     }
+    this.getData();
   }
   approve_site(postid, check){
     if (check) {
@@ -270,10 +286,12 @@ export class GrShowTopicComponent implements OnInit {
     } 
     if (!check){
       this.afs.doc('posts/'+postid).update({checked_site: true});
+      this.afs.doc('posts/'+postid).update({site_type: true});
       var element12 = document.getElementById("2");
       element12.classList.remove("rej");
       element12.classList.add("approve");
     }
+    this.getData();
   }
   approve_lviv(postid, check){
     if (check) {
@@ -284,10 +302,12 @@ export class GrShowTopicComponent implements OnInit {
     } 
     if (!check){
       this.afs.doc('posts/'+postid).update({checked_lviv: true});
+      this.afs.doc('posts/'+postid).update({lviv_type: true});
       var element12 = document.getElementById("3");
       element12.classList.remove("rej");
       element12.classList.add("approve");
     }
+    this.getData();
   }
   approve_regions(postid, check){
     if (check) {
@@ -298,16 +318,12 @@ export class GrShowTopicComponent implements OnInit {
     } 
     if (!check){
       this.afs.doc('posts/'+postid).update({checked_regions: true});
+      this.afs.doc('posts/'+postid).update({regions_type: true});
       var element12 = document.getElementById("4");
       element12.classList.remove("rej");
       element12.classList.add("approve");
     }
-  }
-  reject(postid){
-    this.afs.doc('posts/'+postid).update({checked_gazeta: false});
-    this.afs.doc('posts/'+postid).update({checked_site: false});
-    this.afs.doc('posts/'+postid).update({checked_lviv: false});
-    this.afs.doc('posts/'+postid).update({checked_regions: false});
+    this.getData();
   }
 
   showPost(postid, postdata){

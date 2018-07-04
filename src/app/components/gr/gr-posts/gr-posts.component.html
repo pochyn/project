@@ -38,7 +38,8 @@
 
     <ng-container matColumnDef="data.content" >
         <mat-header-cell *matHeaderCellDef mat-sort-header> Тема </mat-header-cell>
-        <mat-cell style="justify-content: left; text-overflow:ellipsis; " *matCellDef="let post"><p> {{post.data.content}} <br/><br/><button mat-raised-button (click)="$event.stopPropagation(); test()">test</button> <button mat-raised-button (click)="$event.stopPropagation(); test()">test</button> <button mat-raised-button (click)="$event.stopPropagation(); test()">test</button> <button mat-raised-button (click)="$event.stopPropagation(); test()">test</button></p>  </mat-cell>
+        <mat-cell style="justify-content: left; text-overflow:ellipsis; " *matCellDef="let post"><p> {{post.data.content}} <br/><br/>
+          <button mat-raised-button (click)="$event.stopPropagation(); test()">test</button> <button mat-raised-button (click)="$event.stopPropagation(); test()">test</button> <button mat-raised-button (click)="$event.stopPropagation(); test()">test</button> <button mat-raised-button (click)="$event.stopPropagation(); test()">test</button></p></mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="data.comments" >
@@ -59,8 +60,8 @@
     [ngClass]="{'positive' : row.data.checked_gazeta == true, 'negative' : row.data.checked_gazeta == false, 'own' : row.data.author == this.auth.currentUserId && row.data.checked == true, 'read' : row.data.read == true}"></mat-row>
   </mat-table>
   <mat-paginator #gazPaginator
-                 [pageSize]="14"
-                 [pageSizeOptions]="[5, 14, 25, 50]"
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 20, 50]"
                  [showFirstLastButtons]="true">
   </mat-paginator>
   </div>
@@ -71,7 +72,7 @@
       <div class="approved-posts"></div>
     <!-- table with posts for gazets-->
     
-    <mat-table #table1="matSort" [dataSource]="sitesData" matSort matSortActive="data.date" matSortDirection="desc">  
+    <mat-table #table2="matSort" [dataSource]="sitesData" matSort matSortActive="data.date" matSortDirection="desc">  
       
       <ng-container matColumnDef="data.checked">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Затвердити </mat-header-cell>
@@ -117,8 +118,8 @@
       [ngClass]="{'positive' : row.data.checked_gazeta == true, 'negative' : row.data.checked_gazeta == false, 'own' : row.data.author == this.auth.currentUserId && row.data.checked == true, 'read' : row.data.read == true}"></mat-row>
     </mat-table>
     <mat-paginator #sitePaginator
-                   [pageSize]="14"
-                   [pageSizeOptions]="[5, 14, 25, 50]"
+                   [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 20, 50]"
                    [showFirstLastButtons]="true">
     </mat-paginator>
     </div>
@@ -128,7 +129,7 @@
     <div>
       <!-- table with posts for gazets-->
       <div class="rejected-posts"></div>
-      <mat-table #table1="matSort" [dataSource]="lvivData" matSort matSortActive="data.date" matSortDirection="desc">  
+      <mat-table #table3="matSort" [dataSource]="lvivData" matSort matSortActive="data.date" matSortDirection="desc">  
         
         <ng-container matColumnDef="data.checked">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Затвердити </mat-header-cell>
@@ -174,8 +175,8 @@
         [ngClass]="{'positive' : row.data.checked_gazeta == true, 'negative' : row.data.checked_gazeta == false, 'own' : row.data.author == this.auth.currentUserId && row.data.checked == true, 'read' : row.data.read == true}"></mat-row>
       </mat-table>
       <mat-paginator #lvivPaginator
-                     [pageSize]="14"
-                     [pageSizeOptions]="[5, 14, 25, 50]"
+                     [pageSize]="10"
+                     [pageSizeOptions]="[5, 10, 20, 50]"
                      [showFirstLastButtons]="true">
       </mat-paginator>
       </div>

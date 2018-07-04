@@ -53,14 +53,16 @@ interface PostId extends Post {
   id: string; 
 }
 
+interface PostId extends Post { 
+  id: string; 
+}
 
 @Component({
-  selector: 'app-gr-new-topic',
-  templateUrl: './gr-new-topic.component.html',
-  styleUrls: ['./gr-new-topic.component.css']
+  selector: 'app-or-gazeta-new-topic',
+  templateUrl: './or-gazeta-new-topic.component.html',
+  styleUrls: ['./or-gazeta-new-topic.component.css']
 })
-export class GrNewTopicComponent implements OnInit {
-
+export class OrGazetaNewTopicComponent implements OnInit {
 
   postsCol: AngularFirestoreCollection<Post>;
   posts: any;
@@ -101,54 +103,36 @@ export class GrNewTopicComponent implements OnInit {
   postDoc: AngularFirestoreDocument<Post>;
   post: Observable<Post>;
 
-  selected_types: any;
-  types = ['Газета', 'Сайт', 'Львів', 'Регіони'];
-  journ = [];
-  users = {};
-  new_id: any;
-  selected: any;
-
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private afs: AngularFirestore, private auth: AuthService,
+  constructor(private afs: AngularFirestore, private auth: AuthService,
                 private afauth: AngularFireAuth, private dialogRef: MatDialog) { }
   
-  contentControl: FormControl = new FormControl('', [
+    contentControl: FormControl = new FormControl('', [
+        Validators.required
+    ]);
+
+    sourceControl: FormControl = new FormControl('', [
       Validators.required
-  ]);
+    ]);
 
-  sourceControl: FormControl = new FormControl('', [
-    Validators.required
-  ]);
+    dateControl: FormControl = new FormControl('', [
+      Validators.required
+    ]);
 
-  dateControl: FormControl = new FormControl('', [
-    Validators.required
-  ]);
-
-  typeControl: FormControl = new FormControl('', [
-    Validators.required
-  ]);
+    typeControl: FormControl = new FormControl('', [
+      Validators.required
+    ]);
 
   ngOnInit() {
-    let collRef = this.afs.collection('users').ref;
-    let queryRef = collRef;
-    queryRef.get().then((snapShot) => {
-        for( let dock of snapShot.docs){
-          //this.users.push({key: dock.data()['displayName'], 
-          //                 value: dock.id});
-          this.journ.push(dock.data()['displayName']);
-          this.users[dock.data()['displayName']] = [dock.id, dock.data()['branch']];
-        }
-    });
+
     this.content = '';
     this.source = '';
-    this.new_id = '';
-    this.selected = '';
-    this.by_gr = true;
-    this.regime = this.data["regime"];
+
+    this.by_gr = false;
     this.deadline = '';
     this.link = '';
     this.submitDate = undefined;
     this.comments = '';
-    this.read = true;
+    this.read = false;
     this.gazeta_type = false;
     this.site_type = false;
     this.lviv_type = false;
@@ -195,33 +179,14 @@ export class GrNewTopicComponent implements OnInit {
     return sbm_dt
   }
 
-  addPost(regime) {
-    this.dialogRef.open(GrNewTopicComponent, {
-      width: '90vw',
-      data: {
-        regime: regime,
-      }
+  addPost() {
+    this.dialogRef.open(OrGazetaNewTopicComponent, {
+      width: '90vw'
     });
   }
 
   newPost(){
-    //get time
-    if (this.regime == "gazeta") {
-      this.gazeta_type = true;
-      this.checked_gazeta = true;
-    }
-    if (this.regime == "site") {
-      this.site_type = true;
-      this.checked_site = true;
-    }
-    if (this.regime == "lviv") {
-      this.lviv_type = true;
-      this.checked_lviv = true;
-    }
-    if (this.regime == "regions") {
-      this.regions_type = true;
-      this.checked_regions = true;
-    }
+    this.gazeta_type = true;
     var dt = this.formatTodayDate();
     var sbm_dt = this.formatSbmDate();
     var src_dt = this.formatSrcDate();
@@ -232,19 +197,12 @@ export class GrNewTopicComponent implements OnInit {
     queryRef.get().then((snapShot) => {
         var br = snapShot.docs[0].data()['branch']
         var name = snapShot.docs[0].data()['displayName']
-        if (this.selected == ''){
-          this.selected = name;
-          this.new_id = this.auth.currentUserId;
-        } else {
-          this.new_id = this.users[this.selected][0];
-          br = this.users[this.selected][1];
-        } 
         this.afs.collection("/posts").add({ 
                         'content': this.content,
-                        'author': this.new_id,
+                        'author': this.auth.currentUserId,
                         'by_gr': this.by_gr,
                         'date': dt,
-                        'name': this.selected,
+                        'name': name,
                         'link': this.link,
                         'read': this.read,
                         'source': this.source,
@@ -257,7 +215,7 @@ export class GrNewTopicComponent implements OnInit {
                         'site_type': this.site_type,
                         'lviv_type': this.lviv_type,
                         'regions_type': this.regions_type,
-                        'archieved_g':this.archieved_g = false,
+                        'archieved_g': this.archieved_g,
                         'archieved_kv': this.archieved_kv,
                         'archieved_or': this.archieved_or,
                         'archieved_gr':this.archieved_gr,
@@ -272,6 +230,6 @@ export class GrNewTopicComponent implements OnInit {
                         'date_modified': this.date_modified,
                         'branch': br});
     })
-    this.addPost(this.regime);
+    this.addPost();
   }
 }

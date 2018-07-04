@@ -52,7 +52,7 @@
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns; let i = index" 
         (click)="showPost(row.id,row.data)"
-        [ngClass]="{'positive' : row.data.checked_gazeta == true, 'negative' : row.data.checked_gazeta == false, 'own' : row.data.author == this.auth.currentUserId && row.data.checked == true, 'read' : row.data.read == true}"></mat-row>
+        [ngClass]="{'positive' : row.data.checked_site == true, 'negative' : row.data.checked_site == false, 'own' : row.data.author == this.auth.currentUserId && row.data.checked == true, 'read' : row.data.read == true}"></mat-row>
       </mat-table>
       <mat-paginator #gazPaginator
                      [pageSize]="14"
@@ -67,7 +67,7 @@
           <div class="approved-posts"></div>
         <!-- table with posts for gazets-->
         
-        <mat-table #table1="matSort" [dataSource]="sitesData" matSort matSortActive="data.date" matSortDirection="desc">  
+        <mat-table #table2="matSort" [dataSource]="sitesData" matSort matSortActive="data.date" matSortDirection="desc">  
           
           <ng-container matColumnDef="data.checked">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Затвердити </mat-header-cell>
@@ -110,7 +110,7 @@
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns; let i = index" 
           (click)="showPost(row.id,row.data)"
-          [ngClass]="{'positive' : row.data.checked_gazeta == true, 'negative' : row.data.checked_gazeta == false, 'own' : row.data.author == this.auth.currentUserId && row.data.checked == true, 'read' : row.data.read == true}"></mat-row>
+          [ngClass]="{'positive' : row.data.checked_site == true, 'negative' : row.data.checked_site == false, 'own' : row.data.author == this.auth.currentUserId && row.data.checked == true, 'read' : row.data.read == true}"></mat-row>
         </mat-table>
         <mat-paginator #sitePaginator
                        [pageSize]="14"
@@ -124,7 +124,7 @@
         <div>
           <!-- table with posts for gazets-->
           <div class="rejected-posts"></div>
-          <mat-table #table1="matSort" [dataSource]="lvivData" matSort matSortActive="data.date" matSortDirection="desc">  
+          <mat-table #table3="matSort" [dataSource]="lvivData" matSort matSortActive="data.date" matSortDirection="desc">  
             
             <ng-container matColumnDef="data.checked">
               <mat-header-cell *matHeaderCellDef mat-sort-header> Затвердити </mat-header-cell>
@@ -167,7 +167,7 @@
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns; let i = index" 
             (click)="showPost(row.id,row.data)"
-            [ngClass]="{'positive' : row.data.checked_gazeta == true, 'negative' : row.data.checked_gazeta == false, 'own' : row.data.author == this.auth.currentUserId && row.data.checked == true, 'read' : row.data.read == true}"></mat-row>
+            [ngClass]="{'positive' : row.data.checked_site == true, 'negative' : row.data.checked_site == false, 'own' : row.data.author == this.auth.currentUserId && row.data.checked == true, 'read' : row.data.read == true}"></mat-row>
           </mat-table>
           <mat-paginator #lvivPaginator
                          [pageSize]="14"

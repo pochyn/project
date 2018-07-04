@@ -1,0 +1,55 @@
+<div class="full">
+  <mat-dialog-actions>
+      <span class="fillup"></span>
+      <button mat-button class='close' [mat-dialog-close]="true">X</button>
+  </mat-dialog-actions>
+  <div class="header"></div>
+  
+  <form>
+      <mat-form-field class="example-full">
+          <textarea matInput placeholder="Першоджерело" [formControl]="sourceControl" [(ngModel)]="source" name="source" required></textarea>
+          <mat-error *ngIf="sourceControl.hasError('required')">
+              Першоджерело!
+          </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="example-full1">
+          <input matInput [formControl]="dateControl" [(ngModel)]="sourceDate" name="sourceDate" [matDatepicker]="picker" required placeholder="Дата появи в першоджерелі">
+          <mat-error *ngIf="dateControl.hasError('required')">
+              Дата появи в Першоджерелі!
+          </mat-error>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+  </form>
+  <form>
+    <mat-form-field class="example-full2">
+      <textarea matInput placeholder="Лінк" [(ngModel)]="link" name="link"></textarea>
+    </mat-form-field>
+</form>
+  
+  
+  <form>
+      <mat-form-field class="example-full2">
+        <textarea matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=8 placeholder="Опис теми (максимум 1000 знаків)" [formControl]="contentControl" [(ngModel)]="content" name="content" maxLength="1000" required></textarea>
+        <mat-error *ngIf="contentControl.hasError('required')">
+          Опиши тему!
+        </mat-error>
+      </mat-form-field>
+  </form>
+  </div>
+  <form>
+    <mat-form-field>
+          <input matInput [(ngModel)]="submitDate" name="submitDate" [matDatepicker]="picker1"  placeholder="Дата можливої здачі">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+  </form>
+  <mat-dialog-actions>
+      <button mat-raised-button class='approve' type="submit" mat-dialog-close [disabled]="dateControl.hasError('required') || contentControl.hasError('required') || sourceControl.hasError('required')" (click)="newPost()">Додати тему!</button>
+  </mat-dialog-actions>
+  <div class="header"></div>
+  
+  
+  
+  

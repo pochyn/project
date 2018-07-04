@@ -203,7 +203,7 @@ ngOnInit() {
           const id = a.payload.doc.id;
           return { id, data };
         });
-      }).map(posts => posts.filter(post => post.data.regions_type && post.data.checked_gazeta && !post.data.archieved_gr));       
+      }).map(posts => posts.filter(post => post.data.regions_type && post.data.checked_regions && !post.data.archieved_gr));       
   //site tab paginator
   this.sites.subscribe(data => this.sitesData.data = data);
   this.sitesData.paginator = this.sitePaginator;
@@ -240,7 +240,7 @@ ngOnInit() {
         const id = a.payload.doc.id;
         return { id, data };
       });
-    }).map(posts => posts.filter(post => post.data.regions_type && post.data.read && !post.data.checked_gazeta && !post.data.archieved_gr));
+    }).map(posts => posts.filter(post => post.data.regions_type && post.data.read && !post.data.checked_regions && !post.data.archieved_gr));
   //gazeta tab paginator
   this.lviv.subscribe(nData => this.lvivData.data = nData);
   this.lvivData.paginator = this.lvivPaginator;
@@ -290,14 +290,13 @@ approve(postid){
 
 //open window to show current post
 showPost(postid, postdata){
- this.afs.doc('posts/'+postid).update({read: true});
-  this.dialogRef.open(GrShowTopicComponent, {
-   height: '90vh',
-   width: '90vw',
-    data: {
-      postId: postid,
-      postdata: postdata,
-    }
-  });
-} 
+  this.afs.doc('posts/'+postid).update({read: true});
+   this.dialogRef.open(GrShowTopicComponent, {
+    width: '90vw',
+     data: {
+       postId: postid,
+       postdata: postdata,
+     }
+   });
+ }
 }

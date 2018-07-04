@@ -1,16 +1,18 @@
 <div class='all'>
-    <div fxLayout="column" fxLayoutGap="0px" style="background: #D0D3D4;-webkit-user-select: none;">
-      <div fxFlex>
-        <div>
-            <app-or-top-bar></app-or-top-bar>
-        </div>
+  <div fxLayout="column" fxLayoutGap="0px" style="background: #D0D3D4;-webkit-user-select: none;">
+    <div fxFlex>
+      <div>
+          <app-or-top-bar></app-or-top-bar>
+          <app-gazeta-bar [type]="type" (onTypeSelected)="typeSelected($event)"></app-gazeta-bar>
       </div>
-      <div fxFlex>
-        <div class="card-container">
-            <mat-card>
-                <app-post-or-gazeta></app-post-or-gazeta>
-              </mat-card>
-          </div>
+    </div>
+    <div fxFlex>
+      <div class="card-container">
+          <div *ngIf="type == 'gazeta';then gazeta"></div>
+          <div *ngIf="type == 'site';then site"></div>
+          <ng-template #gazeta><app-post-or-gazeta></app-post-or-gazeta>.</ng-template>
+          <ng-template #site><app-site-posts></app-site-posts>.</ng-template>
         </div>
       </div>
     </div>
+  </div>

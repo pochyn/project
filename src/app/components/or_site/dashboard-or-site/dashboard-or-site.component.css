@@ -6,27 +6,16 @@
   overflow-x: auto;
 }
 
-
-
-a {
-  cursor: pointer;
-  color: blue;
-}
-
 .input-width {
   width: 80%;
 }
 
-.content {
-    max-height: calc(100vh);
-    overflow-y: hidden;
-    overflow-x: hidden;
-    /* 80px header + 40px footer = 120px  */
+.all{
+  max-height: calc(100vh);
 }
 
-.all{
-  
-  max-height: calc(100vh);
-    overflow-y: hidden;
-    overflow-x: hidden;
+.body {
+  background-color: #D0D3D4;
 }
+
+

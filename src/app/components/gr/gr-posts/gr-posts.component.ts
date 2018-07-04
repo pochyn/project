@@ -71,7 +71,6 @@ interface PostId extends Post {
   styleUrls: ['./gr-posts.component.css']
 })
 export class GrPostsComponent implements OnInit {
-
  //to get data from database
  postsColGaz: AngularFirestoreCollection<Post>;
  postsColSite: AngularFirestoreCollection<Post>;
@@ -150,12 +149,6 @@ export class GrPostsComponent implements OnInit {
  
 
  ngOnInit() {
-  var a = moment().set({'year': 2013, 'month': 12, 'hour': 13});
-  let one = moment(a).format("h:mm, Do/MM/YY");
-
-  var b = moment().set({'year': 2013, 'month': 3, 'hour': 14});
-  let two = moment(a).format("h:mm, Do/MM/YY");
-
    // --------------------------
    // GAZETA
    // unread
@@ -294,7 +287,6 @@ export class GrPostsComponent implements OnInit {
  showPost(postid, postdata){
   this.afs.doc('posts/'+postid).update({read: true});
    this.dialogRef.open(GrShowTopicComponent, {
-    height: '90vh',
     width: '90vw',
      data: {
        postId: postid,

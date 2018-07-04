@@ -22,13 +22,13 @@ import {
     MatDatepicker,
     MatNativeDateModule,
     MatOptionModule,
-    MatSelectModule
-
+    MatSelectModule,
+    MatSlideToggleModule
 } from '@angular/material';
 import { NgModule } from '@angular/core';
 
 @NgModule({
-  imports: [MatButtonModule, MatProgressSpinnerModule, MatSnackBarModule, MatTabsModule, MatTooltipModule, MatDialogModule, MatCheckboxModule, MatButtonModule, MatListModule, MatLineModule, MatIconModule, MatExpansionModule, MatToolbarModule, MatCardModule, MatFormFieldModule, MatInputModule, MatTableModule, MatPaginatorModule, MatSortModule, MatSidenavModule, MatDatepickerModule, MatNativeDateModule, MatOptionModule, MatSelectModule],
-  exports: [MatButtonModule, MatProgressSpinnerModule, MatSnackBarModule, MatTabsModule, MatTooltipModule, MatDialogModule, MatCheckboxModule, MatButtonModule, MatListModule, MatLineModule, MatIconModule, MatExpansionModule, MatToolbarModule, MatCardModule, MatFormFieldModule, MatInputModule, MatTableModule, MatPaginatorModule, MatSortModule, MatSidenavModule, MatDatepickerModule, MatNativeDateModule, MatOptionModule, MatSelectModule]
+  imports: [MatButtonModule, MatProgressSpinnerModule, MatSnackBarModule, MatTabsModule, MatTooltipModule, MatDialogModule, MatCheckboxModule, MatButtonModule, MatListModule, MatLineModule, MatIconModule, MatExpansionModule, MatToolbarModule, MatCardModule, MatFormFieldModule, MatInputModule, MatTableModule, MatPaginatorModule, MatSortModule, MatSidenavModule, MatDatepickerModule, MatNativeDateModule, MatOptionModule, MatSelectModule, MatSlideToggleModule],
+  exports: [MatButtonModule, MatProgressSpinnerModule, MatSnackBarModule, MatTabsModule, MatTooltipModule, MatDialogModule, MatCheckboxModule, MatButtonModule, MatListModule, MatLineModule, MatIconModule, MatExpansionModule, MatToolbarModule, MatCardModule, MatFormFieldModule, MatInputModule, MatTableModule, MatPaginatorModule, MatSortModule, MatSidenavModule, MatDatepickerModule, MatNativeDateModule, MatOptionModule, MatSelectModule, MatSlideToggleModule]
 })
 export class MaterialdesignModule { }

@@ -204,7 +204,7 @@ export class GrLvivComponent implements OnInit {
            const id = a.payload.doc.id;
            return { id, data };
          });
-       }).map(posts => posts.filter(post => post.data.lviv_type && post.data.checked_gazeta && !post.data.archieved_gr));       
+       }).map(posts => posts.filter(post => post.data.lviv_type && post.data.checked_lviv && !post.data.archieved_gr));       
    //site tab paginator
    this.sites.subscribe(data => this.sitesData.data = data);
    this.sitesData.paginator = this.sitePaginator;
@@ -241,7 +241,7 @@ export class GrLvivComponent implements OnInit {
          const id = a.payload.doc.id;
          return { id, data };
        });
-     }).map(posts => posts.filter(post => post.data.lviv_type && post.data.read && !post.data.checked_gazeta && !post.data.archieved_gr));
+     }).map(posts => posts.filter(post => post.data.lviv_type && post.data.read && !post.data.checked_lviv && !post.data.archieved_gr));
    //gazeta tab paginator
    this.lviv.subscribe(nData => this.lvivData.data = nData);
    this.lvivData.paginator = this.lvivPaginator;
@@ -293,7 +293,6 @@ export class GrLvivComponent implements OnInit {
  showPost(postid, postdata){
   this.afs.doc('posts/'+postid).update({read: true});
    this.dialogRef.open(GrShowTopicComponent, {
-    height: '90vh',
     width: '90vw',
      data: {
        postId: postid,
