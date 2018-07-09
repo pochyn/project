@@ -17,7 +17,6 @@ html *
 }
 
 .content{
-    min-height: 250px;
     max-height: 250px;
     overflow: auto;
 }
@@ -55,7 +54,7 @@ html *
 }
 
 .full{
-    min-height: 75%;
+    
     max-height: 75%;
     overflow: auto;
 }

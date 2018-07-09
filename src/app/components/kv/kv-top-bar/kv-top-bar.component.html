@@ -1,13 +1,15 @@
 <div style="padding-bottom: 0px; -webkit-app-region: drag;">
-    <mat-toolbar class="mat-elevation-z20" [color]="'success'">
-      <img class='ico' src="https://firebasestorage.googleapis.com/v0/b/expres-a0866.appspot.com/o/Ski_trail_rating_symbol_red_circle.png?alt=media&token=4ccc8365-a7af-4ae5-a9eb-1555902b7d1c">
-      <button mat-button  [color]="'success1'" (click)="addPost()"><b><font size="3">ДОДАТИ ТЕМУ</font></b></button>
-      <button mat-button  [color]="'success2'" (click)="showArchieve()">архів</button>
-      <button mat-button  [color]="'success2'" (click)="logout()">вийти</button>
-      <!-- This fills the remaining space of the current row -->
-      <span class="fillup"></span>
-      <span><button mat-button (click)="minimize()">—</button></span>
-      <span><button mat-button (click)="close()">X</button></span>
-    </mat-toolbar>
-    </div>
-    
+  <mat-toolbar class="mat-elevation-z20" [color]="'success'">
+    <img class='ico' src="https://firebasestorage.googleapis.com/v0/b/expres-a0866.appspot.com/o/Ski_trail_rating_symbol_red_circle.png?alt=media&token=4ccc8365-a7af-4ae5-a9eb-1555902b7d1c">
+    <button class="button1"(click)="addPost('gazeta')"><b>В газету</b></button>
+    <button class="button1"(click)="addPost('site')"><b>На сайт</b></button>
+    <button class="button1"(click)="addPost('lviv')"><b>На Львів</b></button>
+    <button class="button1"(click)="addPost('regions')"><b>На регіони</b></button>
+    <span class="fillup"></span>
+    <button mat-button  [color]="'success2'" (click)="showArchieve()">архів</button>
+    <button mat-button  [color]="'success2'" (click)="logout()">вийти</button>
+    <span><button mat-button (click)="minimize()">—</button></span>
+    <span><button mat-button (click)="close()">X</button></span>
+  </mat-toolbar>
+  </div>
+  

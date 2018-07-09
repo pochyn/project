@@ -1,0 +1,28 @@
+.fillup {
+    flex: 1 1 auto;
+  }
+  
+  .mat-success{
+    justify-content: center;
+    background-color: #A93226;
+    max-height: 25px;
+  }
+  
+  .button {
+    outline:none;
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    color: #D0D3D4;
+    padding-left: 12px;
+    padding-right: 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+
+    font-size: 13px;
+    margin: 10px 10px;
+}
+
+
+.button1 {border-radius: 12px;}

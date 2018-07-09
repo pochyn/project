@@ -1,3 +1,4 @@
+
 .mat-column-data-checked {
     flex: 0 0 0px;
 }
@@ -6,10 +7,10 @@
 }
 
 .mat-column-data-content {
-    flex: 0 0 45%;
+    text-align: left;
     margin-left: 25px;
-}
 
+}
 .mat-column-data-comments {
     margin-left: 25px;
 }
@@ -17,9 +18,13 @@
 .mat-column-data-actions {
     flex: 0 0 0px;
 }
+.mat-column-data-name {
+    margin-left: 15px;
+    flex: 0 0 100px;
+}
 
 .mat-column-data-branch {
-    flex: 0 0 0px;
+    flex: 0 0 15px;
 }
 .mat-header-cell {
     display:flex;
@@ -31,36 +36,42 @@
 }  
 
 .mat-row{
-    min-height: 6px;
-    max-height: 30px;
+    min-height: 23px;
     cursor: pointer;
 }
-
   
-
-.example-container {
-    display: flex;
-    flex-direction: column;
-    max-height: 500px;
-    min-width: 300px;
-    overflow: auto;
+.cards{
+    margin-top: 8px;
 }
-  
-.mat-table {
-    overflow: auto;
-    max-height: 500px;
-  }
 
-.example-header {
-    min-height: 64px;
-    padding: 8px 24px 0;
+.posts {
+    overflow-y: auto;
+    overflow-x: auto;
 }
-  
+
 .mat-form-field {
-    top: 15px;
-    bottom: 5px;
+    min-height: 64px;
+    padding-left: 22px;
+    padding-top: 5px;
+    padding-bottom: 0px;
     font-size: 14px;
+    width: 95%;
+}
+
+.new-posts{
+    height: 3px;
     width: 100%;
+    background: #F4D03F;
+}
+.approved-posts{
+    height: 3px;
+    width: 100%;
+    background: green;
+}
+.rejected-posts{
+    height: 3px;
+    width: 100%;
+    background: red;
 }
 
 .positive {
@@ -71,26 +82,67 @@
     background-color: white;
 }
 
-.as {
-    min-height: 100%
+.read {
+    background-color: #E6E6E6;
 }
 
-.posts {
-    min-height: 57vh;
-    max-height: 57vh;
-    overflow-y: auto;
-    overflow-x: auto;
+.Sport {
+    background-color: indigo;
+    color: indigo;
+}
+
+.Svit {
+    background-color: aqua;
+    color: aqua;
+}
+.Zdorovya {
+    background-color: gold;
+    color: gold;
+}
+
+.Techno {
+    background-color: fuchsia;
+    color: fuchsia;
+}
+
+.Gr{
+    background-color: firebrick;
+    color: firebrick; 
+}
+
+.demo-tab-group {
+    border: 1px solid #e8e8e8;
 }
 
 
+.app-fab--absolute {
+
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
 
 
+    color: #D0D3D4;
+    background-color: #A93226;
+    height: 30px;
+    width: 60px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    background-repeat:no-repeat;
+    border: none;
+    outline:none;
+    padding-bottom: 10px;
+    font-size: 20px;
 
-.own {
-    background-color: orange !important;
-}
 
-
-
+  }
+  
+  @media(min-width: 1024px) {
+     .app-fab--absolute {
+      bottom: 1.5rem;
+      right: 1.5rem;
+    }
+  }
 
 

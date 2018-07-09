@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
+import {NewTopicComponent} from '../new-topic/new-topic.component';
+import {MatDialog} from '@angular/material';
+import {ArchieveComponent } from '../archieve/archieve.component';
 declare var electron: any;  
 
 @Component({
@@ -8,7 +12,7 @@ declare var electron: any;
 })
 export class TopBarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private auth: AuthService, private dialogRef: MatDialog) { }
 
   ngOnInit() {
   }
@@ -20,5 +24,25 @@ export class TopBarComponent implements OnInit {
   minimize(){
     electron.ipcRenderer.send('minimize');
   }
+  logout() {
+    this.auth.logout();
+  }
+  
+  //add Post
+  addPost(regime) {
+    this.dialogRef.open(NewTopicComponent, {
+      width: '90vw',
+      data: {
+        regime: regime,
+      }
+    });
+  }
+  showArchieve(){
+    this.dialogRef.open(ArchieveComponent, {
+      height: '90vh',
+      width: '90vw',
+    });
+  }
   
 }
+

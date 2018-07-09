@@ -147,9 +147,7 @@ export class DeadlinesComponent implements OnInit {
   }
 
   showPost(postid, postdata){
-    this.afs.doc('posts/'+postid).update({read: true});
     this.dialogRef.open(ShowTopicComponent, {
-      height: '90vh',
       width: '90vw',
       data: {
         postId: postid,

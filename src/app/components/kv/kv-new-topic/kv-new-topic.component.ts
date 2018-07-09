@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, } from '@angular/core';
 import { Router } from '@angular/router'
 import { Location } from '@angular/common';
 import { AuthService } from '../../../services/auth.service';
 import { FormControl, Validators } from '@angular/forms';
-import { MatSnackBar, MatDatepicker } from '@angular/material';
-
+import { MatSnackBar, MatDatepicker, MAT_DIALOG_DATA} from '@angular/material';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import {MatDialog} from '@angular/material';
 import { AngularFireAuth } from 'angularfire2/auth';
+
+import * as moment from 'moment';
 
 interface Post {
   author: string;
@@ -52,6 +53,7 @@ interface PostId extends Post {
   id: string; 
 }
 
+
 @Component({
   selector: 'app-kv-new-topic',
   templateUrl: './kv-new-topic.component.html',
@@ -61,7 +63,7 @@ export class KvNewTopicComponent implements OnInit {
 
   postsCol: AngularFirestoreCollection<Post>;
   posts: any;
-
+  regime: any;
   author: string;
   name: string;
   date: string;
@@ -92,6 +94,7 @@ export class KvNewTopicComponent implements OnInit {
   checked_lviv: boolean;
   checked_regions: boolean;
   date_modified: any;
+  by_gr: any;
 
 
   postDoc: AngularFirestoreDocument<Post>;
@@ -99,9 +102,13 @@ export class KvNewTopicComponent implements OnInit {
 
   selected_types: any;
   types = ['Газета', 'Сайт', 'Львів', 'Регіони'];
+  journ = [];
+  users = {};
+  new_id: any;
+  selected: any;
 
-  constructor(private afs: AngularFirestore, private auth: AuthService,
-                private afauth: AngularFireAuth) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private afs: AngularFirestore, private auth: AuthService,
+                private afauth: AngularFireAuth, private dialogRef: MatDialog) { }
   
   contentControl: FormControl = new FormControl('', [
       Validators.required
@@ -120,6 +127,22 @@ export class KvNewTopicComponent implements OnInit {
   ]);
 
   ngOnInit() {
+    let collRef = this.afs.collection('users').ref;
+    let queryRef = collRef;
+    queryRef.get().then((snapShot) => {
+        for( let dock of snapShot.docs){
+          //this.users.push({key: dock.data()['displayName'], 
+          //                 value: dock.id});
+          this.journ.push(dock.data()['displayName']);
+          this.users[dock.data()['displayName']] = [dock.id, dock.data()['branch']];
+        }
+    });
+    this.content = '';
+    this.source = '';
+    this.new_id = '';
+    this.selected = '';
+    this.by_gr = false;
+    this.regime = this.data["regime"];
     this.deadline = '';
     this.link = '';
     this.submitDate = undefined;
@@ -145,71 +168,73 @@ export class KvNewTopicComponent implements OnInit {
   }
   
 
-  formatDate(date) {
-    var monthNames = [
-      "Jan", "Feb", "Mar",
-      "Apr", "May", "Jun", "Jul",
-      "Aug", "Spt", "Nov",
-      "Oct", "Dec"
-    ];
-
-    var day = date.getDate();
-    var monthIndex = date.getMonth();
-    var year = date.getFullYear();
-
-    var hour = date.getHours();
-    var min = date.getMinutes();
-
-    return hour + ':' + min + ' ' + '-' + day + ' ' + monthNames[monthIndex] + ' ' + year;
+  formatTodayDate() {
+    var today = new Date();
+    let dt = moment(today).format("h:mm, DD/MM/YY");
+    return dt
   }
-  getTypes(arr){
-    if(arr.indexOf("Газета") > -1){
-      this.gazeta_type = true;
+  formatSrcDate() {
+    var src_dt;
+    if (this.sourceDate != undefined){
+      var dt = moment(this.sourceDate).format("DD/MM/YY");
+      src_dt = dt;
+    } else {
+      src_dt ='';
     }
-    if(arr.indexOf("Сайт") > -1){
-      this.site_type = true;
+    return src_dt
+  }
+  formatSbmDate() {
+    var sbm_dt;
+    if (this.submitDate != undefined){
+      var dt = moment(this.submitDate).format("DD/MM/YY");
+      sbm_dt = dt;
+    } else {
+      sbm_dt ='';
     }
-    if(arr.indexOf("Львів") > -1){
-      this.lviv_type = true;
-    }
-    if(arr.indexOf("Регіони") > -1){
-      this.regions_type = true;
-    }
+    return sbm_dt
+  }
+
+  addPost(regime) {
+    this.dialogRef.open(KvNewTopicComponent, {
+      width: '90vw',
+      data: {
+        regime: regime,
+      }
+    });
   }
 
   newPost(){
-    this.getTypes(this.selected_types);
-
     //get time
-    var today = new Date();
-    var hour = today.getHours();
-    var min = today.getMinutes();
-    today.setHours(hour);
-    today.setMinutes(min);
-    var options = {  
-      year: "numeric", month: "numeric",  
-      day: "numeric", hour: "2-digit", minute: "2-digit"  
-    };  
-    var dt = today.toLocaleTimeString("en-us", options);
-    if (this.submitDate != undefined){
-      var sbm_dt = this.submitDate.toLocaleTimeString("en-us", options);
-    } else {
-      var sbm_dt ='';
+    if (this.regime == "gazeta") {
+      this.gazeta_type = true;
     }
-    var src_dt = this.sourceDate.toLocaleTimeString("en-us", options);
-    
+    if (this.regime == "site") {
+      this.site_type = true;
+    }
+    if (this.regime == "lviv") {
+      this.lviv_type = true;
+    }
+    if (this.regime == "regions") {
+      this.regions_type = true;
+    }
+    var dt = this.formatTodayDate();
+    var sbm_dt = this.formatSbmDate();
+    var src_dt = this.formatSrcDate();
+
     //get all needed info and setup new post
     let collRef = this.afs.collection('users').ref;
     let queryRef = collRef.where('email', '==', this.afauth.auth.currentUser.email);
     queryRef.get().then((snapShot) => {
         var br = snapShot.docs[0].data()['branch']
         var name = snapShot.docs[0].data()['displayName']
-
-        this.afs.collection('posts').add({ 
+        this.selected = name;
+        this.new_id = this.auth.currentUserId;
+        this.afs.collection("/posts").add({ 
                         'content': this.content,
-                        'author': this.auth.currentUserId,
+                        'author': this.new_id,
+                        'by_gr': this.by_gr,
                         'date': dt,
-                        'name': name,
+                        'name': this.selected,
                         'link': this.link,
                         'read': this.read,
                         'source': this.source,
@@ -230,12 +255,13 @@ export class KvNewTopicComponent implements OnInit {
                         'delete_kv': this.delete_kv,
                         'delete_or': this.delete_or,
                         'delete_gr': this.delete_gr,
-                        'date_modified': this.date_modified,
                         'checked_gazeta': this.checked_gazeta,
                         'checked_site': this.checked_site,
                         'checked_lviv': this.checked_lviv,
                         'checked_regions': this.checked_regions,
+                        'date_modified': this.date_modified,
                         'branch': br});
     })
+    this.addPost(this.regime);
   }
 }

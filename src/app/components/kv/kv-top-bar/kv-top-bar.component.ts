@@ -11,6 +11,7 @@ declare var electron: any;
 })
 export class KvTopBarComponent implements OnInit {
 
+  
   constructor(private auth: AuthService, private dialogRef: MatDialog) { }
 
   ngOnInit() {
@@ -26,11 +27,14 @@ export class KvTopBarComponent implements OnInit {
   logout() {
     this.auth.logout();
   }
+  
   //add Post
-  addPost() {
+  addPost(regime) {
     this.dialogRef.open(KvNewTopicComponent, {
-      height: '90vh',
       width: '90vw',
+      data: {
+        regime: regime,
+      }
     });
   }
   showArchieve(){
@@ -39,4 +43,5 @@ export class KvTopBarComponent implements OnInit {
       width: '90vw',
     });
   }
+  
 }

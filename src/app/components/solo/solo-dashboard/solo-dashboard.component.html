@@ -1,0 +1,41 @@
+<div class='all'>
+    <div fxLayout="column" fxLayoutGap="0px" style="background: #D0D3D4;-webkit-user-select: none;">
+      <div fxFlex>
+        <div>
+            <app-solo-top-bar></app-solo-top-bar>
+            <app-solo-bar [type]="type" (onTypeSelected)="typeSelected($event)"></app-solo-bar>
+        </div>
+      </div>
+
+      <div fxFlex>
+        <div class="card-container">
+            <div *ngIf="type == 'gazeta';then gazeta"></div>
+            <div *ngIf="type == 'site';then site"></div>
+            <div *ngIf="type == 'lviv';then lviv"></div>
+            <div *ngIf="type == 'regions';then regions"></div>
+            <ng-template #gazeta><app-solo-posts></app-solo-posts>.</ng-template>
+            <ng-template #site><app-solo-sites></app-solo-sites>.</ng-template>
+            <ng-template #lviv><app-solo-lviv></app-solo-lviv>.</ng-template>
+            <ng-template #regions><app-solo-regions></app-solo-regions>.</ng-template>
+  
+          </div>
+        </div>
+
+        <div fxFlex>
+            <div fxLayout="row" fxLayoutGap="0px" style="background: #D0D3D4;-webkit-user-select: none;">
+              <div fxFlex="75%">
+                <div class="card-container">
+                  <app-solo-comments></app-solo-comments>
+                </div>
+              </div>
+    
+              <div fxFlex>
+                <div class="card-container">
+                  <app-solo-deadlines></app-solo-deadlines>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+      </div>
+    </div>

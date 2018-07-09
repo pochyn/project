@@ -1,4 +1,5 @@
-<div class=posts>
+
+  <mat-card class="cards mat-elevation-z10">
         <div>
         <mat-table #table [dataSource]="postsData" matSort matSortActive="data.date_modified" matSortDirection="desc">  
           
@@ -19,3 +20,4 @@
           (click)="showPost(row.id,row.data)"></mat-row>
         </mat-table>
         </div>
+  </mat-card>

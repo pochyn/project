@@ -1,29 +1,40 @@
 .fillup {
-    flex: 1 1 auto;
-  }
-  
-  button {
-    -webkit-app-region: no-drag;
-  }
-  
-  .mat-success{
-    background-color: #D0D3D4;
-    color: grey;
-    max-height: 40px;
-  }
-  
-  .mat-success1 {
-    color: #A93226;
-    background-color: #D0D3D4;
-    max-height: 40px;
-  }
-  .mat-success2 {
-    color: grey;
-    background-color: #D0D3D4;
-    max-height: 40px;
-  }
-  
-  .ico{
-  max-height: 25px;
-  max-width: 25px;
-  }
+  flex: 1 1 auto;
+}
+
+button {
+  -webkit-app-region: no-drag;
+}
+
+.mat-success{
+  background-color: #D0D3D4;
+  color: grey;
+  max-height: 40px;
+}
+
+.button1 {
+  color: #D0D3D4;
+  background-color: #A93226;
+  max-height: 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  background-repeat:no-repeat;
+  border: none;
+  outline:none;
+  font-size: 13px;
+  margin: 5px 10px;
+  padding: 5px;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+.mat-success2 {
+  color: grey;
+  background-color: #D0D3D4;
+  max-height: 40px;
+}
+
+.ico{
+max-height: 25px;
+max-width: 25px;
+}

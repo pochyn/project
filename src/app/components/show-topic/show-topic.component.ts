@@ -2,10 +2,13 @@ import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { FormControl, Validators } from '@angular/forms';
+import { MatSnackBar, MatDatepicker, MatTableDataSource } from '@angular/material';
 
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
+
+import * as moment from 'moment';
 
 interface Post {
   author: string;
@@ -35,12 +38,12 @@ interface Post {
   delete_kv: boolean;
   delete_or: boolean;
   delete_gr: boolean;
+  checked_gazeta: boolean;
+  checked_site: boolean;
+  checked_lviv: boolean;
+  checked_regions: boolean;
   date_modified: any;
 
-}
-
-interface PostId extends Post { 
-  id: string; 
 }
 
 @Component({
@@ -49,6 +52,9 @@ interface PostId extends Post {
   styleUrls: ['./show-topic.component.css']
 })
 export class ShowTopicComponent implements OnInit {
+  
+  postsColGaz: AngularFirestoreCollection<Post>;
+
   author: string;
   name: string;
   date: string;
@@ -74,19 +80,33 @@ export class ShowTopicComponent implements OnInit {
   delete_kv: boolean;
   delete_or: boolean;
   delete_gr: boolean;
+  checked_gazeta: boolean;
+  checked_site: boolean;
+  checked_lviv: boolean;
+  checked_regions: boolean;
   date_modified: any;
 
   postDoc: AngularFirestoreDocument<Post>;
-  post: Observable<Post>;
+  post: any;
   id: any;
+  posts: any;
 
-  newContent: any;
+  postsData = new MatTableDataSource(this.posts);
+
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private afs: AngularFirestore,
                 private dialogRef: MatDialog) { }
 
   selected_types: any;
+  deadln: any;
+  comm: any;
+  users = {};
   types = ['Газета', 'Сайт', 'Львів', 'Регіони'];
+  hours = ['9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '24:00'];
+  selected: any;
+  selected_hour: any;
+  journ = [];
+  public local = [];
 
   typeControl: FormControl = new FormControl('', [
     Validators.required
@@ -96,65 +116,51 @@ export class ShowTopicComponent implements OnInit {
     this.post = this.data['postdata'];
     this.id = this.data['postId'];
   }
-
-  showData(){
-    
-  }
-
-  getTypes(arr){
-    if(arr.indexOf("Газета") > -1){
-      this.gazeta_type = true;
-    } else {
-      this.gazeta_type = false;
-    }
-    if(arr.indexOf("Сайт") > -1){
-      this.site_type = true;
-    } else {
-      this.site_type = false;
-    }
-    if(arr.indexOf("Львів") > -1){
-      this.lviv_type = true;
-    } else {
-      this.lviv_type = false;
-    }
-    if(arr.indexOf("Регіони") > -1){
-      this.regions_type = true;
-    } else {
-      this.regions_type = false;
-    }
-  }
-  getPost(postId) {
-    this.postDoc = this.afs.doc('posts/'+postId);
-    this.post = this.postDoc.valueChanges();
-  }
-
-  changePost(postid){
-    this.getTypes(this.selected_types);
-    this.afs.doc('posts/'+postid).update({gazeta_type: this.gazeta_type});
-    this.afs.doc('posts/'+postid).update({site_type: this.site_type});
-    this.afs.doc('posts/'+postid).update({lviv_type: this.lviv_type});
-    this.afs.doc('posts/'+postid).update({regions_type: this.regions_type});
+  
+  getData(){
+    let collRef1 = this.afs.collection('posts').ref;
+    let queryRef1 = collRef1;
+    queryRef1.get().then((snapShot) => {
+        for( let dock of snapShot.docs){
+          //this.users.push({key: dock.data()['displayName'], 
+          //                 value: dock.id});
+          if (dock.id == this.data['postId']){
+            this.post = dock.data();
+          }
+        }
+    });
+    var element5 = (<HTMLInputElement>document.getElementById("5"));
+    element5.value = '';
   }
 
   archieve(postid){
     this.afs.doc('posts/'+postid).update({archieved_g: true});
+    this.getData();
   }
 
-  changeContent(postid){
-    console.log(this.newContent);
-    //this.afs.doc('posts/'+postid).update({content: this.newContent});
+  formatTodayDate() {
+    var today = new Date();
+    let dt = moment(today).format("h:mm, DD/MM/YY");
+    return dt
   }
 
-   
-
-  showPost(postid, postdata){
-    this.dialogRef.open(ShowTopicComponent, {
-      height: '90vh',
-      width: '90vw',
-      data: {
-        postId: postid,
-        postdata: postdata
+  formatDlnDate() {
+    var sbm_dt;
+    if (this.deadln != undefined){
+      if (this.selected_hour != undefined){
+        var arr = this.selected_hour.split(':')
+        this.deadln.setHours(arr[0])
+        this.deadln.setMinutes(arr[1])
       }
-    });
-  }
+      var dt = moment(this.deadln).format("h:mm, DD/MM/YY");
+      sbm_dt = dt;
+    } else {
+      if (this.post["deadline"] == ''){
+        sbm_dt ='';
+      } else {
+        sbm_dt = this.post["deadline"];
+      }
+    }
+    return sbm_dt
+  }  
 }

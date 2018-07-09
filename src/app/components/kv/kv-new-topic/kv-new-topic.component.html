@@ -5,24 +5,22 @@
     </mat-dialog-actions>
     <div class="header"></div>
     
-    
     <form>
         <mat-form-field class="example-full">
-            <textarea matInput placeholder="Першоджерело" [formControl]="sourceControl" [(ngModel)]="source" name="source" required></textarea>
-            <mat-error *ngIf="sourceControl.hasError('required')">
-                Першоджерело!
-            </mat-error>
+            <textarea matInput placeholder="Першоджерело" [(ngModel)]="source" name="source" ></textarea>
         </mat-form-field>
     
         <mat-form-field class="example-full1">
-            <input matInput [formControl]="dateControl" [(ngModel)]="sourceDate" name="sourceDate" [matDatepicker]="picker" required placeholder="Дата появи в першоджерелі">
-            <mat-error *ngIf="dateControl.hasError('required')">
-                Дата появи в Першоджерелі!
-            </mat-error>
+            <input matInput [(ngModel)]="sourceDate" name="sourceDate" [matDatepicker]="picker" required placeholder="Дата появи в першоджерелі">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
     </form>
+    <form>
+      <mat-form-field class="example-full2">
+        <textarea matInput placeholder="Лінк" [(ngModel)]="link" name="link"></textarea>
+      </mat-form-field>
+  </form>
     
     
     <form>
@@ -33,25 +31,8 @@
           </mat-error>
         </mat-form-field>
     </form>
-    
-    <form>
-        <mat-form-field class="example-full2">
-          <textarea matInput placeholder="Лінк" [(ngModel)]="link" name="link"></textarea>
-        </mat-form-field>
-    </form>
-    
-    
     </div>
     <form>
-    <mat-form-field>
-        <mat-select placeholder="Куди" required [(ngModel)]="selected_types" [formControl]="typeControl" multiple>
-          <mat-option *ngFor="let type of types" [value]="type">{{type}}</mat-option>
-        </mat-select>
-        <mat-error *ngIf="dateControl.hasError('required')">
-            Куди!
-        </mat-error>
-      </mat-form-field>
-    
       <mat-form-field>
             <input matInput [(ngModel)]="submitDate" name="submitDate" [matDatepicker]="picker1"  placeholder="Дата можливої здачі">
             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
@@ -59,7 +40,7 @@
         </mat-form-field>
     </form>
     <mat-dialog-actions>
-        <button mat-raised-button class='approve' type="submit" mat-dialog-close [disabled]="dateControl.hasError('required') || contentControl.hasError('required') || sourceControl.hasError('required') || typeControl.hasError('required')" (click)="newPost()">Додати тему!</button>
+        <button mat-raised-button class='approve' type="submit" mat-dialog-close [disabled]="contentControl.hasError('required')" (click)="newPost()">Додати тему!</button>
     </mat-dialog-actions>
     <div class="header"></div>
     

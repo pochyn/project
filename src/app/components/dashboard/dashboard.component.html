@@ -1,41 +1,41 @@
-
 <div class='all'>
     <div fxLayout="column" fxLayoutGap="0px" style="background: #D0D3D4;-webkit-user-select: none;">
-      
-        <div fxFlex>
-            <div>
-                <app-top-bar-dashboard></app-top-bar-dashboard>
-            </div>
+      <div fxFlex>
+        <div>
+            <app-top-bar></app-top-bar>
+            <app-bar [type]="type" (onTypeSelected)="typeSelected($event)"></app-bar>
         </div>
+      </div>
 
-        <div fxFlex>
-            <div class="card-container">
-                <mat-card>
-                    <app-posts></app-posts>
-                </mat-card>
-            </div>
+      <div fxFlex>
+        <div class="card-container">
+            <div *ngIf="type == 'gazeta';then gazeta"></div>
+            <div *ngIf="type == 'site';then site"></div>
+            <div *ngIf="type == 'lviv';then lviv"></div>
+            <div *ngIf="type == 'regions';then regions"></div>
+            <ng-template #gazeta><app-posts></app-posts>.</ng-template>
+            <ng-template #site><app-sites></app-sites>.</ng-template>
+            <ng-template #lviv><app-lviv></app-lviv>.</ng-template>
+            <ng-template #regions><app-regions></app-regions>.</ng-template>
+  
+          </div>
         </div>
-
 
         <div fxFlex>
             <div fxLayout="row" fxLayoutGap="0px" style="background: #D0D3D4;-webkit-user-select: none;">
-                <div fxFlex ="70%">
-                    <div class="card-container">
-                        <mat-card>
-                            <app-comments></app-comments>
-                        </mat-card>
-                    </div>
+              <div fxFlex="75%">
+                <div class="card-container">
+                  <app-comments></app-comments>
                 </div>
-                <div fxFlex ="30%">
-                    <div class="card-container">
-                        <mat-card>
-                            <app-deadlines></app-deadlines>
-                        </mat-card>
-                    </div>
+              </div>
+    
+              <div fxFlex>
+                <div class="card-container">
+                  <app-deadlines></app-deadlines>
                 </div>
+              </div>
             </div>
-                    
-                    
-        </div>
+            
+          </div>
+      </div>
     </div>
-</div>

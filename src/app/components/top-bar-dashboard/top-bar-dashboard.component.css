@@ -7,8 +7,8 @@ button {
 }
 
 .mat-success{
-  background-color: #D0D3D4;
-  color: grey;
+  background-color: transparent;
+  color: transparent;
   max-height: 40px;
 }
 
