@@ -95,7 +95,7 @@ export class KvNewTopicComponent implements OnInit {
   checked_regions: boolean;
   date_modified: any;
   by_gr: any;
-
+  priority: any;
 
   postDoc: AngularFirestoreDocument<Post>;
   post: Observable<Post>;
@@ -165,6 +165,7 @@ export class KvNewTopicComponent implements OnInit {
     this.checked_lviv = false;
     this.checked_regions=false;
     this.date_modified = '';
+    this.priority = 'default';
   }
   
 
@@ -233,6 +234,7 @@ export class KvNewTopicComponent implements OnInit {
                         'content': this.content,
                         'author': this.new_id,
                         'by_gr': this.by_gr,
+                        'priority': this.priority,
                         'date': dt,
                         'name': this.selected,
                         'link': this.link,

@@ -94,6 +94,8 @@ export class NewTopicComponent implements OnInit {
   checked_regions: boolean;
   date_modified: any;
   by_gr: any;
+  priority: any;
+  ochna: any;
 
 
   postDoc: AngularFirestoreDocument<Post>;
@@ -141,9 +143,11 @@ export class NewTopicComponent implements OnInit {
     this.new_id = '';
     this.selected = '';
     this.by_gr = false;
+    this.priority = "default";
     this.regime = this.data["regime"];
     this.deadline = '';
     this.link = '';
+    this.checked = false;
     this.submitDate = undefined;
     this.comments = '';
     this.read = false;
@@ -164,8 +168,8 @@ export class NewTopicComponent implements OnInit {
     this.checked_lviv = false;
     this.checked_regions=false;
     this.date_modified = '';
+    this.ochna = false;
   }
-  
 
   formatTodayDate() {
     var today = new Date();
@@ -192,6 +196,14 @@ export class NewTopicComponent implements OnInit {
     }
     return sbm_dt
   }
+
+  checkOchna() {
+    if (this.ochna == true) {
+      this.ochna = false;
+    } else {
+      this.ochna = true;
+    }
+}
 
   addPost(regime) {
     this.dialogRef.open(NewTopicComponent, {
@@ -232,6 +244,7 @@ export class NewTopicComponent implements OnInit {
                         'content': this.content,
                         'author': this.new_id,
                         'by_gr': this.by_gr,
+                        'priority': this.priority,
                         'date': dt,
                         'name': this.selected,
                         'link': this.link,
@@ -239,8 +252,9 @@ export class NewTopicComponent implements OnInit {
                         'source': this.source,
                         'sourceDate': src_dt,
                         'submitDate': sbm_dt,
+                        'ochna': this.ochna,
                         'comments': this.comments,
-                        'checked': false,
+                        'checked': this.checked,
                         'deadline': this.deadline,
                         'gazeta_type': this.gazeta_type,
                         'site_type': this.site_type,

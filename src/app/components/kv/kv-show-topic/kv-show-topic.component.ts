@@ -114,6 +114,13 @@ export class KvShowTopicComponent implements OnInit {
   ngOnInit() {
     this.post = this.data['postdata'];
     this.id = this.data['postId'];
+
+    var element1 = document.getElementById("1");
+    if (this.post['checked']){
+      element1.classList.toggle("approve");
+    } else {
+      element1.classList.toggle("rej");
+    }
   }
   
   getData(){
@@ -128,8 +135,6 @@ export class KvShowTopicComponent implements OnInit {
           }
         }
     });
-    var element5 = (<HTMLInputElement>document.getElementById("5"));
-    element5.value = '';
   }
 
   archieve(postid){
@@ -162,4 +167,22 @@ export class KvShowTopicComponent implements OnInit {
     }
     return sbm_dt
   }  
+
+  approve(postid, check){
+    if (check) {
+      var element11 = document.getElementById("1");
+      this.afs.doc('posts/'+postid).update({checked: false});
+      element11.classList.remove("approve");
+      element11.classList.add("rej");
+    } 
+    if (!check){
+      var element12 = document.getElementById("1");
+      this.afs.doc('posts/'+postid).update({checked: true});
+      element12.classList.remove("rej");
+      element12.classList.add("approve");
+    }
+    this.getData();
+  }
+
+  
 }

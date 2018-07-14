@@ -167,7 +167,7 @@ export class GrSiteComponent implements OnInit {
          const id = a.payload.doc.id;
          return { id, data };
        });
-     }).map(posts => posts.filter(post => post.data.site_type && !post.data.read && !post.data.archieved_gr));
+     }).map(posts => posts.filter(post => post.data.checked && post.data.site_type && !post.data.read && !post.data.archieved_gr));
    //gazeta tab paginator
    this.posts.subscribe(newData => this.postsData.data = newData);
    this.postsData.paginator = this.gazPaginator;
@@ -204,7 +204,7 @@ export class GrSiteComponent implements OnInit {
            const id = a.payload.doc.id;
            return { id, data };
          });
-       }).map(posts => posts.filter(post => post.data.site_type && post.data.checked_site && !post.data.archieved_gr));       
+       }).map(posts => posts.filter(post => post.data.checked && post.data.site_type && post.data.checked_site && !post.data.archieved_gr));       
    //site tab paginator
    this.sites.subscribe(data => this.sitesData.data = data);
    this.sitesData.paginator = this.sitePaginator;
@@ -241,7 +241,7 @@ export class GrSiteComponent implements OnInit {
          const id = a.payload.doc.id;
          return { id, data };
        });
-     }).map(posts => posts.filter(post => post.data.site_type && post.data.read && !post.data.checked_site && !post.data.archieved_gr));
+     }).map(posts => posts.filter(post => post.data.checked && post.data.site_type && post.data.read && !post.data.checked_site && !post.data.archieved_gr));
    //gazeta tab paginator
    this.lviv.subscribe(nData => this.lvivData.data = nData);
    this.lvivData.paginator = this.lvivPaginator;

@@ -98,6 +98,7 @@ export class OrGazetaNewTopicComponent implements OnInit {
   checked_regions: boolean;
   date_modified: any;
   by_gr: any;
+  priority: any;
 
 
   postDoc: AngularFirestoreDocument<Post>;
@@ -150,6 +151,8 @@ export class OrGazetaNewTopicComponent implements OnInit {
     this.checked_lviv = false;
     this.checked_regions=false;
     this.date_modified = '';
+    this.checked = true;
+    this.priority = 'default';
   }
   
 
@@ -201,6 +204,7 @@ export class OrGazetaNewTopicComponent implements OnInit {
                         'content': this.content,
                         'author': this.auth.currentUserId,
                         'by_gr': this.by_gr,
+                        'priority': this.priority,
                         'date': dt,
                         'name': name,
                         'link': this.link,
@@ -209,7 +213,7 @@ export class OrGazetaNewTopicComponent implements OnInit {
                         'sourceDate': src_dt,
                         'submitDate': sbm_dt,
                         'comments': this.comments,
-                        'checked': false,
+                        'checked': this.checked,
                         'deadline': this.deadline,
                         'gazeta_type': this.gazeta_type,
                         'site_type': this.site_type,

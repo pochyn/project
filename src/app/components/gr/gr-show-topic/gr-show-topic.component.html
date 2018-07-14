@@ -77,6 +77,14 @@
       <mat-option *ngFor="let hour of hours" [value]="hour">{{hour}}</mat-option>
     </mat-select>
 </mat-form-field> 
+
+<mat-form-field>
+  <mat-select name="prior" placeholder="Приорітет" [(ngModel)]="priority_selected">
+    <mat-option *ngFor="let p of priorities" ngDefaultControl [value]="p">
+      {{ p }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
   
   </div>
   <div>

@@ -95,6 +95,7 @@ export class SoloNewTopicComponent implements OnInit {
   checked_regions: boolean;
   date_modified: any;
   by_gr: any;
+  priority: any;
 
 
   postDoc: AngularFirestoreDocument<Post>;
@@ -138,6 +139,7 @@ export class SoloNewTopicComponent implements OnInit {
         }
     });
     this.content = '';
+    this.priority = 'defualt',
     this.source = '';
     this.new_id = '';
     this.selected = '';
@@ -166,6 +168,7 @@ export class SoloNewTopicComponent implements OnInit {
     this.checked_lviv = false;
     this.checked_regions=false;
     this.date_modified = '';
+    this.checked = false;
   }
   
 
@@ -234,6 +237,7 @@ export class SoloNewTopicComponent implements OnInit {
                         'content': this.content,
                         'author': this.new_id,
                         'by_gr': this.by_gr,
+                        'priority': this.priority,
                         'date': dt,
                         'name': this.selected,
                         'link': this.link,
@@ -242,7 +246,7 @@ export class SoloNewTopicComponent implements OnInit {
                         'sourceDate': src_dt,
                         'submitDate': sbm_dt,
                         'comments': this.comments,
-                        'checked': false,
+                        'checked': this.checked,
                         'deadline': this.deadline,
                         'gazeta_type': this.gazeta_type,
                         'site_type': this.site_type,

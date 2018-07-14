@@ -46,6 +46,7 @@ interface Post {
   checked_lviv: boolean;
   checked_regions: boolean;
   date_modified: any;
+  priority: any;
 
 }
 
@@ -96,6 +97,7 @@ export class GrNewTopicComponent implements OnInit {
   checked_regions: boolean;
   date_modified: any;
   by_gr: any;
+  priority: any;
 
 
   postDoc: AngularFirestoreDocument<Post>;
@@ -103,10 +105,12 @@ export class GrNewTopicComponent implements OnInit {
 
   selected_types: any;
   types = ['Газета', 'Сайт', 'Львів', 'Регіони'];
+  priorities = ['default', 'risk', 'warn']
   journ = [];
   users = {};
   new_id: any;
   selected: any;
+  priority_selected: any;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private afs: AngularFirestore, private auth: AuthService,
                 private afauth: AngularFireAuth, private dialogRef: MatDialog) { }
@@ -142,6 +146,7 @@ export class GrNewTopicComponent implements OnInit {
     this.source = '';
     this.new_id = '';
     this.selected = '';
+    this.priority_selected = '';
     this.by_gr = true;
     this.regime = this.data["regime"];
     this.deadline = '';
@@ -166,6 +171,7 @@ export class GrNewTopicComponent implements OnInit {
     this.checked_lviv = false;
     this.checked_regions=false;
     this.date_modified = '';
+    this.checked = true;
   }
   
 
@@ -222,6 +228,13 @@ export class GrNewTopicComponent implements OnInit {
       this.regions_type = true;
       this.checked_regions = true;
     }
+
+    if (this.priority_selected == ''){
+      this.priority = 'default';
+    } else {
+      this.priority = this.priority_selected;
+    }
+    
     var dt = this.formatTodayDate();
     var sbm_dt = this.formatSbmDate();
     var src_dt = this.formatSrcDate();
@@ -243,6 +256,7 @@ export class GrNewTopicComponent implements OnInit {
                         'content': this.content,
                         'author': this.new_id,
                         'by_gr': this.by_gr,
+                        'priority': this.priority,
                         'date': dt,
                         'name': this.selected,
                         'link': this.link,
@@ -251,7 +265,7 @@ export class GrNewTopicComponent implements OnInit {
                         'sourceDate': src_dt,
                         'submitDate': sbm_dt,
                         'comments': this.comments,
-                        'checked': false,
+                        'checked': this.checked,
                         'deadline': this.deadline,
                         'gazeta_type': this.gazeta_type,
                         'site_type': this.site_type,

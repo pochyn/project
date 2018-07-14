@@ -43,6 +43,7 @@ interface Post {
   checked_lviv: boolean;
   checked_regions: boolean;
   date_modified: any;
+  priority: any;
 
 }
 @Component({
@@ -83,6 +84,7 @@ export class GrShowTopicComponent implements OnInit {
   checked_lviv: boolean;
   checked_regions: boolean;
   date_modified: any;
+  priority: any;
 
   postDoc: AngularFirestoreDocument<Post>;
   post: any;
@@ -100,11 +102,13 @@ export class GrShowTopicComponent implements OnInit {
   comm: any;
   users = {};
   types = ['Газета', 'Сайт', 'Львів', 'Регіони'];
+  priorities = ['default', 'risk', 'warn'];
   hours = ['9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '24:00'];
   selected: any;
   selected_hour: any;
   journ = [];
   public local = [];
+  priority_selected: any;
 
   typeControl: FormControl = new FormControl('', [
     Validators.required
@@ -113,6 +117,7 @@ export class GrShowTopicComponent implements OnInit {
   ngOnInit() {
     this.post = this.data['postdata'];
     this.id = this.data['postId'];
+    this.priority_selected = ''
   
     let collRef = this.afs.collection('users').ref;
     let queryRef = collRef;
@@ -208,7 +213,12 @@ export class GrShowTopicComponent implements OnInit {
     var sbm_dt = this.formatDlnDate();
     this.afs.doc('posts/'+postid).update({deadline: sbm_dt});
 
-    if (this.selected_types != undefined &&  this.selected_types != ''){
+    if (this.priority_selected != ''){
+      this.priority = this.priority_selected;
+      this.afs.doc('posts/'+postid).update({priority: this.priority});
+    }
+
+    if (this.selected_types != undefined && this.selected_types != ''){
       this.getTypes(this.selected_types);
       this.afs.doc('posts/'+postid).update({gazeta_type: this.gazeta_type});
       this.afs.doc('posts/'+postid).update({site_type: this.site_type});
