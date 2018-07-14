@@ -1,5 +1,8 @@
 <div class="full">
   <mat-dialog-actions>
+        <div *ngIf="regime == 'gazeta';then gazeta"></div>
+        <ng-template #gazeta><input type="checkbox" id="ochna" name="ochna" value="ochna" [(ngModel)]="ochna" (click)="checkOchna()">
+            <label for="ochna"><font color="grey" size="3"><b>ОЧНА</b></font></label></ng-template>
       <span class="fillup"></span>
       <button mat-button class='close' [mat-dialog-close]="true">X</button>
   </mat-dialog-actions>
@@ -46,7 +49,7 @@
       </mat-form-field>
   </form>
   <mat-dialog-actions>
-      <button mat-raised-button class='approve' type="submit" mat-dialog-close [disabled]="dateControl.hasError('required') || contentControl.hasError('required') || sourceControl.hasError('required')" (click)="newPost()">Додати тему!</button>
+      <button mat-raised-button class='approve' type="submit" mat-dialog-close [disabled]="(contentControl.hasError('required') || sourceControl.hasError('required') || dateControl.hasError('required')) && (!ochna || regime != 'gazeta')" (click)="newPost()">Додати тему!</button>
   </mat-dialog-actions>
   <div class="header"></div>
   

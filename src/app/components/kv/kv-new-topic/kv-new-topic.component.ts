@@ -46,6 +46,7 @@ interface Post {
   checked_lviv: boolean;
   checked_regions: boolean;
   date_modified: any;
+  ochna: any;
 
 }
 
@@ -96,6 +97,7 @@ export class KvNewTopicComponent implements OnInit {
   date_modified: any;
   by_gr: any;
   priority: any;
+  ochna: any;
 
   postDoc: AngularFirestoreDocument<Post>;
   post: Observable<Post>;
@@ -166,6 +168,7 @@ export class KvNewTopicComponent implements OnInit {
     this.checked_regions=false;
     this.date_modified = '';
     this.priority = 'default';
+    this.ochna = false;
   }
   
 
@@ -195,6 +198,13 @@ export class KvNewTopicComponent implements OnInit {
     return sbm_dt
   }
 
+  checkOchna() {
+    if (this.ochna == true) {
+      this.ochna = false;
+    } else {
+      this.ochna = true;
+    }
+}
   addPost(regime) {
     this.dialogRef.open(KvNewTopicComponent, {
       width: '90vw',
@@ -203,6 +213,7 @@ export class KvNewTopicComponent implements OnInit {
       }
     });
   }
+  
 
   newPost(){
     //get time
@@ -237,6 +248,7 @@ export class KvNewTopicComponent implements OnInit {
                         'priority': this.priority,
                         'date': dt,
                         'name': this.selected,
+                        'ochna': this.ochna,
                         'link': this.link,
                         'read': this.read,
                         'source': this.source,

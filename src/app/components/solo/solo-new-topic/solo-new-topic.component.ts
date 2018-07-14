@@ -96,6 +96,7 @@ export class SoloNewTopicComponent implements OnInit {
   date_modified: any;
   by_gr: any;
   priority: any;
+  ochna: any;
 
 
   postDoc: AngularFirestoreDocument<Post>;
@@ -169,6 +170,7 @@ export class SoloNewTopicComponent implements OnInit {
     this.checked_regions=false;
     this.date_modified = '';
     this.checked = false;
+    this.ochna = false;
   }
   
 
@@ -197,6 +199,14 @@ export class SoloNewTopicComponent implements OnInit {
     }
     return sbm_dt
   }
+
+  checkOchna() {
+    if (this.ochna == true) {
+      this.ochna = false;
+    } else {
+      this.ochna = true;
+    }
+}
 
   addPost(regime) {
     this.dialogRef.open(SoloNewTopicComponent, {
@@ -239,6 +249,7 @@ export class SoloNewTopicComponent implements OnInit {
                         'by_gr': this.by_gr,
                         'priority': this.priority,
                         'date': dt,
+                        'ochna': this.ochna,
                         'name': this.selected,
                         'link': this.link,
                         'read': this.read,

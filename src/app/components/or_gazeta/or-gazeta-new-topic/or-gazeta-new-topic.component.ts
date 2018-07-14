@@ -99,6 +99,7 @@ export class OrGazetaNewTopicComponent implements OnInit {
   date_modified: any;
   by_gr: any;
   priority: any;
+  ochna: any;
 
 
   postDoc: AngularFirestoreDocument<Post>;
@@ -153,6 +154,7 @@ export class OrGazetaNewTopicComponent implements OnInit {
     this.date_modified = '';
     this.checked = true;
     this.priority = 'default';
+    this.ochna = false;
   }
   
 
@@ -181,6 +183,13 @@ export class OrGazetaNewTopicComponent implements OnInit {
     }
     return sbm_dt
   }
+  checkOchna() {
+    if (this.ochna == true) {
+      this.ochna = false;
+    } else {
+      this.ochna = true;
+    }
+}
 
   addPost() {
     this.dialogRef.open(OrGazetaNewTopicComponent, {
@@ -207,6 +216,7 @@ export class OrGazetaNewTopicComponent implements OnInit {
                         'priority': this.priority,
                         'date': dt,
                         'name': name,
+                        'ochna': this.ochna,
                         'link': this.link,
                         'read': this.read,
                         'source': this.source,

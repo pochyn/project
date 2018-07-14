@@ -1,5 +1,6 @@
 <div class="full">
   <mat-dialog-actions>
+        <div *ngIf="regime == 'gazeta';then gazeta"></div>
       <span class="fillup"></span>
       <button mat-button class='close' [mat-dialog-close]="true">X</button>
   </mat-dialog-actions>
