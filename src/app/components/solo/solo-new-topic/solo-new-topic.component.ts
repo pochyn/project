@@ -224,6 +224,7 @@ export class SoloNewTopicComponent implements OnInit {
     }
     if (this.regime == "site") {
       this.site_type = true;
+      this.checked = true;
     }
     if (this.regime == "lviv") {
       this.lviv_type = true;

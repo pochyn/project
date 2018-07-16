@@ -217,11 +217,13 @@ export class KvNewTopicComponent implements OnInit {
 
   newPost(){
     //get time
+    this.checked = true;
     if (this.regime == "gazeta") {
       this.gazeta_type = true;
     }
     if (this.regime == "site") {
       this.site_type = true;
+
     }
     if (this.regime == "lviv") {
       this.lviv_type = true;

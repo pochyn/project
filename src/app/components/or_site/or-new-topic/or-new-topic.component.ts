@@ -202,6 +202,7 @@ export class OrNewTopicComponent implements OnInit {
 
   newPost(){
     this.site_type = true;
+    this.checked = true;
     var dt = this.formatTodayDate();
     var sbm_dt = this.formatSbmDate();
     var src_dt = this.formatSrcDate();

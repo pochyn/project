@@ -105,7 +105,7 @@ export class OrGazetaNewTopicComponent implements OnInit {
   postDoc: AngularFirestoreDocument<Post>;
   post: Observable<Post>;
 
-  constructor(private afs: AngularFirestore, private auth: AuthService,
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private afs: AngularFirestore, private auth: AuthService,
                 private afauth: AngularFireAuth, private dialogRef: MatDialog) { }
   
     contentControl: FormControl = new FormControl('', [
@@ -128,7 +128,7 @@ export class OrGazetaNewTopicComponent implements OnInit {
 
     this.content = '';
     this.source = '';
-
+    this.regime = this.data["regime"];
     this.by_gr = false;
     this.deadline = '';
     this.link = '';
@@ -191,14 +191,23 @@ export class OrGazetaNewTopicComponent implements OnInit {
     }
 }
 
-  addPost() {
+  addPost(regime) {
     this.dialogRef.open(OrGazetaNewTopicComponent, {
-      width: '90vw'
+      width: '90vw', 
+      data: {
+        regime: regime,
+      }
     });
   }
 
   newPost(){
-    this.gazeta_type = true;
+    if (this.regime == "gazeta") {
+      this.gazeta_type = true;
+    }
+    if (this.regime == "site") {
+      this.site_type = true;
+      this.checked = true;
+    }
     var dt = this.formatTodayDate();
     var sbm_dt = this.formatSbmDate();
     var src_dt = this.formatSrcDate();
@@ -244,6 +253,6 @@ export class OrGazetaNewTopicComponent implements OnInit {
                         'date_modified': this.date_modified,
                         'branch': br});
     })
-    this.addPost();
+    this.addPost(this.regime);
   }
 }

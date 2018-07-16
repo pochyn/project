@@ -32,7 +32,10 @@ export class OrTopBarComponent implements OnInit {
   //add Post
   addPost(regime) {
     this.dialogRef.open(OrGazetaNewTopicComponent, {
-      width: '90vw'
+      width: '90vw',
+      data: {
+        regime: regime,
+      }
     });
   }
   showArchieve(){
