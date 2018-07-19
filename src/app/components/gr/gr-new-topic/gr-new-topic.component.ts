@@ -105,7 +105,7 @@ export class GrNewTopicComponent implements OnInit {
 
   selected_types: any;
   types = ['Газета', 'Сайт', 'Львів', 'Регіони'];
-  priorities = ['default', 'risk', 'warn']
+  priorities = ['▁', '▄', '█'];
   journ = [];
   users = {};
   new_id: any;
@@ -177,13 +177,13 @@ export class GrNewTopicComponent implements OnInit {
 
   formatTodayDate() {
     var today = new Date();
-    let dt = moment(today).format("h:mm, DD/MM/YY");
+    let dt = moment(today).locale('uk').format("LLL");
     return dt
   }
   formatSrcDate() {
     var src_dt;
     if (this.sourceDate != undefined){
-      var dt = moment(this.sourceDate).format("DD/MM/YY");
+      var dt = moment(this.sourceDate).locale('uk').format("LLL");
       src_dt = dt;
     } else {
       src_dt ='';
@@ -193,7 +193,7 @@ export class GrNewTopicComponent implements OnInit {
   formatSbmDate() {
     var sbm_dt;
     if (this.submitDate != undefined){
-      var dt = moment(this.submitDate).format("DD/MM/YY");
+      var dt = moment(this.submitDate).locale('uk').format("LLL");
       sbm_dt = dt;
     } else {
       sbm_dt ='';
@@ -230,7 +230,7 @@ export class GrNewTopicComponent implements OnInit {
     }
 
     if (this.priority_selected == ''){
-      this.priority = 'default';
+      this.priority = '▁';
     } else {
       this.priority = this.priority_selected;
     }

@@ -153,6 +153,10 @@ export class ArchieveComponent implements OnInit{
     this.postDoc = this.afs.doc('posts/'+postId);
     this.post = this.postDoc.valueChanges();
   }
+
+  undoArchieve(postId, postdata){
+    this.afs.doc('posts/'+postId).update({archieved_g: false});
+  }
   
   //delete (not archive)
   deletePost(postId, postdata) {

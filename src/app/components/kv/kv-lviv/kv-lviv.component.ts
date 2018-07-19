@@ -59,6 +59,7 @@ interface Post {
   checked_lviv: boolean;
   checked_regions: boolean;
   date_modified: any;
+  read_kv: any;
 }
 interface PostId extends Post { 
   id: string; 
@@ -112,7 +113,7 @@ export class KvLvivComponent implements OnInit {
  postsColLviv3: AngularFirestoreCollection<Post>;
  
  // what columns to diaplay
- displayedColumns = [ 'data.date', 'data.branch','data.name', 'data.content'];
+ displayedColumns = [ 'data.date', 'data.branch','data.name', 'data.content', 'data.priority'];
 
  constructor(private afs: AngularFirestore, private auth: AuthService,
              private dialogRef: MatDialog, private afauth: AngularFireAuth) { }
@@ -201,7 +202,7 @@ export class KvLvivComponent implements OnInit {
          const id = a.payload.doc.id;
          return { id, data };
        });
-     }).map(posts => posts.filter(post => post.data.branch == br && post.data.lviv_type && !post.data.read && !post.data.archieved_kv));
+     }).map(posts => posts.filter(post => post.data.branch == br && post.data.lviv_type && !post.data.read_kv && !post.data.archieved_kv));
    //gazeta tab paginator
    this.posts.subscribe(newData => this.postsData.data = newData);
    this.postsData.paginator = this.gazPaginator;
@@ -239,7 +240,7 @@ export class KvLvivComponent implements OnInit {
          const id = a.payload.doc.id;
          return { id, data };
        });
-     }).map(posts => posts.filter(post => post.data.branch == br && post.data.lviv_type && post.data.read && !post.data.checked_lviv && !post.data.archieved_kv));
+     }).map(posts => posts.filter(post => post.data.branch == br && post.data.lviv_type && post.data.read_kv && !post.data.checked_lviv && !post.data.archieved_kv));
    //gazeta tab paginator
    this.lviv.subscribe(nData => this.lvivData.data = nData);
    this.lvivData.paginator = this.lvivPaginator;
@@ -290,6 +291,7 @@ export class KvLvivComponent implements OnInit {
  
  //open window to show current post
  showPost(postid, postdata){
+  this.afs.doc('posts/'+postid).update({read_kv: true});
    this.dialogRef.open(KvShowTopicComponent, {
     width: '90vw',
      data: {

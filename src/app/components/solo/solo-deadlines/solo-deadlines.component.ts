@@ -25,6 +25,8 @@ import 'rxjs/add/operator/map';
 
 import {Sort} from '@angular/material';
 
+import * as moment from 'moment';
+
 // post inteface
 interface Post {
   author: string;
@@ -99,15 +101,7 @@ postsData = new MatTableDataSource(this.posts);
 ngOnInit() {
       //get time
       var today = new Date();
-      var hour = today.getHours();
-      var min = today.getMinutes();
-      today.setHours(hour);
-      today.setMinutes(min);
-      var options = {  
-        year: "numeric", month: "numeric",  
-        day: "numeric", hour: "2-digit", minute: "2-digit"  
-      };  
-      var dt = today.toLocaleTimeString("en-us", options);
+      let dt = moment(today).locale('uk').format("LLL");
   // --------------------------
   //get data for posts on gazeta
   // --------------------------
@@ -129,7 +123,7 @@ ngOnInit() {
     switch(property) {
       case 'data.date_modified': return item.data.date_modified;
       case 'data.checked': return item.data.checked;
-      case 'data.content': return item.data.content;
+      case 'data.deadline': return item.data.deadline;
       default: return item[property];
     }
   };

@@ -26,6 +26,7 @@
         <ng-container matColumnDef="data.actions">
           <mat-header-cell  style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;"*matHeaderCellDef> Дії </mat-header-cell>
           <mat-cell *matCellDef="let post">
+              <button mat-raised-button  class="close" [color]="'positive'" (click)=undoArchieve(post.id,post.data)>✓</button>
             <button mat-raised-button  class="close" [color]="'success'" (click)=deletePost(post.id,post.data)>X</button>
           </mat-cell>
         </ng-container>

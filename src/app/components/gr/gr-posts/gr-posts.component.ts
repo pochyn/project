@@ -112,10 +112,14 @@ export class GrPostsComponent implements OnInit {
  postsColLviv3: AngularFirestoreCollection<Post>;
  
  // what columns to diaplay
- displayedColumns = [ 'data.date', 'data.branch','data.name', 'data.content'];
+ displayedColumns = [ 'data.date', 'data.branch','data.name', 'data.content', 'data.priority'];
 
  constructor(private afs: AngularFirestore, private auth: AuthService,
              private dialogRef: MatDialog, private afauth: AngularFireAuth) { }
+
+  selected_types: any;
+  types = ['Газета', 'Сайт', 'Львів', 'Регіони'];
+  current_id: any;
  
  // create observable data for posts or site
  postsData = new MatTableDataSource(this.posts);
@@ -149,6 +153,9 @@ export class GrPostsComponent implements OnInit {
  
 
  ngOnInit() {
+  var element = document.getElementById('ok');
+  element.classList.add("hidden")
+
    // --------------------------
    // GAZETA
    // unread
@@ -261,6 +268,8 @@ export class GrPostsComponent implements OnInit {
      return dataStr.indexOf(transformedFilter) !== -1;
    };
  }
+
+ 
  
  //apply filter for gazeta and site accordingly
  applyFilter(col: any, filterValue: string) {
@@ -295,7 +304,45 @@ export class GrPostsComponent implements OnInit {
    });
  } 
 
- test(){
-   console.log("click")
+ok() {
+  if(this.selected_types.indexOf("Газета") > -1){
+    this.afs.doc('posts/'+this.current_id).update({gazeta_type: true});
+    this.afs.doc('posts/'+this.current_id).update({checked_gazeta: true});
+  } else {
+    this.afs.doc('posts/'+this.current_id).update({checked_gazeta: false});
+  }
+  if(this.selected_types.indexOf("Сайт") > -1){
+    this.afs.doc('posts/'+this.current_id).update({site_type: true});
+    this.afs.doc('posts/'+this.current_id).update({checked_site: true});
+  } else {
+    this.afs.doc('posts/'+this.current_id).update({checked_site: false});
+  }
+  if(this.selected_types.indexOf("Львів") > -1){
+    this.afs.doc('posts/'+this.current_id).update({lviv_type: true});
+    this.afs.doc('posts/'+this.current_id).update({checked_lviv: true});
+  } else {
+    this.afs.doc('posts/'+this.current_id).update({checked_lviv: false});
+  }
+  if(this.selected_types.indexOf("Регіони") > -1){
+    this.afs.doc('posts/'+this.current_id).update({regions_type: true});
+    this.afs.doc('posts/'+this.current_id).update({checked_regions: true});
+  } else {
+    this.afs.doc('posts/'+this.current_id).update({checked_regions: false});
+  }
+
+  this.afs.doc('posts/'+this.current_id).update({read: true});
+  this.selected_types = []
+  this.current_id = undefined;
+  var element = document.getElementById('ok');
+  element.classList.add("hidden")
+}
+
+ test(id){
+  this.selected_types = []
+  var element = document.getElementById('ok');
+  element.classList.remove("hidden")
+  this.current_id = id;
  }
+
+
 }

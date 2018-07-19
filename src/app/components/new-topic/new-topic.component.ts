@@ -143,7 +143,7 @@ export class NewTopicComponent implements OnInit {
     this.new_id = '';
     this.selected = '';
     this.by_gr = false;
-    this.priority = "default";
+    this.priority = "▁";
     this.regime = this.data["regime"];
     this.deadline = '';
     this.link = '';
@@ -173,13 +173,13 @@ export class NewTopicComponent implements OnInit {
 
   formatTodayDate() {
     var today = new Date();
-    let dt = moment(today).format("h:mm, DD/MM/YY");
+    let dt = moment(today).locale('uk').format("LLL");
     return dt
   }
   formatSrcDate() {
     var src_dt;
     if (this.sourceDate != undefined){
-      var dt = moment(this.sourceDate).format("DD/MM/YY");
+      var dt = moment(this.sourceDate).locale('uk').format("LLL");
       src_dt = dt;
     } else {
       src_dt ='';
@@ -189,7 +189,7 @@ export class NewTopicComponent implements OnInit {
   formatSbmDate() {
     var sbm_dt;
     if (this.submitDate != undefined){
-      var dt = moment(this.submitDate).format("DD/MM/YY");
+      var dt = moment(this.submitDate).locale('uk').format("LLL");
       sbm_dt = dt;
     } else {
       sbm_dt ='';
@@ -228,6 +228,9 @@ export class NewTopicComponent implements OnInit {
     }
     if (this.regime == "regions") {
       this.regions_type = true;
+    }
+    if (this.ochna) {
+      this.content = "(ОЧНА) " + this.content;
     }
     var dt = this.formatTodayDate();
     var sbm_dt = this.formatSbmDate();

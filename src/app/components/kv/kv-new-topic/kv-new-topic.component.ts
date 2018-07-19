@@ -167,20 +167,20 @@ export class KvNewTopicComponent implements OnInit {
     this.checked_lviv = false;
     this.checked_regions=false;
     this.date_modified = '';
-    this.priority = 'default';
+    this.priority = '▁';
     this.ochna = false;
   }
   
 
   formatTodayDate() {
     var today = new Date();
-    let dt = moment(today).format("h:mm, DD/MM/YY");
+    let dt = moment(today).locale('uk').format("LLL");
     return dt
   }
   formatSrcDate() {
     var src_dt;
     if (this.sourceDate != undefined){
-      var dt = moment(this.sourceDate).format("DD/MM/YY");
+      var dt = moment(this.sourceDate).locale('uk').format("LLL");
       src_dt = dt;
     } else {
       src_dt ='';
@@ -190,7 +190,7 @@ export class KvNewTopicComponent implements OnInit {
   formatSbmDate() {
     var sbm_dt;
     if (this.submitDate != undefined){
-      var dt = moment(this.submitDate).format("DD/MM/YY");
+      var dt = moment(this.submitDate).locale('uk').format("LLL");
       sbm_dt = dt;
     } else {
       sbm_dt ='';
@@ -230,6 +230,9 @@ export class KvNewTopicComponent implements OnInit {
     }
     if (this.regime == "regions") {
       this.regions_type = true;
+    }
+    if (this.ochna) {
+      this.content = "(ОЧНА) " + this.content;
     }
     var dt = this.formatTodayDate();
     var sbm_dt = this.formatSbmDate();

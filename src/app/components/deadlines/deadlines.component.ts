@@ -23,6 +23,8 @@ import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/map';
 
+import * as moment from 'moment';
+
 import {Sort} from '@angular/material';
 
 // post inteface
@@ -98,15 +100,7 @@ export class DeadlinesComponent implements OnInit {
   ngOnInit() {
         //get time
         var today = new Date();
-        var hour = today.getHours();
-        var min = today.getMinutes();
-        today.setHours(hour);
-        today.setMinutes(min);
-        var options = {  
-          year: "numeric", month: "numeric",  
-          day: "numeric", hour: "2-digit", minute: "2-digit"  
-        };  
-        var dt = today.toLocaleTimeString("en-us", options);
+        let dt = moment(today).locale('uk').format("LLL");
     // --------------------------
     //get data for posts on gazeta
     // --------------------------
@@ -128,7 +122,7 @@ export class DeadlinesComponent implements OnInit {
       switch(property) {
         case 'data.date_modified': return item.data.date_modified;
         case 'data.checked': return item.data.checked;
-        case 'data.content': return item.data.content;
+        case 'data.deadline': return item.data.deadline;
         default: return item[property];
       }
     };

@@ -74,6 +74,27 @@ import { OrNewTopicComponent } from './components/or_site/or-new-topic/or-new-to
 import { GazetaBarComponent } from './components/or_gazeta/gazeta-bar/gazeta-bar.component';
 import { SitePostsComponent } from './components/or_gazeta/site-posts/site-posts.component';
 import { OrGazetaNewTopicComponent } from './components/or_gazeta/or-gazeta-new-topic/or-gazeta-new-topic.component';
+import { KvBarComponent } from './components/kv/kv-bar/kv-bar.component';
+import { KvLvivComponent } from './components/kv/kv-lviv/kv-lviv.component';
+import { KvRegionsComponent } from './components/kv/kv-regions/kv-regions.component';
+import { KvSiteComponent } from './components/kv/kv-site/kv-site.component';
+import { BarComponent } from './components/bar/bar.component';
+import { SitesComponent } from './components/sites/sites.component';
+import { LvivComponent } from './components/lviv/lviv.component';
+import { RegionsComponent } from './components/regions/regions.component';
+import { SoloArchieveComponent } from './components/solo/solo-archieve/solo-archieve.component';
+import { SoloCommentsComponent } from './components/solo/solo-comments/solo-comments.component';
+import { SoloBarComponent } from './components/solo/solo-bar/solo-bar.component';
+import { SoloDashboardComponent } from './components/solo/solo-dashboard/solo-dashboard.component';
+import { SoloDeadlinesComponent } from './components/solo/solo-deadlines/solo-deadlines.component';
+import { SoloLvivComponent } from './components/solo/solo-lviv/solo-lviv.component';
+import { SoloNavbarComponent } from './components/solo/solo-navbar/solo-navbar.component';
+import { SoloNewTopicComponent } from './components/solo/solo-new-topic/solo-new-topic.component';
+import { SoloPostsComponent } from './components/solo/solo-posts/solo-posts.component';
+import { SoloRegionsComponent } from './components/solo/solo-regions/solo-regions.component';
+import { SoloShowTopicComponent } from './components/solo/solo-show-topic/solo-show-topic.component';
+import { SoloSitesComponent } from './components/solo/solo-sites/solo-sites.component';
+import { SoloTopBarComponent } from './components/solo/solo-top-bar/solo-top-bar.component';
 
 
 
@@ -127,7 +148,28 @@ import { OrGazetaNewTopicComponent } from './components/or_gazeta/or-gazeta-new-
     OrNewTopicComponent,
     GazetaBarComponent,
     SitePostsComponent,
-    OrGazetaNewTopicComponent
+    OrGazetaNewTopicComponent,
+    KvBarComponent,
+    KvLvivComponent,
+    KvRegionsComponent,
+    KvSiteComponent,
+    BarComponent,
+    SitesComponent,
+    LvivComponent,
+    RegionsComponent,
+    SoloArchieveComponent,
+    SoloCommentsComponent,
+    SoloBarComponent,
+    SoloDashboardComponent,
+    SoloDeadlinesComponent,
+    SoloLvivComponent,
+    SoloNavbarComponent,
+    SoloNewTopicComponent,
+    SoloPostsComponent,
+    SoloRegionsComponent,
+    SoloShowTopicComponent,
+    SoloSitesComponent,
+    SoloTopBarComponent
   ],
   imports: [
     BrowserModule,
@@ -156,7 +198,10 @@ import { OrGazetaNewTopicComponent } from './components/or_gazeta/or-gazeta-new-
     GrShowTopicComponent,
     GrArchieveComponent,
     OrNewTopicComponent,
-    OrGazetaNewTopicComponent
+    OrGazetaNewTopicComponent,
+    SoloArchieveComponent,
+    SoloShowTopicComponent,
+    SoloNewTopicComponent
   ],
   providers: [
     AuthService,

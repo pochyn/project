@@ -41,10 +41,10 @@
         <mat-cell style="justify-content: left; text-overflow:ellipsis; " *matCellDef="let post"> {{post.data.content}}</mat-cell>
     </ng-container>
   
-    <ng-container matColumnDef="data.comments" >
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Коментарі </mat-header-cell>
-      <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{post.data.comments}} </mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="data.priority" >
+        <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+        <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{post.data.priority}} </mat-cell>
+    </ng-container>
   
     <ng-container matColumnDef="data.actions">
       <mat-header-cell  style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;"*matHeaderCellDef> Дії </mat-header-cell>
@@ -56,7 +56,7 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns; let i = index" 
     (click)="showPost(row.id,row.data)"
-    [ngClass]="{'positive' : row.data.checked_gazeta == true, 'negative' : row.data.checked_gazeta == false, 'own' : row.data.author == this.auth.currentUserId && row.data.checked == true, 'read' : row.data.read == true}"></mat-row>
+    [ngClass]="{'by_gr' : row.data.by_gr == true, 'positive' : row.data.checked_gazeta == true, 'negative' : row.data.checked_gazeta == false, 'own' : row.data.author == this.auth.currentUserId && row.data.checked == true, 'read' : row.data.read == true}"></mat-row>
   </mat-table>
   <mat-paginator #gazPaginator
                  [pageSize]="10"
@@ -99,10 +99,10 @@
           <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{post.data.content}} </mat-cell>
       </ng-container>
   
-      <ng-container matColumnDef="data.comments" >
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Коментарі </mat-header-cell>
-        <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{post.data.comments}} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="data.priority" >
+          <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+          <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{post.data.priority}} </mat-cell>
+      </ng-container>
   
       <ng-container matColumnDef="data.actions">
         <mat-header-cell  style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;"*matHeaderCellDef> Дії </mat-header-cell>
@@ -114,7 +114,7 @@
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns; let i = index" 
       (click)="showPost(row.id,row.data)"
-      [ngClass]="{'positive' : row.data.checked_gazeta == true, 'negative' : row.data.checked_gazeta == false, 'own' : row.data.author == this.auth.currentUserId && row.data.checked == true, 'read' : row.data.read == true}"></mat-row>
+      [ngClass]="{'by_gr' : row.data.by_gr == true, 'positive' : row.data.checked_gazeta == true, 'negative' : row.data.checked_gazeta == false, 'own' : row.data.author == this.auth.currentUserId && row.data.checked == true, 'read' : row.data.read == true}"></mat-row>
     </mat-table>
     <mat-paginator #sitePaginator
                    [pageSize]="10"
@@ -156,10 +156,10 @@
             <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{post.data.content}} </mat-cell>
         </ng-container>
     
-        <ng-container matColumnDef="data.comments" >
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Коментарі </mat-header-cell>
-          <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{post.data.comments}} </mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="data.priority" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+            <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{post.data.priority}} </mat-cell>
+        </ng-container>
     
         <ng-container matColumnDef="data.actions">
           <mat-header-cell  style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;"*matHeaderCellDef> Дії </mat-header-cell>
@@ -171,7 +171,7 @@
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns; let i = index" 
         (click)="showPost(row.id,row.data)"
-        [ngClass]="{'positive' : row.data.checked_gazeta == true, 'negative' : row.data.checked_gazeta == false, 'own' : row.data.author == this.auth.currentUserId && row.data.checked == true, 'read' : row.data.read == true}"></mat-row>
+        [ngClass]="{'by_gr' : row.data.by_gr == true, 'positive' : row.data.checked_gazeta == true, 'negative' : row.data.checked_gazeta == false, 'own' : row.data.author == this.auth.currentUserId && row.data.checked == true, 'read' : row.data.read == true}"></mat-row>
       </mat-table>
       <mat-paginator #lvivPaginator
                      [pageSize]="10"

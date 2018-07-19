@@ -1,15 +1,15 @@
 <mat-card class="cards mat-elevation-z10">
     <div>
-    <mat-table #table [dataSource]="postsData" matSort matSortActive="data.deadline" matSortDirection="desc">  
+    <mat-table #table [dataSource]="postsData" matSort matSortActive="data.deadline" matSortDirection="asc">  
       
 
       <ng-container matColumnDef="data.date_modified">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Дата </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> Дата </mat-header-cell>
         <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{ post.data.date_modified}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="data.deadline" >
-          <mat-header-cell *matHeaderCellDef>Дедлайни</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef  mat-sort-header>Дедлайни</mat-header-cell>
           <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{post.data.deadline}} </mat-cell>
       </ng-container>
 

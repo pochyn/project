@@ -102,7 +102,7 @@ export class GrShowTopicComponent implements OnInit {
   comm: any;
   users = {};
   types = ['Газета', 'Сайт', 'Львів', 'Регіони'];
-  priorities = ['default', 'risk', 'warn'];
+  priorities = ['▁', '▄', '█'];
   hours = ['9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '24:00'];
   selected: any;
   selected_hour: any;
@@ -247,7 +247,7 @@ export class GrShowTopicComponent implements OnInit {
 
   formatTodayDate() {
     var today = new Date();
-    let dt = moment(today).format("h:mm, DD/MM/YY");
+    let dt = moment(today).locale('uk').format("LLL");
     return dt
   }
 
@@ -258,8 +258,11 @@ export class GrShowTopicComponent implements OnInit {
         var arr = this.selected_hour.split(':')
         this.deadln.setHours(arr[0])
         this.deadln.setMinutes(arr[1])
+      } else {
+        this.deadln.setHours(12)
+        this.deadln.setMinutes(0)
       }
-      var dt = moment(this.deadln).format("h:mm, DD/MM/YY");
+      var dt = moment(this.deadln).locale('uk').format("LLL");
       sbm_dt = dt;
     } else {
       if (this.post["deadline"] == ''){

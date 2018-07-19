@@ -10,7 +10,7 @@
 }
 
 .mat-column-data-actions {
-    flex: 0 0 35px;
+    flex: 0 0 70px;
 }
 .mat-column-data-author {
     flex: 0 0 100px;
@@ -29,7 +29,12 @@
 }  
 
 
-  
+.mat-positive {
+    background-color: #00b894 !important;
+    color: #fff;
+    width: 100%;
+    padding: 0px;
+}
 
 .example-container {
     display: flex;

@@ -3,7 +3,7 @@
     flex: 0 0 0px;
 }
 .mat-column-data-date {
-    flex: 0 0 140px;
+    flex: 0 0 160px;
 }
 
 .mat-column-data-content {
@@ -11,7 +11,8 @@
     margin-left: 25px;
 
 }
-.mat-column-data-comments {
+.mat-column-data-priority {
+    flex: 0 0 20px;
     margin-left: 25px;
 }
 
@@ -21,6 +22,9 @@
 .mat-column-data-name {
     margin-left: 15px;
     flex: 0 0 100px;
+}
+.by_gr {
+    background-color: #F4D03F !important;
 }
 
 .mat-column-data-branch {

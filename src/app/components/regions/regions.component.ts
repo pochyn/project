@@ -113,7 +113,7 @@ export class RegionsComponent implements OnInit {
  postsColLviv3: AngularFirestoreCollection<Post>;
  
  // what columns to diaplay
- displayedColumns = [ 'data.date', 'data.branch','data.name', 'data.content'];
+ displayedColumns = [ 'data.date', 'data.branch','data.name', 'data.content', 'data.priority'];
 
  constructor(private afs: AngularFirestore, private auth: AuthService,
              private dialogRef: MatDialog, private afauth: AngularFireAuth) { }

@@ -156,6 +156,11 @@ getPost(postId) {
   this.post = this.postDoc.valueChanges();
 }
 
+undoArchieve(postId, postdata){
+  this.afs.doc('posts/'+postId).update({archieved_g: false});
+}
+
+
 //delete (not archive)
 deletePost(postId, postdata) {
   this.afs.doc('posts/'+postId).update({delete_g: true});
