@@ -28,12 +28,13 @@
         Email is <strong>required</strong>
       </mat-error>
     </mat-form-field>
-    <mat-form-field class="input-width">
-      <input matInput placeholder="Пароль" [formControl]="passwordFormControl" [(ngModel)]="usercreds.password" type="password">
+    <mat-form-field class="input-width1">
+      <input id="pass" matInput placeholder="Пароль" [formControl]="passwordFormControl" [(ngModel)]="usercreds.password" type="password">
       <mat-error *ngIf="passwordFormControl.hasError('required')">
         Password is <strong>required</strong>
       </mat-error>
     </mat-form-field>
+    <input type="checkbox" (click)="showPass()">
       </mat-card-content>
   
         <button mat-raised-button (click)=login() [color]="'success'" style="width: 80%" ng-keyup="$event.keyCode == 13 && login()">Залогінитись!</button>

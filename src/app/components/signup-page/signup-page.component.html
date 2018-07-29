@@ -44,9 +44,9 @@
     Branch is <strong>required</strong>
   </mat-error>
   </mat-form-field>
-
-  
-  <mat-form-field class="input-width">
+  <div *ngIf="usercreds.branch == 'Спорт' || usercreds.branch == 'Здоров\'я' || usercreds.branch == 'Світ' || usercreds.branch == 'Технології' || usercreds.branch == 'Оперативний редактор';then posada"></div>
+  <ng-template #posada>
+  <mat-form-field id="posada" class="input-width">
     <mat-select placeholder="Посада" [formControl]="posadaFormControl" [(ngModel)]="usercreds.posada" name="posada">
      <mat-option *ngFor="let posada of posadas" [value]="posada">
        {{posada}}
@@ -56,9 +56,14 @@
     <strong>required</strong>
   </mat-error>
    </mat-form-field>
+   </ng-template>
+
+   <mat-form-field class="input-width">
+    <input matInput placeholder="Пароль" [(ngModel)]="password">
+   </mat-form-field>
     </mat-card-content>
     
-      <button mat-raised-button  [color]="'success'" (click)=createAccount() color="primary" style="width: 80%">Зареєструватись</button>
+      <button mat-raised-button [disabled]="((usercreds.branch == 'Головний редактор' && password != '1111') || (usercreds.branch == 'Самостійний' && password != '9999') || (usercreds.posada == 'Журналіст' && password != '3333') || (usercreds.branch == 'Головний редактор' && password != '1111') || (usercreds.posada == 'Керівник відділу' && password != '4444') || (usercreds.branch == 'Оперативний редактор - Сайт' && password != '5555') || (usercreds.branch == 'Оперативний Редактор - Газета' && password != '6666')) || (usercreds.displayName == '') || (usercreds.branch == '')" [color]="'success'" (click)=createAccount() color="primary" style="width: 80%">Зареєструватись</button>
       <p></p>
       <button mat-raised-button  [color]="'success'" (click)=goBack() color="primary" style="width: 80%">Назад</button>
     

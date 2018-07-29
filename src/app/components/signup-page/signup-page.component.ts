@@ -21,11 +21,13 @@ export class SignupPageComponent implements OnInit {
     posada: ''
   }
 
+  password: any;
+
   constructor(private auth: AuthService, private router: Router) { }
 
   selected: any;
-  types = ['Самостійний', 'Спорт', 'Світ', "Здоров'я", 'Технології', 'Оперативний редактор', 'Головний редактор'];
-  posadas = ['Журналіст', 'Самостійний', 'Оперативний Редактор - Газета', 'Оперативний редактор - Сайт', 'Керівник відділу', 'Головний редактор']
+  types = ['Самостійний', 'Спорт', 'Світ', "Здоров'я", 'Технології', 'Головний редактор', 'Оперативний редактор - Сайт', 'Оперативний Редактор - Газета'];
+  posadas = ['Журналіст', 'Керівник відділу']
 
   emailFormControl: FormControl = new FormControl('', [
     Validators.required,
@@ -48,6 +50,20 @@ export class SignupPageComponent implements OnInit {
   }
 
   createAccount() {
+    if (this.usercreds.branch == "Головний редактор"){
+      this.usercreds.posada = "Головний редактор"
+    }
+    if (this.usercreds.branch == "Самостіний"){
+      this.usercreds.posada = "Самостіний"
+    }
+    if (this.usercreds.branch == "Оперативний редактор - Сайт"){
+      this.usercreds.branch = "Оперативний редактор"
+      this.usercreds.posada = "Оперативний редактор - Сайт"
+    }
+    if (this.usercreds.branch == "Оперативний Редактор - Газета"){
+      this.usercreds.branch = "Оперативний редактор"
+      this.usercreds.posada = "Оперативний Редактор - Газета"
+    }
     console.log(this.usercreds);
     this.auth.signUp(this.usercreds);
   }

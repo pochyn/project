@@ -52,6 +52,15 @@ export class LoginPageComponent implements OnInit {
     let response = this.auth.twitterLogin(this.usercreds);
   }
 
+  showPass() {
+    var x = (<HTMLInputElement>document.getElementById("pass"))
+    if (x.type === "password") {
+        x.type = "text";
+    } else {
+        x.type = "password";
+    }
+}
+
   signup() {
     this.router.navigate(['signup']);
   }
