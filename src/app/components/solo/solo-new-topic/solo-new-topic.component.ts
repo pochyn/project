@@ -169,7 +169,7 @@ export class SoloNewTopicComponent implements OnInit {
     this.checked_lviv = false;
     this.checked_regions=false;
     this.date_modified = '';
-    this.checked = false;
+    this.checked = true;
     this.ochna = false;
   }
   

@@ -50,11 +50,12 @@ export class SignupPageComponent implements OnInit {
   }
 
   createAccount() {
+    console.log(this.usercreds.branch)
     if (this.usercreds.branch == "Головний редактор"){
       this.usercreds.posada = "Головний редактор"
     }
-    if (this.usercreds.branch == "Самостіний"){
-      this.usercreds.posada = "Самостіний"
+    if (this.usercreds.branch == "Самостійний"){
+      this.usercreds.posada = "Самостійний"
     }
     if (this.usercreds.branch == "Оперативний редактор - Сайт"){
       this.usercreds.branch = "Оперативний редактор"
