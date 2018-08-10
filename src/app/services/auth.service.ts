@@ -81,9 +81,6 @@ export class AuthService {
     if (posada == 'Журналіст') {
       this.router.navigate(['dashboard']);
     }
-    if (posada == 'Самостійний') {
-      this.router.navigate(['solo-dashboard']);
-    }
     if (posada == 'Оперативний Редактор - Газета') {
       this.router.navigate(['dashboard_or_gazeta']);
     }
@@ -137,9 +134,6 @@ export class AuthService {
     if (posada == 'Журналіст') {
       this.router.navigate(['dashboard']);
     }
-    if (posada == 'Самостійний') {
-      this.router.navigate(['solo-dashboard']);
-    }
     if (posada == 'Оперативний Редактор - Газета') {
       this.router.navigate(['dashboard_or_gazeta']);
     }
@@ -172,9 +166,6 @@ export class AuthService {
         console.log(posada)
         if (posada == 'Журналіст') {
           this.router.navigate(['dashboard']);
-        }
-        if (posada == 'Самостійний') {
-          this.router.navigate(['solo-dashboard']);
         }
         if (posada == 'Оперативний Редактор - Газета') {
           this.router.navigate(['dashboard_or_gazeta']);
