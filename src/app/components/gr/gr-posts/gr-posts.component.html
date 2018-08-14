@@ -39,7 +39,7 @@
 
     <ng-container matColumnDef="data.content" >
         <mat-header-cell *matHeaderCellDef mat-sort-header> Тема </mat-header-cell>
-        <mat-cell style="justify-content: left; text-overflow:ellipsis; " *matCellDef="let post"><p> {{post.data.content}} <br/><br/>
+        <mat-cell style="justify-content: left; text-overflow:ellipsis; " *matCellDef="let post"><p> Першоджерело: {{post.data.source}} - {{post.data.sourceDate}} <br/> {{post.data.content}} <br/><br/>
           <mat-select name="prior" placeholder="Затвердити" [(ngModel)]="selected_types"  multiple  (click)="$event.stopPropagation()" (click)="test(post.id)">
               <mat-option *ngFor="let type of types" [value]="type">{{type}}</mat-option>
             </mat-select></mat-cell>

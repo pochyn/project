@@ -39,7 +39,7 @@ table with posts for gazets-->
 
   <ng-container matColumnDef="data.content" >
       <mat-header-cell *matHeaderCellDef mat-sort-header> Тема </mat-header-cell>
-      <mat-cell style="justify-content: left; text-overflow:ellipsis; " *matCellDef="let post"> {{post.data.content}}</mat-cell>
+      <mat-cell style="justify-content: left; text-overflow:ellipsis; " *matCellDef="let post">Першоджерело: {{post.data.source}} - {{post.data.sourceDate}} <br/>  {{post.data.content}}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="data.priority" >
