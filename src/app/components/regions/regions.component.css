@@ -95,24 +95,44 @@
     color: indigo;
 }
 
-.Svit {
+.one {
+    background-color: indigo;
+    color: indigo;
+}
+
+.two {
     background-color: aqua;
     color: aqua;
 }
-.Zdorovya {
+.three {
     background-color: gold;
     color: gold;
 }
 
-.Techno {
+.four {
     background-color: fuchsia;
     color: fuchsia;
 }
 
-.Gr{
+.five{
     background-color: firebrick;
     color: firebrick; 
 }
+.six{
+    background-color: #F8CD77;
+    color: #F8CD77; 
+}
+.seven{
+    background-color: #7A00FC;
+    color: #7A00FC; 
+}
+.eight{
+    background-color: #36F517;
+    color: #36F517; 
+}
+
+
+
 
 .demo-tab-group {
     border: 1px solid #e8e8e8;
