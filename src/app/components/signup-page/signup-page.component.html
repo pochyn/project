@@ -44,7 +44,7 @@
     Branch is <strong>required</strong>
   </mat-error>
   </mat-form-field>
-  <div *ngIf="usercreds.branch == 'Спорт' || usercreds.branch == 'Здоров\'я' || usercreds.branch == 'Світ' || usercreds.branch == 'Технології' || usercreds.branch == 'Оперативний редактор';then posada"></div>
+  <div *ngIf="usercreds.branch == 'Новини' || usercreds.branch == 'Здоров\'я' || usercreds.branch == 'Регіональні редакції' || usercreds.branch == 'Репортери' || usercreds.branch == 'Політика' || usercreds.branch == 'Оперативний редактор';then posada"></div>
   <ng-template #posada>
   <mat-form-field id="posada" class="input-width">
     <mat-select placeholder="Посада" [formControl]="posadaFormControl" [(ngModel)]="usercreds.posada" name="posada">

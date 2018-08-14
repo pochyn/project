@@ -91,30 +91,6 @@
     background-color: #E6E6E6;
 }
 
-.Sport {
-    background-color: indigo;
-    color: indigo;
-}
-
-.Svit {
-    background-color: aqua;
-    color: aqua;
-}
-.Zdorovya {
-    background-color: gold;
-    color: gold;
-}
-
-.Techno {
-    background-color: fuchsia;
-    color: fuchsia;
-}
-
-.Gr{
-    background-color: firebrick;
-    color: firebrick; 
-}
-
 .demo-tab-group {
     border: 1px solid #e8e8e8;
 }
@@ -149,5 +125,42 @@
       right: 1.5rem;
     }
   }
+
+
+.one {
+    background-color: indigo;
+    color: indigo;
+}
+
+.two {
+    background-color: aqua;
+    color: aqua;
+}
+.three {
+    background-color: gold;
+    color: gold;
+}
+
+.four {
+    background-color: fuchsia;
+    color: fuchsia;
+}
+
+.five{
+    background-color: firebrick;
+    color: firebrick; 
+}
+.six{
+    background-color: #F8CD77;
+    color: #F8CD77; 
+}
+.seven{
+    background-color: #7A00FC;
+    color: #7A00FC; 
+}
+.eight{
+    background-color: #36F517;
+    color: #36F517; 
+}
 
 

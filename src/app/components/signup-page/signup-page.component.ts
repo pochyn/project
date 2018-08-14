@@ -26,7 +26,7 @@ export class SignupPageComponent implements OnInit {
   constructor(private auth: AuthService, private router: Router) { }
 
   selected: any;
-  types = ['Самостійний', 'Спорт', 'Світ', "Здоров'я", 'Технології', 'Головний редактор', 'Оперативний редактор - Сайт', 'Оперативний Редактор - Газета'];
+  types = ['Самостійний', 'Новини', 'Політика', "Репортери", 'Регіональні редакції', 'Здоров\'я', 'Головний редактор', 'Оперативний редактор - Сайт', 'Оперативний Редактор - Газета'];
   posadas = ['Журналіст', 'Керівник відділу']
 
   emailFormControl: FormControl = new FormControl('', [

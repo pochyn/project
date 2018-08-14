@@ -19,7 +19,7 @@
     
         <ng-container matColumnDef="data.branch">
             <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
-            <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;"  *matCellDef="let post" [ngClass]="{'Sport' : post.data.branch == 'Спорт', 'Svit' : post.data.branch == 'Світ', 'Zdorovya' : post.data.branch == 'Здоров\'я', 'Techno' : post.data.branch == 'Технології', 'Gr' : post.data.branch == 'Головний редактор'}"> {{ post.data.branch }} </mat-cell>
+            <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;"  *matCellDef="let post" [ngClass]="{'one' : post.data.branch == 'Головний редактор', 'two' : post.data.branch == 'Оперативний редактор', 'three' : post.data.branch == 'Здоров\'я', 'four' : post.data.branch == 'Новини', 'five' : post.data.branch == 'Політика' , 'six' : post.data.branch == 'Репортери', 'seven' : post.data.branch == 'Регіональні редакції', 'eight' : post.data.branch == 'Самостійний'}"> {{ post.data.branch }} </mat-cell>
         </ng-container>
     
         <ng-container matColumnDef="data.date">
@@ -81,8 +81,8 @@
       
           <ng-container matColumnDef="data.branch">
               <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
-              <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;"  *matCellDef="let post" [ngClass]="{'Sport' : post.data.branch == 'Спорт', 'Svit' : post.data.branch == 'Світ', 'Zdorovya' : post.data.branch == 'Здоров\'я', 'Techno' : post.data.branch == 'Технології', 'Gr' : post.data.branch == 'Головний редактор'}"> {{ post.data.branch }} </mat-cell>
-          </ng-container>
+              <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;"  *matCellDef="let post" [ngClass]="{'one' : post.data.branch == 'Головний редактор', 'two' : post.data.branch == 'Оперативний редактор', 'three' : post.data.branch == 'Здоров\'я', 'four' : post.data.branch == 'Новини', 'five' : post.data.branch == 'Політика' , 'six' : post.data.branch == 'Репортери', 'seven' : post.data.branch == 'Регіональні редакції', 'eight' : post.data.branch == 'Самостійний'}"> {{ post.data.branch }} </mat-cell>
+            </ng-container>
       
           <ng-container class="top" matColumnDef="data.date">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Дата </mat-header-cell>
@@ -139,8 +139,8 @@
         
             <ng-container matColumnDef="data.branch">
                 <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
-                <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;"  *matCellDef="let post" [ngClass]="{'Sport' : post.data.branch == 'Спорт', 'Svit' : post.data.branch == 'Світ', 'Zdorovya' : post.data.branch == 'Здоров\'я', 'Techno' : post.data.branch == 'Технології', 'Gr' : post.data.branch == 'Головний редактор'}"> {{ post.data.branch }} </mat-cell>
-            </ng-container>
+                <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;"  *matCellDef="let post" [ngClass]="{'one' : post.data.branch == 'Головний редактор', 'two' : post.data.branch == 'Оперативний редактор', 'three' : post.data.branch == 'Здоров\'я', 'four' : post.data.branch == 'Новини', 'five' : post.data.branch == 'Політика' , 'six' : post.data.branch == 'Репортери', 'seven' : post.data.branch == 'Регіональні редакції', 'eight' : post.data.branch == 'Самостійний'}"> {{ post.data.branch }} </mat-cell>
+              </ng-container>
         
             <ng-container matColumnDef="data.date">
               <mat-header-cell *matHeaderCellDef mat-sort-header> Дата </mat-header-cell>
