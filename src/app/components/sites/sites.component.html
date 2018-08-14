@@ -4,6 +4,7 @@
 
 <mat-card class="mat-elevation-z10">
 <div>
+    <b><p align="left" style="color:#F4D03F; font-size:10px;">НОВЕ</p></b>
 <div class="new-posts"></div>
   <!-- filter field
   <div>
@@ -68,6 +69,7 @@ table with posts for gazets-->
 
 <mat-card class="cards mat-elevation-z10">
 <div>
+    <b><p align="left" style="color:green; font-size:10px;">ЗАТВЕРДЖЕНЕ</p></b>
     <div class="approved-posts"></div>
   <!-- table with posts for gazets-->
   
@@ -127,6 +129,7 @@ table with posts for gazets-->
 <mat-card class="cards mat-elevation-z10">
   <div>
     <!-- table with posts for gazets-->
+    <b><p align="left" style="color:red; font-size:10px;">РОЗГЛЯНУТЕ</p></b>
     <div class="rejected-posts"></div>
     <mat-table #table3="matSort" [dataSource]="lvivData" matSort matSortActive="data.date" matSortDirection="desc">  
       
