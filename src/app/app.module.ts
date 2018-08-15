@@ -95,6 +95,8 @@ import { SoloRegionsComponent } from './components/solo/solo-regions/solo-region
 import { SoloShowTopicComponent } from './components/solo/solo-show-topic/solo-show-topic.component';
 import { SoloSitesComponent } from './components/solo/solo-sites/solo-sites.component';
 import { SoloTopBarComponent } from './components/solo/solo-top-bar/solo-top-bar.component';
+import { DatePickerComponent } from './components/date-picker/date-picker.component';
+import { DateAdapter } from '@angular/material';
 
 
 
@@ -169,7 +171,8 @@ import { SoloTopBarComponent } from './components/solo/solo-top-bar/solo-top-bar
     SoloRegionsComponent,
     SoloShowTopicComponent,
     SoloSitesComponent,
-    SoloTopBarComponent
+    SoloTopBarComponent,
+    DatePickerComponent
   ],
   imports: [
     BrowserModule,
@@ -204,6 +207,7 @@ import { SoloTopBarComponent } from './components/solo/solo-top-bar/solo-top-bar
     SoloNewTopicComponent
   ],
   providers: [
+    {provide: DateAdapter, useClass: DatePickerComponent},
     AuthService,
     AuthguardService
   ],
