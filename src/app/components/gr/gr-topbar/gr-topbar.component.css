@@ -7,8 +7,14 @@ button {
 }
 
 .mat-success{
-  background-color: #D0D3D4;
-  color: grey;
+  background-color: #F0EEF2;
+  color: #B8B8B8;
+  max-height: 40px;
+}
+
+.mat-success2 {
+  color: #B8B8B8;
+  background-color: #F0EEF2;
   max-height: 40px;
 }
 
@@ -27,11 +33,6 @@ button {
   padding: 5px;
   padding-left: 12px;
   padding-right: 12px;
-}
-.mat-success2 {
-  color: grey;
-  background-color: #D0D3D4;
-  max-height: 40px;
 }
 
 .ico{
