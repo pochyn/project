@@ -1,0 +1,166 @@
+
+.mat-column-data-checked {
+    flex: 0 0 0px;
+}
+.mat-column-data-date {
+    flex: 0 0 160px;
+}
+
+.mat-column-data-content {
+    text-align: left;
+    margin-left: 25px;
+
+}
+.mat-column-data-priority {
+    flex: 0 0 20px;
+    margin-left: 25px;
+}
+
+.mat-column-data-actions {
+    flex: 0 0 0px;
+}
+.mat-column-data-name {
+    margin-left: 15px;
+    flex: 0 0 100px;
+}
+
+.mat-column-data-branch {
+    flex: 0 0 15px;
+}
+.mat-header-cell {
+    display:flex;
+    justify-content:center;
+  }
+.mat-cell{
+    display: flex;
+    justify-content: left;
+}  
+
+.mat-row{
+    min-height: 23px;
+    cursor: pointer;
+}
+  
+.cards{
+    margin-top: 8px;
+}
+
+.posts {
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+.mat-form-field {
+    min-height: 64px;
+    padding-left: 22px;
+    padding-top: 5px;
+    padding-bottom: 0px;
+    font-size: 14px;
+    width: 95%;
+}
+
+.new-posts{
+    height: 3px;
+    width: 100%;
+    background: #F4D03F;
+}
+.approved-posts{
+    height: 3px;
+    width: 100%;
+    background: green;
+}
+.rejected-posts{
+    height: 3px;
+    width: 100%;
+    background: red;
+}
+
+.hidden{
+    display: none !important;
+}
+
+.positive {
+    background-color: #ABEBC6 !important;
+}
+
+.negative {
+    background-color: white;
+}
+
+.read {
+    background-color: #E6E6E6;
+}
+
+.demo-tab-group {
+    border: 1px solid #e8e8e8;
+}
+
+
+.app-fab--absolute {
+
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+
+
+    color: #D0D3D4;
+    background-color: #A93226;
+    height: 30px;
+    width: 60px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    background-repeat:no-repeat;
+    border: none;
+    outline:none;
+    padding-bottom: 10px;
+    font-size: 20px;
+
+
+  }
+  
+  @media(min-width: 1024px) {
+     .app-fab--absolute {
+      bottom: 1.5rem;
+      right: 1.5rem;
+    }
+  }
+
+
+.one {
+    background-color: indigo;
+    color: indigo;
+}
+
+.two {
+    background-color: aqua;
+    color: aqua;
+}
+.three {
+    background-color: gold;
+    color: gold;
+}
+
+.four {
+    background-color: fuchsia;
+    color: fuchsia;
+}
+
+.five{
+    background-color: firebrick;
+    color: firebrick; 
+}
+.six{
+    background-color: #F8CD77;
+    color: #F8CD77; 
+}
+.seven{
+    background-color: #7A00FC;
+    color: #7A00FC; 
+}
+.eight{
+    background-color: #36F517;
+    color: #36F517; 
+}
+
+

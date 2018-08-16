@@ -172,7 +172,7 @@ export class GrMediaComponent implements OnInit {
          const id = a.payload.doc.id;
          return { id, data };
        });
-     }).map(posts => posts.filter(post => (!post.data.read) && (post.data.mediaplan_gazeta || post.data.mediaplan_lviv  || post.data.mediaplan_regions || post.data.mediaplan_site)));
+     }).map(posts => posts.filter(post => (!post.data.read) && (post.data.mediaplan_gazeta || post.data.mediaplan_lviv  || post.data.mediaplan_regions || post.data.mediaplan_site) && (!post.data.archieved_gr)));
    //gazeta tab paginator
    this.posts.subscribe(newData => this.postsData.data = newData);
    this.postsData.paginator = this.gazPaginator;
@@ -209,7 +209,7 @@ export class GrMediaComponent implements OnInit {
            const id = a.payload.doc.id;
            return { id, data };
          });
-       }).map(posts => posts.filter(post => (post.data.read) && (post.data.checked_gazeta || post.data.checked_lviv || post.data.checked_regions || post.data.checked_site ) && (post.data.mediaplan_gazeta || post.data.mediaplan_lviv  || post.data.mediaplan_regions || post.data.mediaplan_site)));       
+       }).map(posts => posts.filter(post => (post.data.read) && (post.data.checked_gazeta || post.data.checked_lviv || post.data.checked_regions || post.data.checked_site ) && (post.data.mediaplan_gazeta || post.data.mediaplan_lviv  || post.data.mediaplan_regions || post.data.mediaplan_site) && (!post.data.archieved_gr)));       
    //site tab paginator
    this.sites.subscribe(data => this.sitesData.data = data);
    this.sitesData.paginator = this.sitePaginator;
@@ -246,7 +246,7 @@ export class GrMediaComponent implements OnInit {
          const id = a.payload.doc.id;
          return { id, data };
        });
-     }).map(posts => posts.filter(post =>  (post.data.read) && !(post.data.checked_gazeta || post.data.checked_lviv || post.data.checked_regions || post.data.checked_site ) && (post.data.mediaplan_gazeta || post.data.mediaplan_lviv  || post.data.mediaplan_regions || post.data.mediaplan_site)));
+     }).map(posts => posts.filter(post =>  (post.data.read) && !(post.data.checked_gazeta || post.data.checked_lviv || post.data.checked_regions || post.data.checked_site ) && (post.data.mediaplan_gazeta || post.data.mediaplan_lviv  || post.data.mediaplan_regions || post.data.mediaplan_site) && (!post.data.archieved_gr)));
    //gazeta tab paginator
    this.lviv.subscribe(nData => this.lvivData.data = nData);
    this.lvivData.paginator = this.lvivPaginator;

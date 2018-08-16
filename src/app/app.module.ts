@@ -100,6 +100,10 @@ import { DateAdapter } from '@angular/material';
 import { MediaplanComponent } from './components/mediaplan/mediaplan.component';
 import { GrMediaComponent } from './components/gr/gr-media/gr-media.component';
 import { ShowMediaComponent } from './components/gr/show-media/show-media.component';
+import { KvMediaComponent } from './components/kv/kv-media/kv-media.component';
+import { AllShowMediaComponent } from './components/all-show-media/all-show-media.component';
+import { SoloMediaComponent } from './components/solo/solo-media/solo-media.component';
+import { GMediaComponent } from './components/g-media/g-media.component';
 
 
 
@@ -178,7 +182,11 @@ import { ShowMediaComponent } from './components/gr/show-media/show-media.compon
     DatePickerComponent,
     MediaplanComponent,
     GrMediaComponent,
-    ShowMediaComponent
+    ShowMediaComponent,
+    KvMediaComponent,
+    AllShowMediaComponent,
+    SoloMediaComponent,
+    GMediaComponent
   ],
   imports: [
     BrowserModule,
@@ -212,7 +220,8 @@ import { ShowMediaComponent } from './components/gr/show-media/show-media.compon
     SoloShowTopicComponent,
     SoloNewTopicComponent,
     MediaplanComponent,
-    ShowMediaComponent
+    ShowMediaComponent,
+    AllShowMediaComponent
   ],
   providers: [
     {provide: DateAdapter, useClass: DatePickerComponent},

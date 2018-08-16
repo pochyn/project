@@ -1,0 +1,187 @@
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+  
+  <mat-card class="mat-elevation-z10">
+  <div>
+    <b><p align="left" style="color:#F4D03F; font-size:10px;">НОВЕ</p></b>
+  <div class="new-posts"></div>
+    <!-- filter field
+    <div>
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter(postsData, $event.target.value)" placeholder="Пошук...">
+      </mat-form-field>
+    </div>
+  table with posts for gazets-->
+  
+  <mat-table #table1="matSort" [dataSource]="postsData" matSort matSortActive="data.date" matSortDirection="asc">  
+    
+    <ng-container matColumnDef="data.checked">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Затвердити </mat-header-cell>
+      <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{post.data.checked}} </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="data.branch">
+        <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+        <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;"  *matCellDef="let post" [ngClass]="{'one' : post.data.mediaplan_gazeta == true, 'two' : post.data.mediaplan_lviv  == true, 'three' : post.data.mediaplan_site  == true, 'four' : post.data.mediaplan_regions == true}"> {{ post.data.branch }} </mat-cell>
+      </ng-container>
+  
+    <ng-container matColumnDef="data.date">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Дата </mat-header-cell>
+      <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{ post.data.date}} </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="data.name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Автор </mat-header-cell>
+      <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{ post.data.name}} </mat-cell>
+    </ng-container>
+  
+  
+    <ng-container matColumnDef="data.content" >
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Тема </mat-header-cell>
+        <mat-cell style="justify-content: left; text-overflow:ellipsis; " *matCellDef="let post"> {{post.data.content}} </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="data.priority" >
+        <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+        <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{post.data.priority}} </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="data.actions">
+      <mat-header-cell  style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;"*matHeaderCellDef> Дії </mat-header-cell>
+      <mat-cell *matCellDef="let post">
+        <button (click)=archieve(post.id)>X</button>
+      </mat-cell>
+    </ng-container>
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns; let i = index" 
+    (click)="showMedia(row.id,row.data)"
+    [ngClass]="{'positive' : row.data.checked_gazeta == true, 'negative' : row.data.checked_gazeta == false, 'own' : row.data.author == this.auth.currentUserId && row.data.checked == true, 'read' : row.data.read == true}"></mat-row>
+  </mat-table>
+  <mat-paginator #gazPaginator
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 20, 50]"
+                 [showFirstLastButtons]="true">
+  </mat-paginator>
+  </div>
+  </mat-card>
+  
+  <mat-card class="cards mat-elevation-z10">
+  <div>
+      <b><p align="left" style="color:green; font-size:10px;">ЗАТВЕРДЖЕНЕ</p></b>
+      <div class="approved-posts"></div>
+    <!-- table with posts for gazets-->
+    
+    <mat-table #table2="matSort" [dataSource]="sitesData" matSort matSortActive="data.date" matSortDirection="desc">  
+      
+      <ng-container matColumnDef="data.checked">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Затвердити </mat-header-cell>
+        <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{post.data.checked}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="data.branch">
+          <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+          <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;"  *matCellDef="let post" [ngClass]="{'one' : post.data.mediaplan_gazeta == true, 'two' : post.data.mediaplan_lviv  == true, 'three' : post.data.mediaplan_site  == true, 'four' : post.data.mediaplan_regions == true}"> {{ post.data.branch }} </mat-cell>
+        </ng-container>
+  
+      <ng-container class="top" matColumnDef="data.date">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Дата </mat-header-cell>
+        <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{ post.data.date}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="data.name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Автор </mat-header-cell>
+        <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{ post.data.name}} </mat-cell>
+      </ng-container>
+  
+  
+      <ng-container matColumnDef="data.content" >
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Тема </mat-header-cell>
+          <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{post.data.content}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="data.priority" >
+          <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+          <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{post.data.priority}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="data.actions">
+        <mat-header-cell  style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;"*matHeaderCellDef> Дії </mat-header-cell>
+        <mat-cell *matCellDef="let post">
+          <button (click)=archieve(post.id)>X</button>
+        </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns; let i = index" 
+      (click)="showMedia(row.id,row.data)"
+      [ngClass]="{'positive' : row.data.checked_gazeta == true || row.data.checked_lviv == true || row.data.checked_regions == true || row.data.checked_site == true, 'negative' : row.data.checked_gazeta == false || row.data.checked_lviv == false || row.data.checked_regions == false || row.data.checked_site == false, 'own' : row.data.author == this.auth.currentUserId && row.data.checked == true}"></mat-row>
+    </mat-table>
+    <mat-paginator #sitePaginator
+                   [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 20, 50]"
+                   [showFirstLastButtons]="true">
+    </mat-paginator>
+    </div>
+  </mat-card>
+  
+  <mat-card class="cards mat-elevation-z10">
+    <div>
+      <!-- table with posts for gazets-->
+      <b><p align="left" style="color:red; font-size:10px;">РОЗГЛЯНУТЕ</p></b>
+      <div class="rejected-posts"></div>
+      <mat-table #table3="matSort" [dataSource]="lvivData" matSort matSortActive="data.date" matSortDirection="desc">  
+        
+        <ng-container matColumnDef="data.checked">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Затвердити </mat-header-cell>
+          <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{post.data.checked}} </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="data.branch">
+            <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+            <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;"  *matCellDef="let post" [ngClass]="{'one' : post.data.mediaplan_gazeta == true, 'two' : post.data.mediaplan_lviv  == true, 'three' : post.data.mediaplan_site  == true, 'four' : post.data.mediaplan_regions == true}"> {{ post.data.branch }} </mat-cell>
+          </ng-container>
+    
+        <ng-container matColumnDef="data.date">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Дата </mat-header-cell>
+          <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{ post.data.date}} </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="data.name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Автор </mat-header-cell>
+          <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{ post.data.name}} </mat-cell>
+        </ng-container>
+    
+    
+        <ng-container matColumnDef="data.content" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Тема </mat-header-cell>
+            <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{post.data.content}} </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="data.priority" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+            <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{post.data.priority}} </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="data.actions">
+          <mat-header-cell  style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;"*matHeaderCellDef> Дії </mat-header-cell>
+          <mat-cell *matCellDef="let post">
+            <button (click)=archieve(post.id)>X</button>
+          </mat-cell>
+        </ng-container>
+    
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns; let i = index" 
+        (click)="showMedia(row.id,row.data)"
+        [ngClass]="{'positive' : row.data.checked_gazeta == true || row.data.checked_lviv == true || row.data.checked_regions == true || row.data.checked_site == true, 'negative' : row.data.checked_gazeta == false || row.data.checked_lviv == false || row.data.checked_regions == false || row.data.checked_site == false, 'own' : row.data.author == this.auth.currentUserId && row.data.checked == true, 'read' : row.data.read == true}"></mat-row>
+      </mat-table>
+      <mat-paginator #lvivPaginator
+                     [pageSize]="10"
+                     [pageSizeOptions]="[5, 10, 20, 50]"
+                     [showFirstLastButtons]="true">
+      </mat-paginator>
+      </div>
+    </mat-card>
+  
+      

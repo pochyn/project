@@ -36,4 +36,9 @@ export class KvBarComponent implements OnInit {
     this.onTypeSelected.emit(this.type);
   }
 
+  media(){
+    this.type = "media"
+    this.onTypeSelected.emit(this.type);
+  }
+
 }

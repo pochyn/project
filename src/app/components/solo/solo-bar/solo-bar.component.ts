@@ -35,4 +35,9 @@ export class SoloBarComponent implements OnInit {
     this.onTypeSelected.emit(this.type);
   }
 
+  media(){
+    this.type = "media"
+    this.onTypeSelected.emit(this.type);
+  }
+
 }

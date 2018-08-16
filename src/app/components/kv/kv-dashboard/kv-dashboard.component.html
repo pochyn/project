@@ -12,10 +12,12 @@
             <div *ngIf="type == 'site';then site"></div>
             <div *ngIf="type == 'lviv';then lviv"></div>
             <div *ngIf="type == 'regions';then regions"></div>
+            <div *ngIf="type == 'media';then media"></div>
             <ng-template #gazeta><app-kv-posts></app-kv-posts>.</ng-template>
             <ng-template #site><app-kv-site></app-kv-site>.</ng-template>
             <ng-template #lviv><app-kv-lviv></app-kv-lviv>.</ng-template>
             <ng-template #regions><app-kv-regions></app-kv-regions>.</ng-template>
+            <ng-template #media><app-kv-media></app-kv-media>.</ng-template>
   
           </div>
         </div>
