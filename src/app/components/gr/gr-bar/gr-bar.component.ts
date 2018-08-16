@@ -34,5 +34,9 @@ export class GrBarComponent implements OnInit {
     this.type = "regions"
     this.onTypeSelected.emit(this.type);
   }
+  media(){
+    this.type = "media"
+    this.onTypeSelected.emit(this.type);
+  }
 
 }

@@ -4,6 +4,7 @@ import { AuthService } from '../../../services/auth.service';
 import {MatDialog} from '@angular/material';
 import {ArchieveOrGazetaComponent } from '../archieve-or-gazeta/archieve-or-gazeta.component';
 import { OrGazetaNewTopicComponent } from '../or-gazeta-new-topic/or-gazeta-new-topic.component'
+import { MediaplanComponent } from '../../mediaplan/mediaplan.component';
 declare var electron: any;  
 
 @Component({
@@ -41,6 +42,12 @@ export class OrTopBarComponent implements OnInit {
   showArchieve(){
     this.dialogRef.open(ArchieveOrGazetaComponent, {
       height: '90vh',
+      width: '90vw',
+    });
+  }
+
+  addMediaplan(){
+    this.dialogRef.open(MediaplanComponent, {
       width: '90vw',
     });
   }

@@ -3,6 +3,7 @@ import { AuthService } from '../../../services/auth.service';
 import {SoloNewTopicComponent} from '../solo-new-topic/solo-new-topic.component';
 import {MatDialog} from '@angular/material';
 import {SoloArchieveComponent } from '../solo-archieve/solo-archieve.component';
+import { MediaplanComponent } from '../../mediaplan/mediaplan.component';
 declare var electron: any;  
 @Component({
   selector: 'app-solo-top-bar',
@@ -38,6 +39,12 @@ export class SoloTopBarComponent implements OnInit {
   showArchieve(){
     this.dialogRef.open(SoloArchieveComponent, {
       height: '90vh',
+      width: '90vw',
+    });
+  }
+
+  addMediaplan(){
+    this.dialogRef.open(MediaplanComponent, {
       width: '90vw',
     });
   }

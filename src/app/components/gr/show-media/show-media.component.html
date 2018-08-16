@@ -1,0 +1,92 @@
+
+  <mat-dialog-actions>
+    <button mat-raised-button id='1'   (click)="approve_gazeta(id, post)">Затвердити</button>
+
+    <span class="fillup"></span>
+    <button mat-raised-button class='archieve'  mat-dialog-close (click)="archieve(id)">Архівувати</button>
+    <button mat-button class='close' [mat-dialog-close]="true">X</button>
+  </mat-dialog-actions>
+  <div class="header"></div>
+  <div class="full">
+  <div>
+    <font size="2" color="grey">Тип: </font> <font size="2" color="black">{{mediaplan_type}} </font>
+  </div>
+  <mat-divider></mat-divider>
+  <div>
+    <font size="2" color="grey">Автор: </font> <font size="2" color="black">{{post.name}} </font>
+  </div>
+  <mat-divider></mat-divider>
+  <div>
+    <font size="2" color="grey">Відділ: </font> <font size="2" color="black">{{post.branch}} </font>
+  </div>
+  <mat-divider></mat-divider>
+  <div>
+    <font size="2" color="grey">Дата: </font> <font size="2" color="black">{{post.date}} </font>
+  </div>
+  <mat-divider></mat-divider>
+  <div>
+   <font size="2" color="grey">Здача: </font> <font size="2" color="black">{{post.submitDate}} </font>
+  </div>
+  <mat-divider></mat-divider>
+  <div>
+    <font size="2" color="grey">Дедлайн: </font> <font size="2" color="red">{{post.deadline}}</font>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="content2">
+    <font size="2" color="grey">Першоджерело: </font> <font size="2" color="black">{{post.source}} ({{post.sourceDate}})</font>
+  </div>
+  <mat-divider></mat-divider>
+  <div>
+    <font size="2" color="grey">Лінк: </font> <font size="2" color="black"><a href="{{post.link}}" target="_blank">{{post.link}}</a> </font>
+  </div>
+  
+  
+  <mat-divider></mat-divider>
+  <div class="content">
+    <font size="2" color="grey">Опис: </font> <br /> <font size="2" color="black">{{post.content}} </font>
+    <div class="divider">
+  
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="content1">
+    <font size="2" color="grey">Коментарі: </font> <br /> <font size="2" color="black">{{post.comments}} </font> 
+  </div>
+  <mat-form-field class="example-full-full-width">
+      <input  id='5' matInput [(ngModel)]="comm" name="comm">
+  </mat-form-field>
+  
+  <mat-divider></mat-divider>
+  <mat-form-field>
+        <mat-select placeholder="Перенести"  [(ngModel)]="selected_types">
+          <mat-option *ngFor="let type of types" [value]="type">{{type}}</mat-option>
+        </mat-select>
+  </mat-form-field>  
+  <mat-form-field>
+    <mat-select placeholder="Журналіст" [(ngModel)]="selected">
+      <mat-option *ngFor="let g of journ" ngDefaultControl [value]="g">
+        {{ g }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+      <input matInput [(ngModel)]="deadln" name="deadln" [matDatepicker]="picker1"  placeholder="Дедлайн">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+  </mat-form-field>
+
+<mat-form-field>
+  <mat-select name="prior" placeholder="Приорітет" [(ngModel)]="priority_selected">
+    <mat-option *ngFor="let p of priorities" ngDefaultControl [value]="p">
+      {{ p }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+  
+  </div>
+  <div>
+  <button mat-raised-button class="zminyty" type="submit" (click)="changePost(id)">Змінити</button>
+  </div>
+  
+  
+  

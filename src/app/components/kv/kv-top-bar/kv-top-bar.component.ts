@@ -3,6 +3,7 @@ import { AuthService } from '../../../services/auth.service';
 import {KvNewTopicComponent} from '../kv-new-topic/kv-new-topic.component';
 import {MatDialog} from '@angular/material';
 import {KvArchieveComponent } from '../kv-archieve/kv-archieve.component';
+import { MediaplanComponent } from '../../mediaplan/mediaplan.component';
 declare var electron: any;  
 @Component({
   selector: 'app-kv-top-bar',
@@ -40,6 +41,12 @@ export class KvTopBarComponent implements OnInit {
   showArchieve(){
     this.dialogRef.open(KvArchieveComponent, {
       height: '90vh',
+      width: '90vw',
+    });
+  }
+
+  addMediaplan(){
+    this.dialogRef.open(MediaplanComponent, {
       width: '90vw',
     });
   }

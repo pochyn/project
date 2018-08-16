@@ -3,6 +3,7 @@ import { AuthService } from '../../../services/auth.service';
 import {GrNewTopicComponent} from '../gr-new-topic/gr-new-topic.component';
 import {MatDialog} from '@angular/material';
 import {GrArchieveComponent } from '../gr-archieve/gr-archieve.component';
+import { MediaplanComponent } from '../../mediaplan/mediaplan.component';
 declare var electron: any;  
 
 @Component({
@@ -40,6 +41,12 @@ export class GrTopbarComponent implements OnInit {
   showArchieve(){
     this.dialogRef.open(GrArchieveComponent, {
       height: '90vh',
+      width: '90vw',
+    });
+  }
+
+  addMediaplan(){
+    this.dialogRef.open(MediaplanComponent, {
       width: '90vw',
     });
   }

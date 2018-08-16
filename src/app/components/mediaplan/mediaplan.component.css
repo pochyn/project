@@ -1,0 +1,60 @@
+html *
+{
+   font-size: 1em !important;
+   color: #000 !important;
+   font-family: Arial !important;
+}
+
+
+.example-full {
+    width: 70%;
+}
+.example-full1 {
+    width: 25%;
+}
+.example-full2 {
+    width: 100%;
+}
+
+.content{
+    max-height: 250px;
+    overflow: auto;
+}
+
+.header{
+    height: 3px;
+    width: 100%;
+    background: red;
+}
+
+.close{
+    display: flex;
+    justify-content: center;
+    min-height: 10px;
+    max-height: 35px;
+    min-width: 10px;
+    max-width: 10px;
+}
+
+.divider{
+    max-height: 10px;
+    min-height: 10px;
+}
+
+.approve {
+    background: #d63031;
+    width: 100%;
+    color: white;
+    display: flex;
+    justify-content: center; 
+}
+
+.fillup {
+    flex: 1 1 auto;
+}
+
+.full{
+    
+    max-height: 75%;
+    overflow: auto;
+}

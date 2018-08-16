@@ -4,6 +4,8 @@ import { AuthService } from '../../../services/auth.service';
 import {MatDialog} from '@angular/material';
 import {ArchieveOrSiteComponent } from '../archieve-or-site/archieve-or-site.component';
 import { OrNewTopicComponent } from '../or-new-topic/or-new-topic.component'
+import { MediaplanComponent } from '../../mediaplan/mediaplan.component';
+
 declare var electron: any;  
 
 @Component({
@@ -38,6 +40,11 @@ export class SiteTopBarComponent implements OnInit {
   showArchieve(){
     this.dialogRef.open(ArchieveOrSiteComponent, {
       height: '90vh',
+      width: '90vw',
+    });
+  }
+  addMediaplan(){
+    this.dialogRef.open(MediaplanComponent, {
       width: '90vw',
     });
   }

@@ -1,0 +1,57 @@
+<div class="full">
+    <mat-dialog-actions style="vertical-align: middle">
+        <span class="fillup"></span>
+        <button mat-button class='close' [mat-dialog-close]="true">X</button>
+    </mat-dialog-actions>
+    <div class="header"></div>
+
+    <form>
+        <mat-form-field class="example-full">
+            <textarea matInput placeholder="Першоджерело" [(ngModel)]="source" name="source" ></textarea>
+        </mat-form-field>
+    
+        <mat-form-field class="example-full1">
+            <input matInput [(ngModel)]="sourceDate" name="sourceDate" [matDatepicker]="picker" placeholder="Дата появи в першоджерелі">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </form>
+    <form>
+      <mat-form-field class="example-full2">
+        <textarea matInput placeholder="Лінк" [(ngModel)]="link" name="link"></textarea>
+      </mat-form-field>
+  </form>
+    
+    
+    <form>
+        <mat-form-field class="example-full2">
+          <textarea matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=8 placeholder="Опис теми (максимум 1000 знаків)" [formControl]="contentControl" [(ngModel)]="content" name="content" maxLength="1000" required></textarea>
+          <mat-error *ngIf="contentControl.hasError('required')">
+            Опиши тему!
+          </mat-error>
+        </mat-form-field>
+    </form>
+    </div>
+    <form>
+      <mat-form-field>
+            <input matInput [(ngModel)]="submitDate" name="submitDate" [formControl]="dateControl" [matDatepicker]="picker1"  placeholder="Дата здачі">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-select name="type" placeholder="Куди" [(ngModel)]="selected_type" [formControl]="sourceControl">
+              <mat-option *ngFor="let type of types" ngDefaultControl [value]="type">
+                {{ type }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+    </form>
+    <mat-dialog-actions>
+        <button mat-raised-button class='approve' type="submit" mat-dialog-close [disabled]="(contentControl.hasError('required') || dateControl.hasError('required') || sourceControl.hasError('required'))" (click)="newPost()">Додати медіаплан!</button>
+    </mat-dialog-actions>
+    <div class="header"></div>
+    
+    
+    
+    

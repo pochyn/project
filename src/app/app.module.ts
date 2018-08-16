@@ -97,6 +97,9 @@ import { SoloSitesComponent } from './components/solo/solo-sites/solo-sites.comp
 import { SoloTopBarComponent } from './components/solo/solo-top-bar/solo-top-bar.component';
 import { DatePickerComponent } from './components/date-picker/date-picker.component';
 import { DateAdapter } from '@angular/material';
+import { MediaplanComponent } from './components/mediaplan/mediaplan.component';
+import { GrMediaComponent } from './components/gr/gr-media/gr-media.component';
+import { ShowMediaComponent } from './components/gr/show-media/show-media.component';
 
 
 
@@ -172,7 +175,10 @@ import { DateAdapter } from '@angular/material';
     SoloShowTopicComponent,
     SoloSitesComponent,
     SoloTopBarComponent,
-    DatePickerComponent
+    DatePickerComponent,
+    MediaplanComponent,
+    GrMediaComponent,
+    ShowMediaComponent
   ],
   imports: [
     BrowserModule,
@@ -204,7 +210,9 @@ import { DateAdapter } from '@angular/material';
     OrGazetaNewTopicComponent,
     SoloArchieveComponent,
     SoloShowTopicComponent,
-    SoloNewTopicComponent
+    SoloNewTopicComponent,
+    MediaplanComponent,
+    ShowMediaComponent
   ],
   providers: [
     {provide: DateAdapter, useClass: DatePickerComponent},
