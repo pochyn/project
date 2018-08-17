@@ -1,7 +1,56 @@
 <div class="header"></div>
   <div class="full">
+        <div class="divider1"></div>
         <div class="users">
-                <p ng-repeat="animal in journ">{{animal}}</p>
+                <mat-table #table1="matSort" [dataSource]="postsData" matSort matSortActive="data.displayName" matSortDirection="asc">  
+    
+                        <ng-container matColumnDef="data.displayName">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header> Ім'я </mat-header-cell>
+                          <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{post.data.displayName}} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="data.branch">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> Відділ </mat-header-cell>
+                                <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{post.data.branch}} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="data.posada">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> Посада </mat-header-cell>
+                                <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{post.data.posada}} </mat-cell>
+                        </ng-container>
+                                
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns; let i = index" ></mat-row>
+                </mat-table>
+        </div>
+
+        <div class="divider"></div>
+
+        <mat-form-field>
+                <mat-select placeholder="Журналіст" [(ngModel)]="new_g" [formControl]="gournControl">
+                  <mat-option *ngFor="let g of journ" ngDefaultControl [value]="g">
+                    {{ g }}
+                  </mat-option>
+                </mat-select>        
+        </mat-form-field>
+
+        <mat-form-field>
+                <mat-select placeholder="Відділ" [(ngModel)]="new_branch" [formControl]="posadaControl">
+                  <mat-option *ngFor="let t of types" ngDefaultControl [value]="t">
+                    {{ t }}
+                  </mat-option>
+                </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+                <mat-select placeholder="Посада" [(ngModel)]="new_posada" [formControl]="branchControl">
+                  <mat-option *ngFor="let p of posadas" ngDefaultControl [value]="p">
+                    {{ p }}
+                  </mat-option>
+                </mat-select>
+        </mat-form-field>
+        <div>
+                <button mat-raised-button class="zminyty" type="submit" [disabled]="(gournControl.hasError('required') || posadaControl.hasError('required') || branchControl.hasError('required'))" (click)="change_user()">Перенести користувача</button>
         </div>
         <div class="divider"></div>
         <mat-form-field class="input-width">
@@ -10,7 +59,7 @@
                 Email is <strong>required</strong>
             </mat-error>
         </mat-form-field>
-        <button mat-raised-button [color]="'success'" [disabled]="(emailFormControl.hasError('required'))"(click)=reset(email) color="primary" style="width: 100%">Відновити пароль!</button>
+        <button mat-raised-button mat-dialog-close [color]="'success'"  [disabled]="(emailFormControl.hasError('required'))"(click)=reset(email) color="primary" style="width: 100%">Відновити пароль!</button>
       <div class="divider"></div>
       <div>
           <button mat-raised-button mat-dialog-close class="zminyty" type="submit" (click)="delete()">Видалити користувача!!!</button>

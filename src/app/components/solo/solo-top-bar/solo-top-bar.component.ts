@@ -4,6 +4,7 @@ import {SoloNewTopicComponent} from '../solo-new-topic/solo-new-topic.component'
 import {MatDialog} from '@angular/material';
 import {SoloArchieveComponent } from '../solo-archieve/solo-archieve.component';
 import { MediaplanComponent } from '../../mediaplan/mediaplan.component';
+import { AllSettingsComponent } from '../../all-settings/all-settings.component';
 declare var electron: any;  
 @Component({
   selector: 'app-solo-top-bar',
@@ -45,6 +46,11 @@ export class SoloTopBarComponent implements OnInit {
 
   addMediaplan(){
     this.dialogRef.open(MediaplanComponent, {
+      width: '90vw',
+    });
+  }
+  settings(){
+    this.dialogRef.open(AllSettingsComponent, {
       width: '90vw',
     });
   }

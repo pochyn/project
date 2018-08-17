@@ -4,6 +4,7 @@ import {KvNewTopicComponent} from '../kv-new-topic/kv-new-topic.component';
 import {MatDialog} from '@angular/material';
 import {KvArchieveComponent } from '../kv-archieve/kv-archieve.component';
 import { MediaplanComponent } from '../../mediaplan/mediaplan.component';
+import { AllSettingsComponent } from '../../all-settings/all-settings.component';
 declare var electron: any;  
 @Component({
   selector: 'app-kv-top-bar',
@@ -47,6 +48,12 @@ export class KvTopBarComponent implements OnInit {
 
   addMediaplan(){
     this.dialogRef.open(MediaplanComponent, {
+      width: '90vw',
+    });
+  }
+
+  settings(){
+    this.dialogRef.open(AllSettingsComponent, {
       width: '90vw',
     });
   }

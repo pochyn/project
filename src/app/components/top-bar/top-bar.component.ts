@@ -4,6 +4,7 @@ import {NewTopicComponent} from '../new-topic/new-topic.component';
 import {MatDialog} from '@angular/material';
 import {ArchieveComponent } from '../archieve/archieve.component';
 import { MediaplanComponent } from './../mediaplan/mediaplan.component';
+import { AllSettingsComponent } from '../all-settings/all-settings.component';
 declare var electron: any;  
 
 @Component({
@@ -47,6 +48,12 @@ export class TopBarComponent implements OnInit {
 
   addMediaplan(){
     this.dialogRef.open(MediaplanComponent, {
+      width: '90vw',
+    });
+  }
+
+  settings(){
+    this.dialogRef.open(AllSettingsComponent, {
       width: '90vw',
     });
   }
