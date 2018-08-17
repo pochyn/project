@@ -104,6 +104,7 @@ import { KvMediaComponent } from './components/kv/kv-media/kv-media.component';
 import { AllShowMediaComponent } from './components/all-show-media/all-show-media.component';
 import { SoloMediaComponent } from './components/solo/solo-media/solo-media.component';
 import { GMediaComponent } from './components/g-media/g-media.component';
+import { GrSettingsComponent } from './components/gr/gr-settings/gr-settings.component';
 
 
 
@@ -186,7 +187,8 @@ import { GMediaComponent } from './components/g-media/g-media.component';
     KvMediaComponent,
     AllShowMediaComponent,
     SoloMediaComponent,
-    GMediaComponent
+    GMediaComponent,
+    GrSettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -221,7 +223,8 @@ import { GMediaComponent } from './components/g-media/g-media.component';
     SoloNewTopicComponent,
     MediaplanComponent,
     ShowMediaComponent,
-    AllShowMediaComponent
+    AllShowMediaComponent,
+    GrSettingsComponent
   ],
   providers: [
     {provide: DateAdapter, useClass: DatePickerComponent},

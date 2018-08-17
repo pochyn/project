@@ -4,6 +4,7 @@ import {GrNewTopicComponent} from '../gr-new-topic/gr-new-topic.component';
 import {MatDialog} from '@angular/material';
 import {GrArchieveComponent } from '../gr-archieve/gr-archieve.component';
 import { MediaplanComponent } from '../../mediaplan/mediaplan.component';
+import { GrSettingsComponent } from '../../gr/gr-settings/gr-settings.component';
 declare var electron: any;  
 
 @Component({
@@ -47,6 +48,12 @@ export class GrTopbarComponent implements OnInit {
 
   addMediaplan(){
     this.dialogRef.open(MediaplanComponent, {
+      width: '90vw',
+    });
+  }
+
+  settings(){
+    this.dialogRef.open(GrSettingsComponent, {
       width: '90vw',
     });
   }

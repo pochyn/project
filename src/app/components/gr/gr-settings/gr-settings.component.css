@@ -1,0 +1,128 @@
+html *
+{
+   font-size: 1em !important;
+   color: #000 !important;
+   font-family: Arial !important;
+}
+
+.example-form {
+    min-width: 150px;
+    min-height: 350px;
+    width: 100%;
+}
+
+.source_form {
+    width: 100%;
+}
+.example-full {
+    width: 76%;
+}
+  
+.example-full-width {
+    width: 80%;
+}
+.example-full-full-width {
+    width: 100%;
+}
+
+.content{
+    max-height: 40%;
+    overflow: auto;
+}
+.content1{
+    max-height: 30%;
+    overflow: auto;
+}
+.content2{
+    max-height: 20px;
+    overflow: auto;
+}
+.divider{
+    min-height: 20px;
+}
+
+.header{
+    height: 3px;
+    width: 100%;
+    background: red;
+}
+.vdivider{
+    padding-left: 50px;
+}
+.close{
+    display: flex;
+    justify-content: center;
+    min-height: 10px;
+    max-height: 35px;
+    min-width: 10px;
+    max-width: 10px;
+}
+
+.archieve{
+    background: #d63031;
+}
+
+.approve{
+    background: #00b894;
+    display: flex;
+    justify-content: center;
+    min-height: 10px;
+    max-height: 35px;
+    min-width: 10px;
+    max-width: 60px;
+}
+.reject {
+    background: #d63031;
+    display: flex;
+    justify-content: center;
+    min-height: 10px;
+    max-height: 35px;
+    min-width: 10px;
+    max-width: 10px; 
+}
+
+.rej {
+    background: #d63031;
+    display: flex;
+    justify-content: center;
+    min-height: 10px;
+    max-height: 35px;
+    min-width: 10px;
+    max-width: 60px;
+}
+
+.zminyty{
+    width: 100%;
+    background: #E11F1F;
+    color: white;
+}
+
+.input-width {
+    width: 100%;
+}
+
+.divider{
+    max-height: 10px;
+    min-height: 10px;
+}
+
+.full{
+    max-height: 75vh;
+    overflow: scroll;
+}
+
+.fillup {
+    flex: 1 1 auto;
+}
+
+.mat-success{
+    background-color: #E11F1F;
+    color: #fff;
+  }
+.divider{
+    min-height: 6vh;
+}
+.users{
+    max-height: 50vh;
+    overflow: scroll;
+}
