@@ -47,12 +47,10 @@ table with posts for gazets-->
     <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{post.data.priority}} </mat-cell>
 </ng-container>
 
-  <ng-container matColumnDef="data.actions">
-    <mat-header-cell  style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;"*matHeaderCellDef> Дії </mat-header-cell>
-    <mat-cell *matCellDef="let post">
-      <button (click)=archieve(post.id)>X</button>
-    </mat-cell>
-  </ng-container>
+<ng-container matColumnDef="data.actions">
+    <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
+    <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;"  *matCellDef="let post" [ngClass]="{'oneone' : post.data.comments != '' || post.data.deadline != '', 'twotwo' : post.data.comments == '' && post.data.deadline == ''}"> {{ post.data.branch }} </mat-cell>
+</ng-container>
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns; let i = index" 
@@ -107,10 +105,8 @@ table with posts for gazets-->
     </ng-container>
 
     <ng-container matColumnDef="data.actions">
-      <mat-header-cell  style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;"*matHeaderCellDef> Дії </mat-header-cell>
-      <mat-cell *matCellDef="let post">
-        <button (click)=archieve(post.id)>X</button>
-      </mat-cell>
+        <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
+        <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;"  *matCellDef="let post" [ngClass]="{'oneone' : post.data.comments != '' || post.data.deadline != '', 'twotwo' : post.data.comments == '' && post.data.deadline == ''}"> {{ post.data.branch }} </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -165,10 +161,8 @@ table with posts for gazets-->
       </ng-container>
   
       <ng-container matColumnDef="data.actions">
-        <mat-header-cell  style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;"*matHeaderCellDef> Дії </mat-header-cell>
-        <mat-cell *matCellDef="let post">
-          <button (click)=archieve(post.id)>X</button>
-        </mat-cell>
+          <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
+          <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;"  *matCellDef="let post" [ngClass]="{'oneone' : post.data.comments != '' || post.data.deadline != '', 'twotwo' : post.data.comments == '' && post.data.deadline == ''}"> {{ post.data.branch }} </mat-cell>
       </ng-container>
   
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

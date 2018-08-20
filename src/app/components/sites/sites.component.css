@@ -11,9 +11,9 @@
     margin-left: 25px;
 
 }
-.mat-column-data-priority {
-    flex: 0 0 20px;
-    margin-left: 25px;
+.mat-column-data-actions {
+    max-height: 23px;
+    flex: 0 0 15px;
 }
 
 .mat-column-data-actions {
@@ -124,6 +124,15 @@
 .eight{
     background-color: #36F517;
     color: #36F517; 
+}
+
+.oneone{
+    background-color: red;
+    color: red;
+}
+.twotwo{
+    background-color: transparent;
+    color: transparent;
 }
 
 

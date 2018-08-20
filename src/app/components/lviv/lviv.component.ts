@@ -111,7 +111,7 @@ postsColSite3: AngularFirestoreCollection<Post>;
 postsColLviv3: AngularFirestoreCollection<Post>;
 
 // what columns to diaplay
-displayedColumns = [ 'data.date', 'data.branch','data.name', 'data.content', 'data.priority'];
+displayedColumns = [ 'data.date', 'data.branch','data.name', 'data.content', 'data.priority', 'data.actions'];
 
 constructor(private afs: AngularFirestore, private auth: AuthService,
             private dialogRef: MatDialog, private afauth: AngularFireAuth) { }

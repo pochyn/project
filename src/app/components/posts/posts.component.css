@@ -17,7 +17,8 @@
 }
 
 .mat-column-data-actions {
-    flex: 0 0 0px;
+    max-height: 23px;
+    flex: 0 0 15px;
 }
 .mat-column-data-name {
     margin-left: 15px;
@@ -169,6 +170,16 @@
 }
 .notCheckbox::after{
     content: '';
+}
+
+
+.oneone{
+    background-color: red;
+    color: red;
+}
+.twotwo{
+    background-color: transparent;
+    color: transparent;
 }
 
 
