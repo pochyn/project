@@ -60,6 +60,10 @@ interface Post {
   checked_lviv: boolean;
   checked_regions: boolean;
   date_modified: any;
+  mediaplan_gazeta: boolean;
+  mediaplan_lviv: boolean;
+  mediaplan_site: boolean;
+  mediaplan_regions: boolean;
 }
 interface PostId extends Post { 
   id: string; 
@@ -158,7 +162,7 @@ export class SoloPostsComponent implements OnInit {
                const id = a.payload.doc.id;
                return { id, data };
              });
-           }).map(posts => posts.filter(post => post.data.author == this.auth.currentUserId && post.data.gazeta_type && post.data.checked_gazeta && !post.data.archieved_solo));       
+           }).map(posts => posts.filter(post => post.data.author == this.auth.currentUserId && post.data.gazeta_type && post.data.checked_gazeta && !post.data.archieved_solo && !(post.data.mediaplan_gazeta || post.data.mediaplan_lviv || post.data.mediaplan_regions || post.data.mediaplan_site)));       
        //site tab paginator
        this.sites.subscribe(data => this.sitesData.data = data);
        this.sitesData.paginator = this.sitePaginator;
@@ -196,7 +200,7 @@ export class SoloPostsComponent implements OnInit {
           const id = a.payload.doc.id;
           return { id, data };
         });
-      }).map(posts => posts.filter(post => post.data.author == this.auth.currentUserId && post.data.gazeta_type && !post.data.read && !post.data.archieved_solo));
+      }).map(posts => posts.filter(post => post.data.author == this.auth.currentUserId && post.data.gazeta_type && !post.data.read && !post.data.archieved_solo && !(post.data.mediaplan_gazeta || post.data.mediaplan_lviv || post.data.mediaplan_regions || post.data.mediaplan_site)));
     //gazeta tab paginator
     this.posts.subscribe(newData => this.postsData.data = newData);
     this.postsData.paginator = this.gazPaginator;
@@ -234,7 +238,7 @@ export class SoloPostsComponent implements OnInit {
           const id = a.payload.doc.id;
           return { id, data };
         });
-      }).map(posts => posts.filter(post => post.data.author == this.auth.currentUserId && post.data.gazeta_type && post.data.read && !post.data.checked_gazeta && !post.data.archieved_solo));
+      }).map(posts => posts.filter(post => post.data.author == this.auth.currentUserId && post.data.gazeta_type && post.data.read && !post.data.checked_gazeta && !post.data.archieved_solo && !(post.data.mediaplan_gazeta || post.data.mediaplan_lviv || post.data.mediaplan_regions || post.data.mediaplan_site)));
     //gazeta tab paginator
     this.lviv.subscribe(nData => this.lvivData.data = nData);
     this.lvivData.paginator = this.lvivPaginator;

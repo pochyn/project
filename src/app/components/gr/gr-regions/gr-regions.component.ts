@@ -58,6 +58,10 @@ interface Post {
   checked_lviv: boolean;
   checked_regions: boolean;
   date_modified: any;
+  mediaplan_gazeta: boolean;
+  mediaplan_lviv: boolean;
+  mediaplan_site: boolean;
+  mediaplan_regions: boolean;
 }
 interface PostId extends Post { 
   id: string; 
@@ -167,7 +171,7 @@ ngOnInit() {
         const id = a.payload.doc.id;
         return { id, data };
       });
-    }).map(posts => posts.filter(post => post.data.checked && post.data.regions_type && !post.data.read && !post.data.archieved_gr));
+    }).map(posts => posts.filter(post => post.data.checked && post.data.regions_type && !post.data.read && !post.data.archieved_gr&& !(post.data.mediaplan_gazeta || post.data.mediaplan_lviv || post.data.mediaplan_regions || post.data.mediaplan_site)));
   //gazeta tab paginator
   this.posts.subscribe(newData => this.postsData.data = newData);
   this.postsData.paginator = this.gazPaginator;
@@ -204,7 +208,7 @@ ngOnInit() {
           const id = a.payload.doc.id;
           return { id, data };
         });
-      }).map(posts => posts.filter(post => post.data.checked && post.data.regions_type && post.data.checked_regions && !post.data.archieved_gr));       
+      }).map(posts => posts.filter(post => post.data.checked && post.data.regions_type && post.data.checked_regions && !post.data.archieved_gr&& !(post.data.mediaplan_gazeta || post.data.mediaplan_lviv || post.data.mediaplan_regions || post.data.mediaplan_site)));       
   //site tab paginator
   this.sites.subscribe(data => this.sitesData.data = data);
   this.sitesData.paginator = this.sitePaginator;
@@ -241,7 +245,7 @@ ngOnInit() {
         const id = a.payload.doc.id;
         return { id, data };
       });
-    }).map(posts => posts.filter(post => post.data.checked && post.data.regions_type && post.data.read && !post.data.checked_regions && !post.data.archieved_gr));
+    }).map(posts => posts.filter(post => post.data.checked && post.data.regions_type && post.data.read && !post.data.checked_regions && !post.data.archieved_gr&& !(post.data.mediaplan_gazeta || post.data.mediaplan_lviv || post.data.mediaplan_regions || post.data.mediaplan_site)));
   //gazeta tab paginator
   this.lviv.subscribe(nData => this.lvivData.data = nData);
   this.lvivData.paginator = this.lvivPaginator;
