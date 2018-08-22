@@ -1,3 +1,7 @@
+<mat-dialog-actions>
+    <span class="fillup"></span>
+    <button mat-button class='close' [mat-dialog-close]="true">X</button>
+  </mat-dialog-actions>
 <div class="header"></div>
   <div class="full">
         <div class="divider1"></div>
@@ -52,6 +56,20 @@
         <div>
                 <button mat-raised-button class="zminyty" type="submit" [disabled]="(gournControl.hasError('required') || posadaControl.hasError('required') || branchControl.hasError('required'))" (click)="change_user()">Перенести користувача</button>
         </div>
+
+        <div class="divider"></div>
+
+        <mat-form-field>
+            <mat-select placeholder="Додати наскрізного" [(ngModel)]="selected_for_naskriz" [formControl]="nascriznaControl" >
+              <mat-option *ngFor="let n of not_nascrizni" ngDefaultControl [value]="n">
+                {{ n }}
+              </mat-option>
+            </mat-select>        
+        </mat-form-field>
+        <div>
+            <button mat-raised-button mat-dialog-close class="zminyty" type="submit" [disabled]="(nascriznaControl.hasError('required'))" (click)="add_naskriz()">Додати до наскрізних</button>
+        </div>
+
         <div class="divider"></div>
         <mat-form-field class="input-width">
             <input matInput placeholder="Емейл" [formControl]="emailFormControl" [(ngModel)]="email">

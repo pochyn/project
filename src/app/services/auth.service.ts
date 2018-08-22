@@ -36,6 +36,7 @@ export class AuthService {
   get currentUserId(): string {
     return this.authState !== null ? this.authState.uid : '';
   }
+
   
   //Signup
   signUp(usercreds) {

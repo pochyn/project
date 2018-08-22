@@ -7,8 +7,10 @@
     <span class="fillup"></span>
     <button mat-raised-button class='archieve'  mat-dialog-close (click)="archieve(id)">Архівувати</button>
     <button mat-button class='close' [mat-dialog-close]="true">X</button>
-  </mat-dialog-actions>
+  
   <div class="header"></div>
+  <input type="checkbox" id="nascrizna" name="nascrizna" value="nascrizna" [(ngModel)]="nascrizna" (click)="checkNascrizna()">
+          <label for="nascrizna"><font color="grey" size="3"><b>Наскрізна</b></font></label>
   <div class="full">
   <div>
     <font size="2" color="grey">Автор: </font> <font size="2" color="black">{{post.name}} </font>
@@ -85,11 +87,11 @@
     </mat-option>
   </mat-select>
 </mat-form-field>
-  
+<div>
+    <button mat-raised-button class="approve1" type="submit" (click)="changePost(id)">Змінити</button>
+</div>
   </div>
-  <div>
-  <button mat-raised-button class="zminyty" type="submit" (click)="changePost(id)">Змінити</button>
-  </div>
+
   
   
   

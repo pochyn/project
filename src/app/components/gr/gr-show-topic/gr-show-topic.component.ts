@@ -85,6 +85,7 @@ export class GrShowTopicComponent implements OnInit {
   checked_regions: boolean;
   date_modified: any;
   priority: any;
+  nascrizna: any;
 
   postDoc: AngularFirestoreDocument<Post>;
   post: any;
@@ -161,6 +162,16 @@ export class GrShowTopicComponent implements OnInit {
     }
   }
 
+  checkNascrizna() {
+    if (this.nascrizna == true) {
+      this.nascrizna = true;
+      this.content = "(НАСКРІЗНА) " + this.post.content;
+    } else {
+      this.nascrizna = false;
+      this.content = this.post.content;
+    }
+}
+
   getData(){
     let collRef1 = this.afs.collection('posts').ref;
     let queryRef1 = collRef1;
@@ -210,6 +221,10 @@ export class GrShowTopicComponent implements OnInit {
   }
 
   changePost(postid, data){
+    this.checkNascrizna();
+    this.afs.doc('posts/'+postid).update({nascrizna: this.nascrizna});
+    this.afs.doc('posts/'+postid).update({content: this.content});
+
     var sbm_dt = this.formatDlnDate();
     this.afs.doc('posts/'+postid).update({deadline: sbm_dt});
 

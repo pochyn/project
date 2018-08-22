@@ -126,7 +126,7 @@ html *
     min-height: 2vh;
 }
 .users{
-    max-height: 22vh;
+    max-height: 25vh;
     overflow: scroll;
 }
 
@@ -143,4 +143,13 @@ html *
     min-height: 23px;
     cursor: pointer;
     background-color: #ABEBC6
+}
+
+.close{
+    display: flex;
+    justify-content: center;
+    min-height: 10px;
+    max-height: 35px;
+    min-width: 10px;
+    max-width: 10px;
 }

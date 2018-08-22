@@ -64,6 +64,7 @@ interface Post {
   mediaplan_lviv: boolean;
   mediaplan_site: boolean;
   mediaplan_regions: boolean;
+  nascrizna: boolean;
 }
 interface PostId extends Post { 
   id: string; 
@@ -115,6 +116,8 @@ export class KvLvivComponent implements OnInit {
  postsColGaz3: AngularFirestoreCollection<Post>;
  postsColSite3: AngularFirestoreCollection<Post>;
  postsColLviv3: AngularFirestoreCollection<Post>;
+
+ nascriznyy = false;
  
  // what columns to diaplay
  displayedColumns = [ 'data.date', 'data.branch','data.name', 'data.content', 'data.priority', 'data.actions'];
@@ -154,11 +157,23 @@ export class KvLvivComponent implements OnInit {
  
 
  ngOnInit() {
+
   var br;
   let collRef = this.afs.collection('users').ref;
   let queryRef = collRef.where('email', '==', this.afauth.auth.currentUser.email);
   queryRef.get().then((snapShot) => {
       br = snapShot.docs[0].data()['branch']
+      var name = snapShot.docs[0].data()['displayName']
+      let collRef1 = this.afs.collection('nascrizni').ref;
+      let queryRef1 = collRef1;
+      queryRef1.get().then((snapShot) => {
+          for( let dock1 of snapShot.docs){
+            console.log(dock1.data()['name'])
+            if (dock1.data()['name'] == name) {
+              console.log("tak")
+              this.nascriznyy = true;
+            }
+          }
       this.postsColSite = this.afs.collection('posts');
       this.sites = this.postsColSite.snapshotChanges()
           .map(actions => {
@@ -167,7 +182,7 @@ export class KvLvivComponent implements OnInit {
               const id = a.payload.doc.id;
               return { id, data };
             });
-          }).map(posts => posts.filter(post => post.data.branch == br && post.data.lviv_type && post.data.checked_lviv && !post.data.archieved_kv&& !(post.data.mediaplan_gazeta || post.data.mediaplan_lviv || post.data.mediaplan_regions || post.data.mediaplan_site)));       
+          }).map(posts => posts.filter(post => (post.data.branch == br && post.data.lviv_type && post.data.checked_lviv && !post.data.archieved_kv&& !(post.data.mediaplan_gazeta || post.data.mediaplan_lviv || post.data.mediaplan_regions || post.data.mediaplan_site) || (post.data.nascrizna == true && this.nascriznyy) )));       
       //site tab paginator
       console.log(br)
       this.sites.subscribe(data => this.sitesData.data = data);
@@ -193,6 +208,7 @@ export class KvLvivComponent implements OnInit {
         const transformedFilter = filter.trim().toLowerCase();
         return dataStr.indexOf(transformedFilter) !== -1;
       }
+    })
 
     // --------------------------
    // GAZETA
