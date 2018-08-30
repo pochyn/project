@@ -174,4 +174,17 @@
     color: transparent;
 }
 
+.default {
+    background:#E9E6E6;
+    color: black;
+}
+.approve {
+    background:green;
+    color: white;
+}
+.read1 {
+    background:red;
+    color: white;
+}
+
 

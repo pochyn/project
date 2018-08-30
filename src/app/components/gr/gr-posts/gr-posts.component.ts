@@ -124,6 +124,12 @@ export class GrPostsComponent implements OnInit {
   selected_types: any;
   types = ['Газета', 'Сайт', 'Львів', 'Регіони'];
   current_id: any;
+
+  checked_for_gazeta = [];
+  checked_for_site = [];
+  checked_for_lviv = [];
+  checked_for_regions = [];
+  checked_for_read = [];
  
  // create observable data for posts or site
  postsData = new MatTableDataSource(this.posts);
@@ -298,7 +304,6 @@ export class GrPostsComponent implements OnInit {
  
  //open window to show current post
  showPost(postid, postdata){
-  this.afs.doc('posts/'+postid).update({read: true});
    this.dialogRef.open(GrShowTopicComponent, {
     width: '90vw',
      data: {
@@ -308,33 +313,138 @@ export class GrPostsComponent implements OnInit {
    });
  } 
 
+ approve_gazeta(id){
+  var element = document.getElementById('ok');
+  var idd = id + '-1';
+  var button = document.getElementById(idd);
+  if (this.checked_for_gazeta.indexOf(id) > -1){
+    var indx = this.checked_for_gazeta.indexOf(id);
+    this.checked_for_gazeta.splice(indx, 1);
+    button.classList.remove('approve');
+    button.classList.add('default');
+  } else {
+    this.checked_for_gazeta.push(id);
+    element.classList.remove("hidden")
+    button.classList.remove('default');
+    button.classList.add('approve');
+  }
+    if ((this.checked_for_gazeta.length <= 0) && (this.checked_for_lviv.length <= 0) && (this.checked_for_read.length <= 0) && (this.checked_for_regions.length <= 0) && (this.checked_for_site.length <= 0)){
+      element.classList.add("hidden")
+    }
+}
+
+approve_site(id){
+  var element = document.getElementById('ok');
+  var idd = id + '-2';
+  var button = document.getElementById(idd);
+  if (this.checked_for_site.indexOf(id) > -1){
+    var indx = this.checked_for_site.indexOf(id);
+    this.checked_for_site.splice(indx, 1);
+    button.classList.remove('approve');
+    button.classList.add('default');
+  } else {
+    this.checked_for_site.push(id);
+    element.classList.remove("hidden")
+    button.classList.remove('default');
+    button.classList.add('approve');
+  }
+    if ((this.checked_for_gazeta.length <= 0) && (this.checked_for_lviv.length <= 0) && (this.checked_for_read.length <= 0) && (this.checked_for_regions.length <= 0) && (this.checked_for_site.length <= 0)){
+      element.classList.add("hidden")
+    }
+}
+
+approve_regions(id){
+  var element = document.getElementById('ok');
+  var idd = id + '-4';
+  var button = document.getElementById(idd);
+  if (this.checked_for_regions.indexOf(id) > -1){
+    var indx = this.checked_for_regions.indexOf(id);
+    this.checked_for_regions.splice(indx, 1);
+    button.classList.remove('approve');
+    button.classList.add('default');
+  } else {
+    this.checked_for_regions.push(id);
+    element.classList.remove("hidden")
+    button.classList.remove('default');
+    button.classList.add('approve');
+  }
+    if ((this.checked_for_gazeta.length <= 0) && (this.checked_for_lviv.length <= 0) && (this.checked_for_read.length <= 0) && (this.checked_for_regions.length <= 0) && (this.checked_for_site.length <= 0)){
+      element.classList.add("hidden")
+    }
+}
+
+approve_lviv(id){
+  var element = document.getElementById('ok');
+  var idd = id + '-3';
+  var button = document.getElementById(idd);
+  if (this.checked_for_lviv.indexOf(id) > -1){
+    var indx = this.checked_for_lviv.indexOf(id);
+    this.checked_for_lviv.splice(indx, 1);
+    button.classList.remove('approve');
+    button.classList.add('default');
+  } else {
+    this.checked_for_lviv.push(id);
+    element.classList.remove("hidden")
+    button.classList.remove('default');
+    button.classList.add('approve');
+  }
+    if ((this.checked_for_gazeta.length <= 0) && (this.checked_for_lviv.length <= 0) && (this.checked_for_read.length <= 0) && (this.checked_for_regions.length <= 0) && (this.checked_for_site.length <= 0)){
+      element.classList.add("hidden")
+    }
+}
+
+approve_read(id){
+  var element = document.getElementById('ok');
+  var idd = id + '-5';
+  var button = document.getElementById(idd);
+  if (this.checked_for_read.indexOf(id) > -1){
+    var indx = this.checked_for_read.indexOf(id);
+    this.checked_for_read.splice(indx, 1);
+    button.classList.remove('read1');
+    button.classList.add('default');
+  } else {
+    this.checked_for_read.push(id);
+    element.classList.remove("hidden")
+    button.classList.remove('default');
+    button.classList.add('read1');
+  }
+    if ((this.checked_for_gazeta.length <= 0) && (this.checked_for_lviv.length <= 0) && (this.checked_for_read.length <= 0) && (this.checked_for_regions.length <= 0) && (this.checked_for_site.length <= 0)){
+      element.classList.add("hidden")
+    }
+}
+
+
 ok() {
-  if(this.selected_types.indexOf("Газета") > -1){
-    this.afs.doc('posts/'+this.current_id).update({gazeta_type: true});
-    this.afs.doc('posts/'+this.current_id).update({checked_gazeta: true});
-  } else {
-    this.afs.doc('posts/'+this.current_id).update({checked_gazeta: false});
-  }
-  if(this.selected_types.indexOf("Сайт") > -1){
-    this.afs.doc('posts/'+this.current_id).update({site_type: true});
-    this.afs.doc('posts/'+this.current_id).update({checked_site: true});
-  } else {
-    this.afs.doc('posts/'+this.current_id).update({checked_site: false});
-  }
-  if(this.selected_types.indexOf("Львів") > -1){
-    this.afs.doc('posts/'+this.current_id).update({lviv_type: true});
-    this.afs.doc('posts/'+this.current_id).update({checked_lviv: true});
-  } else {
-    this.afs.doc('posts/'+this.current_id).update({checked_lviv: false});
-  }
-  if(this.selected_types.indexOf("Регіони") > -1){
-    this.afs.doc('posts/'+this.current_id).update({regions_type: true});
-    this.afs.doc('posts/'+this.current_id).update({checked_regions: true});
-  } else {
-    this.afs.doc('posts/'+this.current_id).update({checked_regions: false});
+  var i;
+  for (i = 0; i < this.checked_for_gazeta.length; i++) { 
+    this.afs.doc('posts/'+this.checked_for_gazeta[i]).update({read: true});
+    this.afs.doc('posts/'+this.checked_for_gazeta[i]).update({checked_gazeta: true});
+    this.afs.doc('posts/'+this.checked_for_gazeta[i]).update({gazeta_type: true});
   }
 
-  this.afs.doc('posts/'+this.current_id).update({read: true});
+  for (i = 0; i < this.checked_for_lviv.length; i++) { 
+    this.afs.doc('posts/'+this.checked_for_lviv[i]).update({read: true});
+    this.afs.doc('posts/'+this.checked_for_lviv[i]).update({checked_lviv: true});
+    this.afs.doc('posts/'+this.checked_for_lviv[i]).update({lviv_type: true});
+  }
+
+  for (i = 0; i < this.checked_for_regions.length; i++) { 
+    this.afs.doc('posts/'+this.checked_for_regions[i]).update({read: true});
+    this.afs.doc('posts/'+this.checked_for_regions[i]).update({checked_regions: true});
+    this.afs.doc('posts/'+this.checked_for_lviv[i]).update({regions_type: true});
+  }
+
+  for (i = 0; i < this.checked_for_site.length; i++) { 
+    this.afs.doc('posts/'+this.checked_for_site[i]).update({read: true});
+    this.afs.doc('posts/'+this.checked_for_site[i]).update({checked_site: true});
+    this.afs.doc('posts/'+this.checked_for_lviv[i]).update({site_type: true});
+  }
+
+  for (i = 0; i < this.checked_for_read.length; i++) { 
+    this.afs.doc('posts/'+this.checked_for_read[i]).update({read: true});
+  }
+
+
   this.selected_types = []
   this.current_id = undefined;
   var element = document.getElementById('ok');

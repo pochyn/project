@@ -354,6 +354,15 @@ export class GrShowTopicComponent implements OnInit {
     this.getData();
   }
 
+  reject(postid){
+    this.afs.doc('posts/'+postid).update({read: true});
+    this.afs.doc('posts/'+postid).update({checked_regions: false});
+    this.afs.doc('posts/'+postid).update({checked_gazeta: false});
+    this.afs.doc('posts/'+postid).update({checked_lviv: false});
+    this.afs.doc('posts/'+postid).update({checked_site: false});
+    
+  }
+
   showPost(postid, postdata){
     this.dialogRef.open(GrShowTopicComponent, {
       height: '90vh',

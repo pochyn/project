@@ -4,6 +4,7 @@
     <button mat-raised-button id='2'   (click)="approve_site(id, post.checked_site)">Сайт</button>
     <button mat-raised-button id='3'   (click)="approve_lviv(id, post.checked_lviv)">Львів</button>
     <button mat-raised-button id='4'   (click)="approve_regions(id, post.checked_regions)">Регіони</button>
+    <button mat-raised-button id='5' class='archieve' mat-dialog-close (click)="reject(id)">Відхилити</button>
     <span class="fillup"></span>
     <button mat-raised-button class='archieve'  mat-dialog-close (click)="archieve(id)">Архівувати</button>
     <button mat-button class='close' [mat-dialog-close]="true">X</button>

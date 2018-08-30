@@ -40,7 +40,7 @@
         </mat-form-field>
 
         <mat-form-field>
-            <mat-select name="type" placeholder="Куди" [(ngModel)]="selected_type" [formControl]="sourceControl">
+            <mat-select name="type" placeholder="Тип медіаплану" [(ngModel)]="selected_type" [formControl]="sourceControl">
               <mat-option *ngFor="let type of types" ngDefaultControl [value]="type">
                 {{ type }}
               </mat-option>

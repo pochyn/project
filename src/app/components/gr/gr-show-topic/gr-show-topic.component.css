@@ -59,6 +59,8 @@ html *
 }
 
 .archieve{
+    min-height: 10px;
+    max-height: 35px;
     background: #d63031;
 }
 

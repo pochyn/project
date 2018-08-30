@@ -4,7 +4,7 @@
 
 <mat-card class="mat-elevation-z10">
 <div>
-  <b><p align="left" style="color:#F4D03F; font-size:10px;">НОВЕ</p></b>
+  <b><p align="left" style="color:#F4D03F; font-size:10px;">НОВЕ - МЕДІАПЛАНИ</p></b>
 <div class="new-posts"></div>
   <!-- filter field
   <div>
@@ -39,7 +39,9 @@ table with posts for gazets-->
 
   <ng-container matColumnDef="data.content" >
       <mat-header-cell *matHeaderCellDef mat-sort-header> Тема </mat-header-cell>
-      <mat-cell style="justify-content: left; text-overflow:ellipsis; " *matCellDef="let post"> {{post.data.content}} </mat-cell>
+      <mat-cell style="justify-content: left; text-overflow:ellipsis; " *matCellDef="let post"> <p>{{post.data.content}} <br/><br/>
+        <button mat-raised-button  class="default" id={{post.id}}-4  (click)="approve_regions(post.id, post.data); $event.stopPropagation()">Затвердити</button>
+        <button mat-raised-button  class="default" id={{post.id}}-5  (click)="approve_read(post.id); $event.stopPropagation()">Відхилити</button>   </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="data.priority" >
@@ -67,7 +69,7 @@ table with posts for gazets-->
 
 <mat-card class="cards mat-elevation-z10">
 <div>
-    <b><p align="left" style="color:green; font-size:10px;">ЗАТВЕРДЖЕНЕ</p></b>
+    <b><p align="left" style="color:green; font-size:10px;">ЗАТВЕРДЖЕНЕ - МЕДІАПЛАНИ</p></b>
     <div class="approved-posts"></div>
   <!-- table with posts for gazets-->
   
@@ -125,7 +127,7 @@ table with posts for gazets-->
 <mat-card class="cards mat-elevation-z10">
   <div>
     <!-- table with posts for gazets-->
-    <b><p align="left" style="color:red; font-size:10px;">РОЗГЛЯНУТЕ</p></b>
+    <b><p align="left" style="color:red; font-size:10px;">РОЗГЛЯНУТЕ - МЕДІАПЛАНИ</p></b>
     <div class="rejected-posts"></div>
     <mat-table #table3="matSort" [dataSource]="lvivData" matSort matSortActive="data.date" matSortDirection="desc">  
       
@@ -177,5 +179,9 @@ table with posts for gazets-->
     </mat-paginator>
     </div>
   </mat-card>
+
+  <button id="ok" (click)="ok()" class="mdc-fab material-icons app-fab--absolute hidden" aria-label="Favorite">
+    OK
+  </button>
 
     

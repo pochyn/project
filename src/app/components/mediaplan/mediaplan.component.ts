@@ -221,15 +221,19 @@ export class MediaplanComponent implements OnInit {
     //get time
     if (this.selected_type == "Загальний") {
       this.mediaplan_gazeta = true;
+      this.content = "(ЗАГАЛЬНИЙ )" + this.content;
     }
     if (this.selected_type == "Сайт") {
       this.mediaplan_site = true;
+      this.content = "(САЙТ )" + this.content;
     }
     if (this.selected_type == "Львівський") {
       this.mediaplan_lviv = true;
+      this.content = "(ЛЬВІВСЬКИЙ )" + this.content;
     }
     if (this.selected_type == "Регіональний") {
       this.mediaplan_regions = true;
+      this.content = "(РЕГІОНАЛЬНИЙ )" + this.content;
     }
 
     var dt = this.formatTodayDate();
