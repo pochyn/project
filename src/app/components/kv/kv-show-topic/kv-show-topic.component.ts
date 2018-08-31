@@ -184,5 +184,15 @@ export class KvShowTopicComponent implements OnInit {
     this.getData();
   }
 
+  changePost(postid, data){
+
+    if (this.comm != undefined &&  this.comm != ''){
+      this.afs.doc('posts/'+postid).update({comments: this.post['comments'] + " (КЕРІВНИК ВІДДІЛУ): " +this.comm});
+      var modified_dt = this.formatTodayDate();
+      this.afs.doc('posts/'+postid).update({date_modified: modified_dt});
+    }
+    this.getData();
+  }
+
   
 }

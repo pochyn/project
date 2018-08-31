@@ -163,4 +163,16 @@ export class SoloShowTopicComponent implements OnInit {
     }
     return sbm_dt
   }  
+
+
+
+  changePost(postid, data){
+
+    if (this.comm != undefined &&  this.comm != ''){
+      this.afs.doc('posts/'+postid).update({comments: this.post['comments'] + " (ЖУРНАЛІСТ): " +this.comm});
+      var modified_dt = this.formatTodayDate();
+      this.afs.doc('posts/'+postid).update({date_modified: modified_dt});
+    }
+    this.getData();
+  }
 }

@@ -248,7 +248,7 @@ export class GrShowTopicComponent implements OnInit {
     }
 
     if (this.comm != undefined &&  this.comm != ''){
-      this.afs.doc('posts/'+postid).update({comments: this.post['comments'] + this.comm});
+      this.afs.doc('posts/'+postid).update({comments: this.post['comments'] + " (ГОЛОВНИЙ РЕДАКТОР): " + this.comm});
       var modified_dt = this.formatTodayDate();
       this.afs.doc('posts/'+postid).update({date_modified: modified_dt});
     }

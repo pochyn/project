@@ -179,7 +179,7 @@ export class SitesComponent implements OnInit {
                     const id = a.payload.doc.id;
                     return { id, data };
                   });
-                }).map(posts => posts.filter(post => (post.data.author == this.auth.currentUserId && post.data.site_type && post.data.checked_site && !post.data.archieved_g && !(post.data.mediaplan_gazeta || post.data.mediaplan_lviv || post.data.mediaplan_regions || post.data.mediaplan_site) || (post.data.nascrizna == true && this.nascriznyy) )));       
+                }).map(posts => posts.filter(post => (post.data.author == this.auth.currentUserId && post.data.site_type && post.data.checked_site && !post.data.archieved_g && !(post.data.mediaplan_gazeta || post.data.mediaplan_lviv || post.data.mediaplan_regions || post.data.mediaplan_site) || (post.data.nascrizna == true && this.nascriznyy && post.data.checked_site) )));       
             //site tab paginator
             this.sites.subscribe(data => this.sitesData.data = data);
             this.sitesData.paginator = this.sitePaginator;
@@ -259,7 +259,7 @@ export class SitesComponent implements OnInit {
            const id = a.payload.doc.id;
            return { id, data };
          });
-       }).map(posts => posts.filter(post => post.data.author == this.auth.currentUserId && post.data.site_type && post.data.read && !post.data.checked_gazeta && !post.data.archieved_g && !(post.data.mediaplan_gazeta || post.data.mediaplan_lviv || post.data.mediaplan_regions || post.data.mediaplan_site)));
+       }).map(posts => posts.filter(post => post.data.author == this.auth.currentUserId && post.data.site_type && post.data.read && !post.data.checked_site && !post.data.archieved_g && !(post.data.mediaplan_gazeta || post.data.mediaplan_lviv || post.data.mediaplan_regions || post.data.mediaplan_site)|| (post.data.nascrizna == true && this.nascriznyy && !post.data.checked_site)));
      //gazeta tab paginator
      this.lviv.subscribe(nData => this.lvivData.data = nData);
      this.lvivData.paginator = this.lvivPaginator;

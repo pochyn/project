@@ -180,7 +180,7 @@ export class SoloLvivComponent implements OnInit {
                     const id = a.payload.doc.id;
                     return { id, data };
                   });
-                }).map(posts => posts.filter(post => (post.data.author == this.auth.currentUserId && post.data.lviv_type && post.data.checked_lviv && !post.data.archieved_solo && !(post.data.mediaplan_gazeta || post.data.mediaplan_lviv || post.data.mediaplan_regions || post.data.mediaplan_site) || (post.data.nascrizna == true && this.nascriznyy) )));       
+                }).map(posts => posts.filter(post => (post.data.author == this.auth.currentUserId && post.data.lviv_type && post.data.checked_lviv && !post.data.archieved_solo && !(post.data.mediaplan_gazeta || post.data.mediaplan_lviv || post.data.mediaplan_regions || post.data.mediaplan_site) || (post.data.nascrizna == true && this.nascriznyy && post.data.checked_lviv) )));       
             //site tab paginator
             this.sites.subscribe(data => this.sitesData.data = data);
             this.sitesData.paginator = this.sitePaginator;
@@ -260,7 +260,7 @@ export class SoloLvivComponent implements OnInit {
             const id = a.payload.doc.id;
             return { id, data };
           });
-        }).map(posts => posts.filter(post => post.data.author == this.auth.currentUserId && post.data.lviv_type && post.data.read && !post.data.checked_gazeta && !post.data.archieved_solo && !(post.data.mediaplan_gazeta || post.data.mediaplan_lviv || post.data.mediaplan_regions || post.data.mediaplan_site)));
+        }).map(posts => posts.filter(post => post.data.author == this.auth.currentUserId && post.data.lviv_type && post.data.read && !post.data.checked_gazeta && !post.data.archieved_solo && !(post.data.mediaplan_gazeta || post.data.mediaplan_lviv || post.data.mediaplan_regions || post.data.mediaplan_site) || (post.data.nascrizna == true && this.nascriznyy && !post.data.checked_lviv)));
       //gazeta tab paginator
       this.lviv.subscribe(nData => this.lvivData.data = nData);
       this.lvivData.paginator = this.lvivPaginator;

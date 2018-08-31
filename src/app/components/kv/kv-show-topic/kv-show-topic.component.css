@@ -108,3 +108,20 @@ html *
 .fillup {
     flex: 1 1 auto;
 }
+
+.approve1 {
+    background: #d63031;
+    width: 100%;
+    color: white;
+    display: flex;
+    justify-content: center; 
+}
+
+.content1{
+    max-height: 30%;
+    overflow: auto;
+}
+
+.example-full-full-width {
+    width: 100%;
+}

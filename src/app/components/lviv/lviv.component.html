@@ -55,7 +55,7 @@ table with posts for gazets-->
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns; let i = index" 
   (click)="showPost(row.id,row.data)"
-  [ngClass]="{'by_gr' : row.data.by_gr == true, 'positive' : row.data.checked_gazeta == true, 'negative' : row.data.checked_gazeta == false, 'own' : row.data.author == this.auth.currentUserId && row.data.checked == true, 'read' : row.data.read == true}"></mat-row>
+  [ngClass]="{'by_gr' : row.data.by_gr == true, 'positive' : row.data.checked_lviv == true, 'negative' : row.data.checked_lviv == false, 'own' : row.data.author == this.auth.currentUserId && row.data.checked == true, 'read' : row.data.read == true}"></mat-row>
 </mat-table>
 <mat-paginator #gazPaginator
                [pageSize]="10"
@@ -112,7 +112,7 @@ table with posts for gazets-->
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns; let i = index" 
     (click)="showPost(row.id,row.data)"
-    [ngClass]="{'by_gr' : row.data.by_gr == true, 'positive' : row.data.checked_gazeta == true, 'negative' : row.data.checked_gazeta == false, 'own' : row.data.author == this.auth.currentUserId && row.data.checked == true, 'read' : row.data.read == true}"></mat-row>
+    [ngClass]="{'by_gr' : row.data.by_gr == true, 'positive' : row.data.checked_lviv == true, 'negative' : row.data.checked_lviv == false, 'own' : row.data.author == this.auth.currentUserId && row.data.checked == true, 'read' : row.data.read == true}"></mat-row>
   </mat-table>
   <mat-paginator #sitePaginator
                  [pageSize]="10"
@@ -168,7 +168,7 @@ table with posts for gazets-->
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns; let i = index" 
       (click)="showPost(row.id,row.data)"
-      [ngClass]="{'by_gr' : row.data.by_gr == true, 'positive' : row.data.checked_gazeta == true, 'negative' : row.data.checked_gazeta == false, 'own' : row.data.author == this.auth.currentUserId && row.data.checked == true, 'read' : row.data.read == true}"></mat-row>
+      [ngClass]="{'by_gr' : row.data.by_gr == true, 'positive' : row.data.checked_lviv == true, 'negative' : row.data.checked_lviv == false, 'own' : row.data.author == this.auth.currentUserId && row.data.checked == true, 'read' : row.data.read == true}"></mat-row>
     </mat-table>
     <mat-paginator #lvivPaginator
                    [pageSize]="10"
