@@ -39,7 +39,9 @@ table with posts for gazets-->
 
   <ng-container matColumnDef="data.content" >
       <mat-header-cell *matHeaderCellDef mat-sort-header> Тема </mat-header-cell>
-      <mat-cell style="justify-content: left; text-overflow:ellipsis; " *matCellDef="let post">Першоджерело: {{post.data.source}} - {{post.data.sourceDate}} <br/> {{post.data.content}}</mat-cell>
+      <mat-cell style="justify-content: left; text-overflow:ellipsis; " *matCellDef="let post"><p>Першоджерело: {{post.data.source}} - {{post.data.sourceDate}} <br/> {{post.data.content}} <br/><br/>
+        <button mat-raised-button  class="default" id={{post.id}}-4  (click)="approve_regions(post.id); $event.stopPropagation()">Затвердити</button>
+        <button mat-raised-button  class="default" id={{post.id}}-5  (click)="approve_read(post.id); $event.stopPropagation()">Відхилити</button>  </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="data.priority" >

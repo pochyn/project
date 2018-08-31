@@ -118,6 +118,12 @@ export class KvRegionsComponent implements OnInit {
  postsColLviv3: AngularFirestoreCollection<Post>;
 
  nascriznyy = false;
+
+ checked_for_gazeta = [];
+  checked_for_site = [];
+  checked_for_lviv = [];
+  checked_for_regions = [];
+  checked_for_read = [];
  
  // what columns to diaplay
  displayedColumns = [ 'data.date', 'data.branch','data.name', 'data.content', 'data.priority', 'data.actions'];
@@ -181,7 +187,7 @@ export class KvRegionsComponent implements OnInit {
               const id = a.payload.doc.id;
               return { id, data };
             });
-          }).map(posts => posts.filter(post => (post.data.branch == br && post.data.regions_type && post.data.checked_regions && !post.data.archieved_kv&& !(post.data.mediaplan_gazeta || post.data.mediaplan_lviv || post.data.mediaplan_regions || post.data.mediaplan_site) || (post.data.nascrizna == true && this.nascriznyy) )));       
+          }).map(posts => posts.filter(post => (post.data.branch == br && post.data.regions_type && post.data.checked_regions && !post.data.archieved_kv&& !(post.data.mediaplan_gazeta || post.data.mediaplan_lviv || post.data.mediaplan_regions || post.data.mediaplan_site) || (post.data.nascrizna == true && this.nascriznyy && post.data.checked_regions) )));       
       //site tab paginator
       console.log(br)
       this.sites.subscribe(data => this.sitesData.data = data);
@@ -259,7 +265,7 @@ export class KvRegionsComponent implements OnInit {
          const id = a.payload.doc.id;
          return { id, data };
        });
-     }).map(posts => posts.filter(post => post.data.branch == br && post.data.regions_type && post.data.read_kv && !post.data.checked_regions && !post.data.archieved_kv&& !(post.data.mediaplan_gazeta || post.data.mediaplan_lviv || post.data.mediaplan_regions || post.data.mediaplan_site)));
+     }).map(posts => posts.filter(post => post.data.branch == br && post.data.regions_type && post.data.read_kv && !post.data.checked_regions && !post.data.archieved_kv&& !(post.data.mediaplan_gazeta || post.data.mediaplan_lviv || post.data.mediaplan_regions || post.data.mediaplan_site) || (post.data.nascrizna == true && this.nascriznyy && !post.data.checked_regions)));
    //gazeta tab paginator
    this.lviv.subscribe(nData => this.lvivData.data = nData);
    this.lvivData.paginator = this.lvivPaginator;
@@ -307,10 +313,45 @@ export class KvRegionsComponent implements OnInit {
  deletePost(postId) {
    this.afs.doc('posts/'+postId).delete();
  }
+
+ approve_read(id){
+  var element = document.getElementById('ok');
+  var idd = id + '-5';
+  var button = document.getElementById(idd);
+  if (this.checked_for_read.indexOf(id) > -1){
+    var indx = this.checked_for_read.indexOf(id);
+    this.checked_for_read.splice(indx, 1);
+    button.classList.remove('read1');
+    button.classList.add('default');
+  } else {
+    this.checked_for_read.push(id);
+    element.classList.remove("hidden")
+    button.classList.remove('default');
+    button.classList.add('read1');
+  }
+  if ((this.checked_for_read.length <= 0) && (this.checked_for_regions.length <= 0)){
+      element.classList.add("hidden")
+    }
+}
+
+
+ok() {
+  var i;
+  
+  for (i = 0; i < this.checked_for_regions.length; i++) { 
+    this.afs.doc('posts/'+this.checked_for_regions[i]).update({read_kv: true});
+    this.afs.doc('posts/'+this.checked_for_regions[i]).update({checked: true});
+  }
+  for (i = 0; i < this.checked_for_read.length; i++) { 
+    this.afs.doc('posts/'+this.checked_for_read[i]).update({read_kv: true});
+  }
+
+  var element = document.getElementById('ok');
+  element.classList.add("hidden")
+}
  
  //open window to show current post
  showPost(postid, postdata){
-  this.afs.doc('posts/'+postid).update({read_kv: true});
    this.dialogRef.open(KvShowTopicComponent, {
     width: '90vw',
      data: {
