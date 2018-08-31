@@ -106,6 +106,8 @@ import { SoloMediaComponent } from './components/solo/solo-media/solo-media.comp
 import { GMediaComponent } from './components/g-media/g-media.component';
 import { GrSettingsComponent } from './components/gr/gr-settings/gr-settings.component';
 import { AllSettingsComponent } from './components/all-settings/all-settings.component';
+import { GazetaMediaComponent } from './components/or_gazeta/gazeta-media/gazeta-media.component';
+import { OrSiteBarComponent } from './components/or_site/or-site-bar/or-site-bar.component';
 
 
 
@@ -190,7 +192,9 @@ import { AllSettingsComponent } from './components/all-settings/all-settings.com
     SoloMediaComponent,
     GMediaComponent,
     GrSettingsComponent,
-    AllSettingsComponent
+    AllSettingsComponent,
+    GazetaMediaComponent,
+    OrSiteBarComponent
   ],
   imports: [
     BrowserModule,

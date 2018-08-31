@@ -17,8 +17,7 @@
 }
 
 .mat-column-data-actions {
-    max-height: 23px;
-    flex: 0 0 15px;
+    flex: 0 0 0px;
 }
 .mat-column-data-name {
     margin-left: 15px;
@@ -76,11 +75,12 @@
     background: red;
 }
 
+.hidden{
+    display: none !important;
+}
+
 .positive {
     background-color: #ABEBC6 !important;
-}
-.by_gr {
-    background-color: #F4D03F !important;
 }
 
 .negative {
@@ -90,45 +90,6 @@
 .read {
     background-color: #E6E6E6;
 }
-
-.one {
-    background-color: indigo;
-    color: indigo;
-}
-
-.two {
-    background-color: aqua;
-    color: aqua;
-}
-.three {
-    background-color: gold;
-    color: gold;
-}
-
-.four {
-    background-color: fuchsia;
-    color: fuchsia;
-}
-
-.five{
-    background-color: firebrick;
-    color: firebrick; 
-}
-.six{
-    background-color: #F8CD77;
-    color: #F8CD77; 
-}
-.seven{
-    background-color: #7A00FC;
-    color: #7A00FC; 
-}
-.eight{
-    background-color: #36F517;
-    color: #36F517; 
-}
-
-
-
 
 .demo-tab-group {
     border: 1px solid #e8e8e8;
@@ -165,21 +126,41 @@
     }
   }
 
-.checkbox::after{
-   content: 👀;
-}
-.notCheckbox::after{
-    content: '';
+
+.one {
+    background-color: indigo;
+    color: indigo;
 }
 
-
-.oneone{
-    background-color: red;
-    color: red;
+.two {
+    background-color: aqua;
+    color: aqua;
 }
-.twotwo{
-    background-color: transparent;
-    color: transparent;
+.three {
+    background-color: gold;
+    color: gold;
+}
+
+.four {
+    background-color: fuchsia;
+    color: fuchsia;
+}
+
+.five{
+    background-color: firebrick;
+    color: firebrick; 
+}
+.six{
+    background-color: #F8CD77;
+    color: #F8CD77; 
+}
+.seven{
+    background-color: #7A00FC;
+    color: #7A00FC; 
+}
+.eight{
+    background-color: #36F517;
+    color: #36F517; 
 }
 
 

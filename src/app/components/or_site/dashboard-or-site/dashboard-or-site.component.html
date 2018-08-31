@@ -3,11 +3,15 @@
     <div fxFlex>
       <div>
           <app-site-top-bar></app-site-top-bar>
+          <app-or-site-bar [type]="type" (onTypeSelected)="typeSelected($event)"></app-or-site-bar>
       </div>
     </div>
     <div fxFlex>
       <div class="card-container">
-          <app-post-or-site></app-post-or-site>
+        <div *ngIf="type == 'site';then site"></div>
+        <div *ngIf="type == 'media';then media"></div>
+        <ng-template #site><app-site-posts></app-site-posts>.</ng-template>
+        <ng-template #media><app-gazeta-media></app-gazeta-media>.</ng-template>
         </div>
       </div>
     </div>

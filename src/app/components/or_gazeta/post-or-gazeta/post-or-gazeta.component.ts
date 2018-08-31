@@ -9,7 +9,7 @@ import { MatSnackBar, MatPaginator, MatTableDataSource, MatSort } from '@angular
 import {MatDialog} from '@angular/material';
 import {MatTableModule} from '@angular/material';
 
-import { ShowTopicOrGazetaComponent } from '../show-topic-or-gazeta/show-topic-or-gazeta.component';
+import { ShowTopicOrGazetaComponent } from '../show-topic-or-gazeta/show-topic-or-gazeta.component'
 
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
@@ -25,6 +25,7 @@ import 'rxjs/add/operator/map';
 
 
 import {Sort} from '@angular/material';
+
 
 // post inteface
 interface Post {
@@ -59,6 +60,11 @@ interface Post {
   checked_lviv: boolean;
   checked_regions: boolean;
   date_modified: any;
+  mediaplan_gazeta: boolean;
+  mediaplan_lviv: boolean;
+  mediaplan_site: boolean;
+  mediaplan_regions: boolean;
+  nascrizna: boolean;
 }
 interface PostId extends Post { 
   id: string; 
@@ -71,148 +77,243 @@ interface PostId extends Post {
 })
 export class PostOrGazetaComponent implements OnInit {
 
-    //to get data from database
- postsColGaz: AngularFirestoreCollection<Post>;
- postsColSite: AngularFirestoreCollection<Post>;
- postsColLviv: AngularFirestoreCollection<Post>;
- postsColRegions: AngularFirestoreCollection<Post>;
- postsColApp: AngularFirestoreCollection<Post>;
- postDoc: AngularFirestoreDocument<Post>;
- post: Observable<Post>;
-
- // needed to show post data
- content:string;
- author: string;
-
- //all posts of neede type
- posts: any;
- sites: any;
- lviv: any;
- regions: any;
- app: any;
- br: any;
-
- posts1: any;
- sites1: any;
- lviv1: any;
- posts2: any;
- sites2: any;
- lviv2: any;
- posts3: any;
- sites3: any;
- lviv3: any;
- postsColGaz1: AngularFirestoreCollection<Post>;
- postsColSite1: AngularFirestoreCollection<Post>;
- postsColLviv1: AngularFirestoreCollection<Post>;
- postsColGaz2: AngularFirestoreCollection<Post>;
- postsColSite2: AngularFirestoreCollection<Post>;
- postsColLviv2: AngularFirestoreCollection<Post>;
- postsColGaz3: AngularFirestoreCollection<Post>;
- postsColSite3: AngularFirestoreCollection<Post>;
- postsColLviv3: AngularFirestoreCollection<Post>;
  
- // what columns to diaplay
- displayedColumns = [ 'data.date', 'data.branch','data.name', 'data.content', 'data.priority'];
-
- constructor(private afs: AngularFirestore, private auth: AuthService,
-             private dialogRef: MatDialog, private afauth: AngularFireAuth) { }
- 
- // create observable data for posts or site
- postsData = new MatTableDataSource(this.posts);
- sitesData = new MatTableDataSource(this.sites);
- lvivData = new MatTableDataSource(this.lviv);
- regionsData = new MatTableDataSource(this.regions);
- appData = new MatTableDataSource(this.app);
-
- postsData1 = new MatTableDataSource(this.posts);
- sitesData1 = new MatTableDataSource(this.sites);
- lvivData1 = new MatTableDataSource(this.lviv);
- postsData2 = new MatTableDataSource(this.posts);
- sitesData2 = new MatTableDataSource(this.sites);
- lvivData2 = new MatTableDataSource(this.lviv);
- postsData3 = new MatTableDataSource(this.posts);
- sitesData3= new MatTableDataSource(this.sites);
- lvivData3 = new MatTableDataSource(this.lviv);
-
- @ViewChild('gazPaginator') gazPaginator: MatPaginator;
- @ViewChild('sitePaginator') sitePaginator: MatPaginator;
- @ViewChild('lvivPaginator') lvivPaginator: MatPaginator;
- @ViewChild('regionsPaginator') regionsPaginator: MatPaginator;
- @ViewChild('appPaginator') appPaginator: MatPaginator;
- @ViewChild(MatSort) sort: MatSort;
- @ViewChild('table1') table1: MatSort;
- @ViewChild('table2') table2: MatSort;
- @ViewChild('table3') table3: MatSort;
- @ViewChild('table4') table4: MatSort;
- @ViewChildren('matrow') datarows: QueryList<MatRow>;
-
- 
-
- ngOnInit() {
+   //to get data from database
+   postsColGaz: AngularFirestoreCollection<Post>;
+   postsColSite: AngularFirestoreCollection<Post>;
+   postsColLviv: AngularFirestoreCollection<Post>;
+   postsColRegions: AngularFirestoreCollection<Post>;
+   postsColApp: AngularFirestoreCollection<Post>;
+   postDoc: AngularFirestoreDocument<Post>;
+   post: Observable<Post>;
+  
+   // needed to show post data
+   content:string;
+   author: string;
+  
+   //all posts of neede type
+   posts: any;
+   sites: any;
+   lviv: any;
+   regions: any;
+   app: any;
+   br: any;
+  
+   posts1: any;
+   sites1: any;
+   lviv1: any;
+   posts2: any;
+   sites2: any;
+   lviv2: any;
+   posts3: any;
+   sites3: any;
+   lviv3: any;
+   postsColGaz1: AngularFirestoreCollection<Post>;
+   postsColSite1: AngularFirestoreCollection<Post>;
+   postsColLviv1: AngularFirestoreCollection<Post>;
+   postsColGaz2: AngularFirestoreCollection<Post>;
+   postsColSite2: AngularFirestoreCollection<Post>;
+   postsColLviv2: AngularFirestoreCollection<Post>;
+   postsColGaz3: AngularFirestoreCollection<Post>;
+   postsColSite3: AngularFirestoreCollection<Post>;
+   postsColLviv3: AngularFirestoreCollection<Post>;
+  
+   nascriznyy = false;
    
-   // -------------------------
-   // approved
-   // -------------------------
-   this.postsColSite = this.afs.collection('posts');
-   this.sites = this.postsColSite.snapshotChanges()
+   // what columns to diaplay
+   displayedColumns = [ 'data.date', 'data.branch','data.name', 'data.content', 'data.priority', 'data.actions'];
+  
+   constructor(private afs: AngularFirestore, private auth: AuthService,
+               private dialogRef: MatDialog, private afauth: AngularFireAuth) { }
+   
+   // create observable data for posts or site
+   postsData = new MatTableDataSource(this.posts);
+   sitesData = new MatTableDataSource(this.sites);
+   lvivData = new MatTableDataSource(this.lviv);
+   regionsData = new MatTableDataSource(this.regions);
+   appData = new MatTableDataSource(this.app);
+  
+   postsData1 = new MatTableDataSource(this.posts);
+   sitesData1 = new MatTableDataSource(this.sites);
+   lvivData1 = new MatTableDataSource(this.lviv);
+   postsData2 = new MatTableDataSource(this.posts);
+   sitesData2 = new MatTableDataSource(this.sites);
+   lvivData2 = new MatTableDataSource(this.lviv);
+   postsData3 = new MatTableDataSource(this.posts);
+   sitesData3= new MatTableDataSource(this.sites);
+   lvivData3 = new MatTableDataSource(this.lviv);
+  
+   @ViewChild('gazPaginator') gazPaginator: MatPaginator;
+   @ViewChild('sitePaginator') sitePaginator: MatPaginator;
+   @ViewChild('lvivPaginator') lvivPaginator: MatPaginator;
+   @ViewChild('regionsPaginator') regionsPaginator: MatPaginator;
+   @ViewChild('appPaginator') appPaginator: MatPaginator;
+   @ViewChild(MatSort) sort: MatSort;
+   @ViewChild('table1') table1: MatSort;
+   @ViewChild('table2') table2: MatSort;
+   @ViewChild('table3') table3: MatSort;
+   @ViewChild('table4') table4: MatSort;
+   @ViewChildren('matrow') datarows: QueryList<MatRow>;
+  
+   
+  
+   ngOnInit() {
+    let collRef2 = this.afs.collection('users').ref;
+    let queryRef2 = collRef2.where('email', '==', this.afauth.auth.currentUser.email);
+    queryRef2.get().then((snapShot) => {
+        var name = snapShot.docs[0].data()['displayName']
+        let collRef1 = this.afs.collection('nascrizni').ref;
+        let queryRef1 = collRef1;
+        queryRef1.get().then((snapShot) => {
+            for( let dock of snapShot.docs){
+              if (dock.data()['name'] == name) {
+                console.log("tak")
+                this.nascriznyy = true;
+              }
+            }
+  
+            this.postsColSite = this.afs.collection('posts');
+            this.sites = this.postsColSite.snapshotChanges()
+                .map(actions => {
+                  return actions.map(a => {
+                    const data = a.payload.doc.data() as Post;
+                    const id = a.payload.doc.id;
+                    return { id, data };
+                  });
+                }).map(posts => posts.filter(post => ( post.data.gazeta_type && post.data.checked_gazeta && !post.data.archieved_or  && !(post.data.mediaplan_gazeta || post.data.mediaplan_lviv || post.data.mediaplan_regions || post.data.mediaplan_site) || (post.data.nascrizna == true && this.nascriznyy && post.data.checked_gazeta) )));              
+                //site tab paginator
+            this.sites.subscribe(data => this.sitesData.data = data);
+            this.sitesData.paginator = this.sitePaginator;
+            //sorting settings
+            this.sitesData.sortingDataAccessor = (item: any, property) => {
+              switch(property) {
+                case 'data.date': return item.data.date;
+                case 'data.checked': return item.data.checked;
+                case 'data.content': return item.data.content;
+                case 'data.name': return item.data.name;
+                default: return item[property];
+              }
+            };
+            //filter settings
+            this.sitesData.sort = this.table2;
+            this.sitesData.filterPredicate = (item: any, filter: string)  => {
+              const accumulator = (currentTerm, key) => {
+                return key === 'data' ? currentTerm + item.data.content + item.data.name  : currentTerm + item[key];
+              };
+              const dataStr = Object.keys(item).reduce(accumulator, '').toLowerCase();
+              // Transform the filter by converting it to lowercase and removing whitespace.
+              const transformedFilter = filter.trim().toLowerCase();
+              return dataStr.indexOf(transformedFilter) !== -1;
+            }
+      
+        });
+    
+      })
+  
+        
+      // --------------------------
+     // GAZETA
+     // unread
+     // --------------------------
+     this.postsColGaz = this.afs.collection('posts');
+     this.posts = this.postsColGaz.snapshotChanges()
        .map(actions => {
          return actions.map(a => {
            const data = a.payload.doc.data() as Post;
            const id = a.payload.doc.id;
            return { id, data };
          });
-       }).map(posts => posts.filter(post => post.data.gazeta_type && post.data.checked_gazeta && !post.data.archieved_or));       
-   //site tab paginator
-   this.sites.subscribe(data => this.sitesData.data = data);
-   this.sitesData.paginator = this.sitePaginator;
-   //sorting settings
-   this.sitesData.sortingDataAccessor = (item: any, property) => {
-     switch(property) {
-       case 'data.date': return item.data.date;
-       case 'data.checked': return item.data.checked;
-       case 'data.content': return item.data.content;
-       case 'data.name': return item.data.name;
-       default: return item[property];
-     }
-   };
-   //filter settings
-   this.sitesData.sort = this.table2;
-   this.sitesData.filterPredicate = (item: any, filter: string)  => {
-     const accumulator = (currentTerm, key) => {
-       return key === 'data' ? currentTerm + item.data.content + item.data.name  : currentTerm + item[key];
+       }).map(posts => posts.filter(post => post.data.author == this.auth.currentUserId && post.data.gazeta_type && !post.data.read && !post.data.archieved_or  && !(post.data.mediaplan_gazeta || post.data.mediaplan_lviv || post.data.mediaplan_regions || post.data.mediaplan_site)));
+     //gazeta tab paginator
+     this.posts.subscribe(newData => this.postsData.data = newData);
+     this.postsData.paginator = this.gazPaginator;
+     //sorting settings
+     this.postsData.sortingDataAccessor = (item: any, property) => {
+       switch(property) {
+         case 'data.date': return item.data.date;
+         case 'data.checked': return item.data.checked;
+         case 'data.content': return item.data.content;
+         case 'data.name': return item.data.name;
+         default: return item[property];
+       }
      };
-     const dataStr = Object.keys(item).reduce(accumulator, '').toLowerCase();
-     // Transform the filter by converting it to lowercase and removing whitespace.
-     const transformedFilter = filter.trim().toLowerCase();
-     return dataStr.indexOf(transformedFilter) !== -1;
-   };
- }
- 
- //apply filter for gazeta and site accordingly
- applyFilter(col: any, filterValue: string) {
-   filterValue = filterValue.trim(); 
-   filterValue = filterValue.toLowerCase(); 
-   col.filter = filterValue;
- }
- //post id
- getPost(postId) {
-   this.postDoc = this.afs.doc('posts/'+postId);
-   this.post = this.postDoc.valueChanges();
- }
- 
- //delete (not archive)
- deletePost(postId) {
-   this.afs.doc('posts/'+postId).delete();
- }
- 
- //open window to show current post
- showPost(postid, postdata){
-   this.dialogRef.open(ShowTopicOrGazetaComponent, {
-    width: '90vw',
-     data: {
-       postId: postid,
-       postdata: postdata,
-     }
-   });
- } 
-}
+     //filter settings
+     this.postsData.sort = this.table1;
+     this.postsData.filterPredicate = (item: any, filter: string)  => {
+       const accumulator = (currentTerm, key) => {
+         return key === 'data' ? currentTerm + item.data.content + item.data.name  : currentTerm + item[key];
+       };
+       const dataStr = Object.keys(item).reduce(accumulator, '').toLowerCase();
+       // Transform the filter by converting it to lowercase and removing whitespace.
+       const transformedFilter = filter.trim().toLowerCase();
+       return dataStr.indexOf(transformedFilter) !== -1;
+     };
+  
+  
+     // --------------------------
+     // read
+     // --------------------------
+     this.postsColLviv = this.afs.collection('posts');
+     this.lviv = this.postsColLviv.snapshotChanges()
+       .map(actions => {
+         return actions.map(a => {
+           const data = a.payload.doc.data() as Post;
+           const id = a.payload.doc.id;
+           return { id, data };
+         });
+       }).map(posts => posts.filter(post => post.data.author == this.auth.currentUserId && post.data.gazeta_type && post.data.read && !post.data.checked_gazeta && !post.data.archieved_or  && !(post.data.mediaplan_gazeta || post.data.mediaplan_lviv || post.data.mediaplan_regions || post.data.mediaplan_site) || (post.data.nascrizna == true && this.nascriznyy && !post.data.checked_gazeta)));
+     //gazeta tab paginator
+     this.lviv.subscribe(nData => this.lvivData.data = nData);
+     this.lvivData.paginator = this.lvivPaginator;
+     //sorting settings
+     this.lvivData.sortingDataAccessor = (item: any, property) => {
+       switch(property) {
+         case 'data.date': return item.data.date;
+         case 'data.checked': return item.data.checked;
+         case 'data.content': return item.data.content;
+         case 'data.name': return item.data.name;
+         default: return item[property];
+       }
+     };
+     //filter settings
+     this.lvivData.sort = this.table3;
+     this.lvivData.filterPredicate = (item: any, filter: string)  => {
+       const accumulator = (currentTerm, key) => {
+         return key === 'data' ? currentTerm + item.data.content + item.data.name  : currentTerm + item[key];
+       };
+       const dataStr = Object.keys(item).reduce(accumulator, '').toLowerCase();
+       // Transform the filter by converting it to lowercase and removing whitespace.
+       const transformedFilter = filter.trim().toLowerCase();
+       return dataStr.indexOf(transformedFilter) !== -1;
+     };
+   
+   }
+   
+   //apply filter for gazeta and site accordingly
+   applyFilter(col: any, filterValue: string) {
+     filterValue = filterValue.trim(); 
+     filterValue = filterValue.toLowerCase(); 
+     col.filter = filterValue;
+   }
+   //post id
+   getPost(postId) {
+     this.postDoc = this.afs.doc('posts/'+postId);
+     this.post = this.postDoc.valueChanges();
+   }
+   
+   //delete (not archive)
+   deletePost(postId) {
+     this.afs.doc('posts/'+postId).delete();
+   }
+   
+   //open window to show current post
+   showPost(postid, postdata){
+     this.dialogRef.open(ShowTopicOrGazetaComponent, {
+      width: '90vw',
+       data: {
+         postId: postid,
+         postdata: postdata,
+       }
+     });
+   } 
+  }

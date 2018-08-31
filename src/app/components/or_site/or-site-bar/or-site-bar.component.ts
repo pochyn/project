@@ -3,20 +3,21 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 @Component({
   inputs: ['type'],
   outputs: ['onTypeSelected'],
-  selector: 'app-gazeta-bar',
-  templateUrl: './gazeta-bar.component.html',
-  styleUrls: ['./gazeta-bar.component.css']
+  selector: 'app-or-site-bar',
+  templateUrl: './or-site-bar.component.html',
+  styleUrls: ['./or-site-bar.component.css']
 })
-export class GazetaBarComponent implements OnInit {
+export class OrSiteBarComponent implements OnInit {
 
-  type = "gazeta"
+
+  type = "site"
   onTypeSelected: EventEmitter<string>;
   constructor() { 
     this.onTypeSelected = new EventEmitter();
   }
 
   ngOnInit() {
-    this.type = "gazeta"
+    this.type = "site"
     this.onTypeSelected.emit(this.type);
   }
   site(){

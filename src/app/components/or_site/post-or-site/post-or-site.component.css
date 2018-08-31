@@ -17,14 +17,12 @@
 }
 
 .mat-column-data-actions {
-    flex: 0 0 0px;
+    max-height: 23px;
+    flex: 0 0 15px;
 }
 .mat-column-data-name {
     margin-left: 15px;
     flex: 0 0 100px;
-}
-.by_gr {
-    background-color: #F4D03F !important;
 }
 
 .mat-column-data-branch {
@@ -81,6 +79,9 @@
 .positive {
     background-color: #ABEBC6 !important;
 }
+.by_gr {
+    background-color: #F4D03F !important;
+}
 
 .negative {
     background-color: white;
@@ -126,6 +127,9 @@
     color: #36F517; 
 }
 
+
+
+
 .demo-tab-group {
     border: 1px solid #e8e8e8;
 }
@@ -160,5 +164,22 @@
       right: 1.5rem;
     }
   }
+
+.checkbox::after{
+   content: 👀;
+}
+.notCheckbox::after{
+    content: '';
+}
+
+
+.oneone{
+    background-color: red;
+    color: red;
+}
+.twotwo{
+    background-color: transparent;
+    color: transparent;
+}
 
 
