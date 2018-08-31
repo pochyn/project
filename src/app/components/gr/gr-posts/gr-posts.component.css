@@ -3,7 +3,7 @@
     flex: 0 0 0px;
 }
 .mat-column-data-date {
-    flex: 0 0 160px;
+    flex: 0 0 200px;
 }
 
 .mat-column-data-content {
@@ -188,6 +188,19 @@
     color: white;
 }
 .read1 {
+    background:red;
+    color: white;
+}
+
+.default1 {
+    height: 20px;
+    width: 23px;
+    background:#E9E6E6;
+    color: black;
+}
+.read2 {
+    height: 20px;
+    width: 23px;
     background:red;
     color: white;
 }

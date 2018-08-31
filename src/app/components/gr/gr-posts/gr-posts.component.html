@@ -4,7 +4,7 @@
 
 <mat-card class="mat-elevation-z10">
 <div>
-    <b><p align="left" style="color:#F4D03F; font-size:10px;">НОВЕ - ГАЗЕТА</p></b>
+    <b><p align="left" style="color:#F4D03F; font-size:10px;">НОВЕ - ЗАГАЛЬНІ</p></b>
   <div class="new-posts"></div>
     <!-- filter field
     <div>
@@ -73,7 +73,7 @@
 
 <mat-card class="cards mat-elevation-z10">
   <div>
-      <b><p align="left" style="color:green; font-size:10px;">ЗАТВЕРДЖЕНЕ - ГАЗЕТА</p></b>
+      <b><p align="left" style="color:green; font-size:10px;">ЗАТВЕРДЖЕНЕ - ЗАГАЛЬНІ</p></b>
       <div class="approved-posts"></div>
     <!-- table with posts for gazets-->
     
@@ -91,7 +91,9 @@
   
       <ng-container class="top" matColumnDef="data.date">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Дата </mat-header-cell>
-        <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{ post.data.date}} </mat-cell>
+        <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post">  
+          <button  class="default1" id={{post.id}}-6  (click)="approve_archieve(post.id); $event.stopPropagation()">А</button>
+           {{ post.data.date}} </mat-cell>
       </ng-container>
   
       <ng-container matColumnDef="data.name">
@@ -102,7 +104,7 @@
   
       <ng-container matColumnDef="data.content" >
           <mat-header-cell *matHeaderCellDef mat-sort-header> Тема </mat-header-cell>
-          <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{post.data.content}} </mat-cell>
+          <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post">{{post.data.content}} </mat-cell>
       </ng-container>
   
       <ng-container matColumnDef="data.priority" >
@@ -131,7 +133,7 @@
 <mat-card class="cards mat-elevation-z10">
     <div>
       <!-- table with posts for gazets-->
-      <b><p align="left" style="color:red; font-size:10px;">РОЗГЛЯНУТЕ - ГАЗЕТА</p></b>
+      <b><p align="left" style="color:red; font-size:10px;">РОЗГЛЯНУТЕ - ЗАГАЛЬНІ</p></b>
       <div class="rejected-posts"></div>
       <mat-table #table3="matSort" [dataSource]="lvivData" matSort matSortActive="data.date" matSortDirection="desc">  
         
@@ -147,7 +149,9 @@
     
         <ng-container matColumnDef="data.date">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Дата </mat-header-cell>
-          <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post"> {{ post.data.date}} </mat-cell>
+          <mat-cell style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden;" *matCellDef="let post">
+              <button  class="default1" id={{post.id}}-6  (click)="approve_archieve(post.id); $event.stopPropagation()">А</button>
+               {{ post.data.date}} </mat-cell>
         </ng-container>
     
         <ng-container matColumnDef="data.name">

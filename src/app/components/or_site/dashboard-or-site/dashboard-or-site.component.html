@@ -10,7 +10,7 @@
       <div class="card-container">
         <div *ngIf="type == 'site';then site"></div>
         <div *ngIf="type == 'media';then media"></div>
-        <ng-template #site><app-site-posts></app-site-posts>.</ng-template>
+        <ng-template #site><app-post-or-site></app-post-or-site>.</ng-template>
         <ng-template #media><app-gazeta-media></app-gazeta-media>.</ng-template>
         </div>
       </div>

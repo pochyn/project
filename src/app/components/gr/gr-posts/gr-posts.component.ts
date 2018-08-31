@@ -130,6 +130,7 @@ export class GrPostsComponent implements OnInit {
   checked_for_lviv = [];
   checked_for_regions = [];
   checked_for_read = [];
+  checked_for_archieve = [];
  
  // create observable data for posts or site
  postsData = new MatTableDataSource(this.posts);
@@ -348,7 +349,7 @@ approve_site(id){
     button.classList.remove('default');
     button.classList.add('approve');
   }
-    if ((this.checked_for_gazeta.length <= 0) && (this.checked_for_lviv.length <= 0) && (this.checked_for_read.length <= 0) && (this.checked_for_regions.length <= 0) && (this.checked_for_site.length <= 0)){
+    if ((this.checked_for_archieve.length <= 0) && (this.checked_for_gazeta.length <= 0) && (this.checked_for_lviv.length <= 0) && (this.checked_for_read.length <= 0) && (this.checked_for_regions.length <= 0) && (this.checked_for_site.length <= 0)){
       element.classList.add("hidden")
     }
 }
@@ -368,7 +369,7 @@ approve_regions(id){
     button.classList.remove('default');
     button.classList.add('approve');
   }
-    if ((this.checked_for_gazeta.length <= 0) && (this.checked_for_lviv.length <= 0) && (this.checked_for_read.length <= 0) && (this.checked_for_regions.length <= 0) && (this.checked_for_site.length <= 0)){
+    if ((this.checked_for_archieve.length <= 0) && (this.checked_for_gazeta.length <= 0) && (this.checked_for_lviv.length <= 0) && (this.checked_for_read.length <= 0) && (this.checked_for_regions.length <= 0) && (this.checked_for_site.length <= 0)){
       element.classList.add("hidden")
     }
 }
@@ -388,7 +389,7 @@ approve_lviv(id){
     button.classList.remove('default');
     button.classList.add('approve');
   }
-    if ((this.checked_for_gazeta.length <= 0) && (this.checked_for_lviv.length <= 0) && (this.checked_for_read.length <= 0) && (this.checked_for_regions.length <= 0) && (this.checked_for_site.length <= 0)){
+    if ((this.checked_for_archieve.length <= 0) && (this.checked_for_gazeta.length <= 0) && (this.checked_for_lviv.length <= 0) && (this.checked_for_read.length <= 0) && (this.checked_for_regions.length <= 0) && (this.checked_for_site.length <= 0)){
       element.classList.add("hidden")
     }
 }
@@ -408,7 +409,27 @@ approve_read(id){
     button.classList.remove('default');
     button.classList.add('read1');
   }
-    if ((this.checked_for_gazeta.length <= 0) && (this.checked_for_lviv.length <= 0) && (this.checked_for_read.length <= 0) && (this.checked_for_regions.length <= 0) && (this.checked_for_site.length <= 0)){
+    if ((this.checked_for_archieve.length <= 0) && (this.checked_for_gazeta.length <= 0) && (this.checked_for_lviv.length <= 0) && (this.checked_for_read.length <= 0) && (this.checked_for_regions.length <= 0) && (this.checked_for_site.length <= 0)){
+      element.classList.add("hidden")
+    }
+}
+
+approve_archieve(id){
+  var element = document.getElementById('ok');
+  var idd = id + '-6';
+  var button = document.getElementById(idd);
+  if (this.checked_for_archieve.indexOf(id) > -1){
+    var indx = this.checked_for_archieve.indexOf(id);
+    this.checked_for_archieve.splice(indx, 1);
+    button.classList.remove('read2');
+    button.classList.add('default1');
+  } else {
+    this.checked_for_archieve.push(id);
+    element.classList.remove("hidden")
+    button.classList.remove('default1');
+    button.classList.add('read2');
+  }
+    if ((this.checked_for_archieve.length <= 0) && (this.checked_for_gazeta.length <= 0) && (this.checked_for_lviv.length <= 0) && (this.checked_for_read.length <= 0) && (this.checked_for_regions.length <= 0) && (this.checked_for_site.length <= 0)){
       element.classList.add("hidden")
     }
 }
@@ -431,13 +452,17 @@ ok() {
   for (i = 0; i < this.checked_for_regions.length; i++) { 
     this.afs.doc('posts/'+this.checked_for_regions[i]).update({read: true});
     this.afs.doc('posts/'+this.checked_for_regions[i]).update({checked_regions: true});
-    this.afs.doc('posts/'+this.checked_for_lviv[i]).update({regions_type: true});
+    this.afs.doc('posts/'+this.checked_for_regions[i]).update({regions_type: true});
   }
 
   for (i = 0; i < this.checked_for_site.length; i++) { 
     this.afs.doc('posts/'+this.checked_for_site[i]).update({read: true});
     this.afs.doc('posts/'+this.checked_for_site[i]).update({checked_site: true});
-    this.afs.doc('posts/'+this.checked_for_lviv[i]).update({site_type: true});
+    this.afs.doc('posts/'+this.checked_for_site[i]).update({site_type: true});
+  }
+
+  for (i = 0; i < this.checked_for_archieve.length; i++) { 
+    this.afs.doc('posts/'+this.checked_for_archieve[i]).update({archieved_gr: true});
   }
 
   for (i = 0; i < this.checked_for_read.length; i++) { 
