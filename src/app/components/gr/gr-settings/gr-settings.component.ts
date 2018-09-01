@@ -12,6 +12,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 
 import * as moment from 'moment';
+import * as admin from 'firebase-admin';
 import { not } from '@angular/compiler/src/output/output_ast';
 
 @Component({
@@ -34,6 +35,9 @@ export class GrSettingsComponent implements OnInit {
     Validators.required
   ]);
   nascriznaControl: FormControl = new FormControl('', [
+    Validators.required
+  ]);
+  deleteOtherControl: FormControl = new FormControl('', [
     Validators.required
   ]);
 
@@ -162,5 +166,30 @@ export class GrSettingsComponent implements OnInit {
       // An error happened.
     });
   }
+
+  /**deleteOther(email){
+    admin.auth().deleteUser(email)
+    let coll = this.afs.collection('status').ref;
+      let qurt = coll;
+      qurt.get().then((snapShot) => {
+        for( let dock of snapShot.docs){
+          if (email == dock.data['email']){
+            this.afs.doc('status/'+dock.id).delete();
+          }
+          
+        }
+      });
+
+      let collRef = this.afs.collection('users').ref;
+      let queryRef = collRef;
+      queryRef.get().then((snapShot) => {
+        for( let dock of snapShot.docs){
+          if (email == dock.data['email']){
+            this.afs.doc('users/'+dock.id).delete();
+          }
+          
+        }
+    });
+  }**/
 
 }

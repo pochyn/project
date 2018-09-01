@@ -64,6 +64,7 @@ interface Post {
   mediaplan_site: boolean;
   mediaplan_regions: boolean;
   nascrizna: boolean;
+  to_nascrizni: any;
 }
 interface PostId extends Post { 
   id: string; 
@@ -117,7 +118,7 @@ export class KvSiteComponent implements OnInit {
  postsColLviv3: AngularFirestoreCollection<Post>;
 
  nascriznyy = false;
-
+ nascr_name = '';
  checked_for_gazeta = [];
   checked_for_site = [];
   checked_for_lviv = [];
@@ -169,6 +170,7 @@ export class KvSiteComponent implements OnInit {
 
       br = snapShot.docs[0].data()['branch']
       var name = snapShot.docs[0].data()['displayName']
+      this.nascr_name = snapShot.docs[0].data()['displayName']
       let collRef1 = this.afs.collection('nascrizni').ref;
       let queryRef1 = collRef1;
       queryRef1.get().then((snapShot) => {
@@ -187,7 +189,7 @@ export class KvSiteComponent implements OnInit {
               const id = a.payload.doc.id;
               return { id, data };
             });
-          }).map(posts => posts.filter(post => (post.data.branch == br && post.data.site_type && post.data.checked_site && !post.data.archieved_kv&& !(post.data.mediaplan_gazeta || post.data.mediaplan_lviv || post.data.mediaplan_regions || post.data.mediaplan_site) || (post.data.nascrizna == true && this.nascriznyy && post.data.checked_site) )));       
+          }).map(posts => posts.filter(post => (post.data.branch == br && post.data.site_type && post.data.checked_site && !post.data.archieved_kv&& !(post.data.mediaplan_gazeta || post.data.mediaplan_lviv || post.data.mediaplan_regions || post.data.mediaplan_site) || (this.nascriznyy && post.data.site_type && post.data.checked_site && (post.data.to_nascrizni.indexOf(this.nascr_name) > -1)) )));       
       //site tab paginator
       console.log(br)
       this.sites.subscribe(data => this.sitesData.data = data);
@@ -265,7 +267,7 @@ export class KvSiteComponent implements OnInit {
          const id = a.payload.doc.id;
          return { id, data };
        });
-     }).map(posts => posts.filter(post => post.data.branch == br && post.data.site_type && post.data.read && !post.data.checked_site && !post.data.archieved_kv&& !(post.data.mediaplan_gazeta || post.data.mediaplan_lviv || post.data.mediaplan_regions || post.data.mediaplan_site) || (post.data.nascrizna == true && this.nascriznyy && !post.data.checked_site)));
+     }).map(posts => posts.filter(post => post.data.branch == br && post.data.site_type && post.data.read && !post.data.checked_site && !post.data.archieved_kv&& !(post.data.mediaplan_gazeta || post.data.mediaplan_lviv || post.data.mediaplan_regions || post.data.mediaplan_site) || (this.nascriznyy && post.data.site_type && !post.data.checked_site && (post.data.to_nascrizni.indexOf(this.nascr_name) > -1))));
    //gazeta tab paginator
    this.lviv.subscribe(nData => this.lvivData.data = nData);
    this.lvivData.paginator = this.lvivPaginator;

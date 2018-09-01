@@ -65,6 +65,7 @@ interface Post {
   mediaplan_site: boolean;
   mediaplan_regions: boolean;
   nascrizna: boolean;
+  to_nascrizni: any;
 }
 interface PostId extends Post { 
   id: string; 
@@ -119,6 +120,7 @@ export class SoloSitesComponent implements OnInit {
    postsColLviv3: AngularFirestoreCollection<Post>;
 
    nascriznyy = false;
+   nascr_name = '';
    
    // what columns to diaplay
    displayedColumns = [ 'data.date', 'data.branch','data.name', 'data.content', 'data.priority', 'data.actions'];
@@ -163,6 +165,7 @@ export class SoloSitesComponent implements OnInit {
   let queryRef2 = collRef2.where('email', '==', this.afauth.auth.currentUser.email);
   queryRef2.get().then((snapShot) => {
       var name = snapShot.docs[0].data()['displayName']
+      this.nascr_name = snapShot.docs[0].data()['displayName']
 
       let collRef1 = this.afs.collection('nascrizni').ref;
       let queryRef1 = collRef1;
@@ -181,7 +184,7 @@ export class SoloSitesComponent implements OnInit {
                   const id = a.payload.doc.id;
                   return { id, data };
                 });
-              }).map(posts => posts.filter(post => (post.data.author == this.auth.currentUserId && post.data.site_type && post.data.checked_site && !post.data.archieved_solo && !(post.data.mediaplan_gazeta || post.data.mediaplan_lviv || post.data.mediaplan_regions || post.data.mediaplan_site) || (post.data.nascrizna == true && this.nascriznyy && post.data.checked_site) )));       
+              }).map(posts => posts.filter(post => (post.data.author == this.auth.currentUserId && post.data.site_type && post.data.checked_site && !post.data.archieved_solo && !(post.data.mediaplan_gazeta || post.data.mediaplan_lviv || post.data.mediaplan_regions || post.data.mediaplan_site) || (this.nascriznyy && post.data.site_type && post.data.checked_site && (post.data.to_nascrizni.indexOf(this.nascr_name) > -1)) )));       
           //site tab paginator
           this.sites.subscribe(data => this.sitesData.data = data);
           this.sitesData.paginator = this.sitePaginator;
@@ -259,7 +262,7 @@ export class SoloSitesComponent implements OnInit {
            const id = a.payload.doc.id;
            return { id, data };
          });
-       }).map(posts => posts.filter(post => post.data.author == this.auth.currentUserId && post.data.site_type && post.data.read && !post.data.checked_gazeta && !post.data.archieved_solo && !(post.data.mediaplan_gazeta || post.data.mediaplan_lviv || post.data.mediaplan_regions || post.data.mediaplan_site) || (post.data.nascrizna == true && this.nascriznyy && !post.data.checked_site)));
+       }).map(posts => posts.filter(post => post.data.author == this.auth.currentUserId && post.data.site_type && post.data.read && !post.data.checked_gazeta && !post.data.archieved_solo && !(post.data.mediaplan_gazeta || post.data.mediaplan_lviv || post.data.mediaplan_regions || post.data.mediaplan_site) || (this.nascriznyy && post.data.site_type && !post.data.checked_lviv && (post.data.to_nascrizni.indexOf(this.nascr_name) > -1))));
      //gazeta tab paginator
      this.lviv.subscribe(nData => this.lvivData.data = nData);
      this.lvivData.paginator = this.lvivPaginator;

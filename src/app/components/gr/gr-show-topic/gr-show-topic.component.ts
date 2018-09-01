@@ -44,6 +44,7 @@ interface Post {
   checked_regions: boolean;
   date_modified: any;
   priority: any;
+  to_nascrizni: any;
 
 }
 @Component({
@@ -86,6 +87,7 @@ export class GrShowTopicComponent implements OnInit {
   date_modified: any;
   priority: any;
   nascrizna: any;
+  to_nascrizni: any;
 
   postDoc: AngularFirestoreDocument<Post>;
   post: any;
@@ -110,6 +112,8 @@ export class GrShowTopicComponent implements OnInit {
   journ = [];
   public local = [];
   priority_selected: any;
+  added_to_nascrizni = [];
+  all_nascrizni = [];
 
   typeControl: FormControl = new FormControl('', [
     Validators.required
@@ -130,6 +134,16 @@ export class GrShowTopicComponent implements OnInit {
           this.users[dock.data()['displayName']] = [dock.id, dock.data()['branch']];
         }
     });
+
+    let collRef1 = this.afs.collection('nascrizni').ref;
+    let queryRef1 = collRef1;
+    queryRef1.get().then((snapShot) => {
+        for( let dock of snapShot.docs){
+          this.all_nascrizni.push(dock.data()['name']);
+        }
+    });
+
+
     this.getClass();
   }
   getClass(){
@@ -163,14 +177,16 @@ export class GrShowTopicComponent implements OnInit {
   }
 
   checkNascrizna() {
-    if (this.nascrizna == true) {
-      this.nascrizna = true;
-      this.content = "(НАСКРІЗНА) " + this.post.content;
-    } else {
-      this.nascrizna = false;
-      this.content = this.post.content;
+    if (this.added_to_nascrizni != undefined && this.added_to_nascrizni != [] && this.added_to_nascrizni.length != 0){
+      var i;
+      var newstring = ''
+      for (i = 0; i < this.added_to_nascrizni.length; i++) { 
+          newstring = newstring +  " " + this.added_to_nascrizni[i];
+      }
+      this.to_nascrizni = newstring;
+      this.content = "(НАСКРІЗНА) " + this.post["content"];
     }
-}
+  }
 
   getData(){
     let collRef1 = this.afs.collection('posts').ref;
@@ -222,7 +238,7 @@ export class GrShowTopicComponent implements OnInit {
 
   changePost(postid, data){
     this.checkNascrizna();
-    this.afs.doc('posts/'+postid).update({nascrizna: this.nascrizna});
+    this.afs.doc('posts/'+postid).update({to_nascrizni: this.to_nascrizni});
     this.afs.doc('posts/'+postid).update({content: this.content});
 
     var sbm_dt = this.formatDlnDate();

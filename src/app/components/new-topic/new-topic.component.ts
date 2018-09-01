@@ -46,6 +46,7 @@ interface Post {
   checked_lviv: boolean;
   checked_regions: boolean;
   date_modified: any;
+  to_nascrizni: any;
 
 }
 
@@ -96,6 +97,7 @@ export class NewTopicComponent implements OnInit {
   by_gr: any;
   priority: any;
   ochna: any;
+  to_nascrizni: any;
 
 
   postDoc: AngularFirestoreDocument<Post>;
@@ -169,6 +171,7 @@ export class NewTopicComponent implements OnInit {
     this.checked_regions=false;
     this.date_modified = '';
     this.ochna = false;
+    this.to_nascrizni = '';
   }
 
   formatTodayDate() {
@@ -277,6 +280,7 @@ export class NewTopicComponent implements OnInit {
                         'checked_lviv': this.checked_lviv,
                         'checked_regions': this.checked_regions,
                         'date_modified': this.date_modified,
+                        'to_nascrizni': this.to_nascrizni,
                         'branch': br});
     })
     this.addPost(this.regime);

@@ -70,6 +70,18 @@
             <button mat-raised-button mat-dialog-close class="zminyty" type="submit" [disabled]="(nascriznaControl.hasError('required'))" (click)="add_naskriz()">Додати до наскрізних</button>
         </div>
 
+        <!--<div class="divider"></div>
+        <mat-form-field>
+            <mat-select placeholder="Журналіст" [(ngModel)]="new_g" [formControl]="deleteOtherControl">
+              <mat-option *ngFor="let g of journ" ngDefaultControl [value]="g">
+                {{ g }}
+              </mat-option>
+            </mat-select>        
+      </mat-form-field>
+      <div>
+          <button mat-raised-button mat-dialog-close class="zminyty" type="submit" [disabled]="(deleteOtherControl.hasError('required'))" (click)="deleteOther()">Видалити журналіста</button>
+      </div> -->
+
         <div class="divider"></div>
         <mat-form-field class="input-width">
             <input matInput placeholder="Емейл" [formControl]="emailFormControl" [(ngModel)]="email">
